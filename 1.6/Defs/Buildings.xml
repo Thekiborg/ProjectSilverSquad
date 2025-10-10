@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+
+    <ThingDef ParentName="TableGatherSpotBase">
+        <defName>SilverSquad_CloningVat</defName>
+        <label>cloning vat</label>
+        <thingClass>ProjectSilverSquad.ThingClass_CloningVat</thingClass>
+        <graphicData>
+            <texPath>Things/Building/Furniture/Table2x2</texPath>
+            <graphicClass>Graphic_Multi</graphicClass>
+            <drawSize>(4,4)</drawSize>
+            <damageData>
+                <cornerTL>Damage/Corner</cornerTL>
+                <cornerTR>Damage/Corner</cornerTR>
+                <cornerBL>Damage/Corner</cornerBL>
+                <cornerBR>Damage/Corner</cornerBR>
+            </damageData>
+        </graphicData>
+        <uiIconScale>0.8</uiIconScale>
+        <statBases>
+            <MaxHitPoints>100</MaxHitPoints>
+            <WorkToBuild>1500</WorkToBuild>
+            <Mass>10</Mass>
+            <Flammability>1.0</Flammability>
+            <Beauty>1</Beauty>
+            <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">10</StyleDominance>
+        </statBases>
+        <size>(2,2)</size>
+        <costStuffCount>50</costStuffCount>
+        <rotatable>false</rotatable>
+    </ThingDef>
+
+</Defs>

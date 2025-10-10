@@ -1,0 +1,16 @@
+Change potatopic with plus sign, and brain chip textures.
+
+Gameplay idea: Heal missing body parts or permanent wounds by reverting the age of the pawn
+Down to a minimum of 18 years
+The more 5-10 years that have been reverted, the more injuries get healed (maybe 2 per set of years?)
+It should also increment the time to grow the clone
+
+transpile the birth year to not show it in AgetoolTipString for clones
+
+transpile to avoid "assigned ideo to pawn with missing ideo"
+
+for surgeries store the required products in a list excluding medicine
+
+POSTPONED
+add skill passion calc -- RECALCULATE PASSIONS ON REMOVAL ON GENES AND TRAITS, ADDING IS DONE
+add skill passion calc

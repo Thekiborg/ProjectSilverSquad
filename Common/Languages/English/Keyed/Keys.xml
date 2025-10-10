@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+    <SilverSquad_GenomeImprint_InspectGizmoLabel>See saved info</SilverSquad_GenomeImprint_InspectGizmoLabel>
+
+    <SilverSquad_CloningVat_StartGizmoLabel>Start cloning</SilverSquad_CloningVat_StartGizmoLabel>
+
+    <SilverSquad_CloningVat_CharacterImprint_Title>Imprint</SilverSquad_CloningVat_CharacterImprint_Title>
+    <SilverSquad_CloningVat_CharacterImprint_PortraitTooltip>Select imprint</SilverSquad_CloningVat_CharacterImprint_PortraitTooltip>
+    <SilverSquad_CloningVat_CharacterImprint_PortraitFloatMenuEmpty>No imprints found</SilverSquad_CloningVat_CharacterImprint_PortraitFloatMenuEmpty>
+    <SilverSquad_CloningVat_CharacterImprint_Name>{0_nameFull}</SilverSquad_CloningVat_CharacterImprint_Name>
+    <SilverSquad_CloningVat_CharacterImprint_RenameTooltip>Click to rename.</SilverSquad_CloningVat_CharacterImprint_RenameTooltip>
+    <SilverSquad_CloningVat_CharacterImprint_Age>Age: {0}</SilverSquad_CloningVat_CharacterImprint_Age>
+    <SilverSquad_CloningVat_CharacterImprint_DeAgeTooltip>Click to de-age.</SilverSquad_CloningVat_CharacterImprint_DeAgeTooltip>
+    <SilverSquad_CloningVat_CharacterImprint_XenoImplantTooltip>Click to ???</SilverSquad_CloningVat_CharacterImprint_XenoImplantTooltip>
+
+    <SilverSquad_CloningVat_SkillModificationTitle>Skills</SilverSquad_CloningVat_SkillModificationTitle>
+    <SilverSquad_CloningVat_TraitModificationTitle>Traits</SilverSquad_CloningVat_TraitModificationTitle>
+    <SilverSquad_CloningVat_SelectBrainChip>Select brain chip</SilverSquad_CloningVat_SelectBrainChip>
+
+    <SilverSquad_CloningVat_HealthTitle>Health</SilverSquad_CloningVat_HealthTitle>
+    <SilverSquad_CloningVat_HediffTitle>Hediffs</SilverSquad_CloningVat_HediffTitle>
+    <SilverSquad_CloningVat_CapacityTitle>Capacities</SilverSquad_CloningVat_CapacityTitle>
+
+    <SilverSquad_CloningVat_Confirm>Confirm</SilverSquad_CloningVat_Confirm>
+    <SilverSquad_CloningVat_Cancel>Cancel</SilverSquad_CloningVat_Cancel>
+    <SilverSquad_CloningVat_Instability>Instability: {0}</SilverSquad_CloningVat_Instability>
+
+</LanguageData>

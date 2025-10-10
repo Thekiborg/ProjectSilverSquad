@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+
+    <ProjectSilverSquad.TraitSettingsDef>
+        <defName>SilverSquad_TraitSettings</defName>
+        <traitsArePsychological>
+            <Nudist>True</Nudist>
+            <Bloodlust>True</Bloodlust>
+            <Kind>True</Kind>
+            <Psychopath>True</Psychopath>
+            <Cannibal>True</Cannibal>
+            <Abrasive>True</Abrasive>
+            <TooSmart>True</TooSmart>
+            <Brawler>True</Brawler>
+            <Masochist>True</Masochist>
+            <NightOwl>True</NightOwl>
+            <Greedy>True</Greedy>
+            <Jealous>True</Jealous>
+            <Ascetic>True</Ascetic>
+            <Gay>True</Gay>
+            <Bisexual>True</Bisexual>
+            <Asexual>True</Asexual>
+            <AnnoyingVoice>False</AnnoyingVoice>
+            <CreepyBreathing>False</CreepyBreathing>
+            <Pyromaniac>True</Pyromaniac>
+            <Wimp>True</Wimp>
+            <Nimble>False</Nimble>
+            <FastLearner>False</FastLearner>
+            <SlowLearner>False</SlowLearner>
+            <Undergrounder>True</Undergrounder>
+            <Transhumanist>True</Transhumanist>
+            <BodyPurist>True</BodyPurist>
+            <DislikesMen>True</DislikesMen>
+            <DislikesWomen>True</DislikesWomen>
+            <GreatMemory>False</GreatMemory>
+            <Tough>False</Tough>
+            <TorturedArtist>True</TorturedArtist>
+            <Gourmand>True</Gourmand>
+            <QuickSleeper>False</QuickSleeper>
+            <SpeedOffset>False</SpeedOffset>
+            <DrugDesire>True</DrugDesire>
+            <NaturalMood>True</NaturalMood>
+            <Nerves>True</Nerves>
+            <Neurotic>True</Neurotic>
+            <Industriousness>True</Industriousness>
+            <PsychicSensitivity>True</PsychicSensitivity>
+            <ShootingAccuracy>True</ShootingAccuracy>
+            <Beauty>False</Beauty>
+            <Immunity>False</Immunity>
+            <Delicate MayRequire="ludeon.rimworld.biotech">False</Delicate>
+            <Recluse MayRequire="ludeon.rimworld.biotech">True</Recluse>
+            <PerfectMemory MayRequire="ludeon.rimworld.anomaly">True</PerfectMemory>
+            <Occultist MayRequire="ludeon.rimworld.anomaly">False</Occultist>
+            <Joyous MayRequire="ludeon.rimworld.anomaly">False</Joyous>
+            <BodyMastery MayRequire="ludeon.rimworld.anomaly">True</BodyMastery>
+            <Disturbing MayRequire="ludeon.rimworld.anomaly">False</Disturbing>
+            <VoidFascination MayRequire="ludeon.rimworld.anomaly">False</VoidFascination>
+            <HAR_Xenophobia MayRequire="erdelf.humanoidalienraces">True</HAR_Xenophobia>
+
+        </traitsArePsychological>
+    </ProjectSilverSquad.TraitSettingsDef>
+    
+</Defs>

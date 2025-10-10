@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+
+    <ProjectSilverSquad.BrainChipDef ParentName="ResourceBase">
+        <defName>SilverSquad_DummyChip</defName>
+        <label>dummy chip</label>
+        <description>A record of someone's body at a given point; it contains all the data needed to artificially grow a new body in the appropriate cloning vat.</description>
+        <graphicData>
+            <texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <statBases>
+            <MarketValue>400</MarketValue>
+            <MaxHitPoints>60</MaxHitPoints>
+            <Flammability>1.0</Flammability>
+            <DeteriorationRate>6</DeteriorationRate>
+            <Mass>0.03</Mass>
+        </statBases>
+        <thingCategories>
+            <li>ItemsMisc</li>
+        </thingCategories>
+        <allowedArchonexusCount>5</allowedArchonexusCount>
+        <skillMods>
+            <Shooting>3</Shooting>
+        </skillMods>
+        <instabilityOffset>0.1</instabilityOffset>
+    </ProjectSilverSquad.BrainChipDef>
+
+    <ProjectSilverSquad.BrainChipDef ParentName="ResourceBase">
+        <defName>SilverSquad_DummyChipTWO</defName>
+        <label>dummy chip 2</label>
+        <description>A record of someone's body at a given point; it contains all the data needed to artificially grow a new body in the appropriate cloning vat.</description>
+        <graphicData>
+            <texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <statBases>
+            <MarketValue>400</MarketValue>
+            <MaxHitPoints>60</MaxHitPoints>
+            <Flammability>1.0</Flammability>
+            <DeteriorationRate>6</DeteriorationRate>
+            <Mass>0.03</Mass>
+        </statBases>
+        <thingCategories>
+            <li>ItemsMisc</li>
+        </thingCategories>
+        <allowedArchonexusCount>5</allowedArchonexusCount>
+        <skillMods>
+            <Shooting>3</Shooting>
+            <Melee>-4</Melee>
+        </skillMods>
+        <instabilityOffset>0.1</instabilityOffset>
+    </ProjectSilverSquad.BrainChipDef>
+
+    <ProjectSilverSquad.BrainChipDef ParentName="ResourceBase">
+        <defName>SilverSquad_DummyChipTHREE</defName>
+        <label>dummy chip 3</label>
+        <description>A record of someone's body at a given point; it contains all the data needed to artificially grow a new body in the appropriate cloning vat.</description>
+        <graphicData>
+            <texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <statBases>
+            <MarketValue>400</MarketValue>
+            <MaxHitPoints>60</MaxHitPoints>
+            <Flammability>1.0</Flammability>
+            <DeteriorationRate>6</DeteriorationRate>
+            <Mass>0.03</Mass>
+        </statBases>
+        <thingCategories>
+            <li>ItemsMisc</li>
+        </thingCategories>
+        <allowedArchonexusCount>5</allowedArchonexusCount>
+        <traitMods>
+            <Masochist>0</Masochist>
+            <Brawler>0</Brawler>
+        </traitMods>
+        <instabilityOffset>0.25</instabilityOffset>
+    </ProjectSilverSquad.BrainChipDef>
+
+</Defs>
