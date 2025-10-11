@@ -165,28 +165,47 @@ namespace ProjectSilverSquad
 			if (selectedSurgeries[surgeryWithPart])
 			{
 				settingsWindow.PreviewClone.health.AddHediff(surgeryWithPart.Item1.addsHediff, surgeryWithPart.Item2);
-				foreach (var part in surgeryWithPart.Item2.parts)
+				if (!surgeryWithPart.Item2.parts.NullOrEmpty())
 				{
-					foreach (var surg in selectedSurgeries)
+					foreach (var part in surgeryWithPart.Item2.GetPartAndAllChildParts())
 					{
-						if (surg.Key.Item2 == part)
+						// disables other any previous recipes on the same part
+						foreach (var surg in selectedSurgeries)
 						{
-							selectedSurgeries[surg.Key] = false;
-							RegisterSurgeryResult(surg.Key);
-							break;
+							if (surg.Key.Item2 == part && surg.Key.Item1 != surgeryWithPart.Item1)
+							{
+								selectedSurgeries[surg.Key] = false;
+								RegisterSurgeryResult(surg.Key);
+								break;
+							}
 						}
 					}
 				}
-
 			}
 			else
 			{
-				settingsWindow.PreviewClone.health.hediffSet.TryGetHediff(surgeryWithPart.Item1.addsHediff, out Hediff foundAddedPart);
-				if (foundAddedPart is not null)
+				settingsWindow.PreviewClone.health.hediffSet.TryGetHediff(surgeryWithPart.Item1.addsHediff, out Hediff foundHediffOnPart);
+				if (foundHediffOnPart is not null)
 				{
-					settingsWindow.PreviewClone.health.RemoveHediff(foundAddedPart);
+					settingsWindow.PreviewClone.health.RemoveHediff(foundHediffOnPart);
 					settingsWindow.PreviewClone.health.RestorePart(surgeryWithPart.Item2);
+					RestoreOriginalHediffRecursively(surgeryWithPart.Item2);
 				}
+			}
+		}
+
+
+		private void RestoreOriginalHediffRecursively(BodyPartRecord part)
+		{
+			Log.Message(part);
+			settingsWindow.originalHediffs.TryGetValue(part, out Hediff hediff);
+			if (hediff is not null)
+			{
+				settingsWindow.PreviewClone.health.AddHediff(hediff, part);
+			}
+			for (int i = 0; i < part.parts.Count; i++)
+			{
+				RestoreOriginalHediffRecursively(part.parts[i]);
 			}
 		}
 

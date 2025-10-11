@@ -36,6 +36,7 @@
 		public Dictionary<BrainChipDef, bool> selectedSkillChips = [];
 		public Dictionary<BrainChipDef, bool> selectedTraitChips = [];
 		public Dictionary<(RecipeDef, BodyPartRecord), bool> selectedSurgeries = [];
+		public Dictionary<BodyPartRecord, Hediff> originalHediffs = [];
 
 		private readonly Dictionary<PawnCapacityDef, string> initialCloneCapacities = [];
 
@@ -535,6 +536,7 @@
 				if (!thing.PositionHeld.Fogged(cloningVat.Map))
 				{
 					ThingClass_GenomeImprint imprint = thing as ThingClass_GenomeImprint;
+					if (imprint?.genome.Clone is null) continue;
 					options.Add(new(imprint.genome.Clone.Name.ToStringFull, () =>
 					{
 						this.imprint = imprint;
@@ -547,7 +549,19 @@
 
 							initialCloneCapacities.Add(cap, PawnCapacityUtility.CalculateCapacityLevel(PreviewClone.health.hediffSet, cap).ToStringPercent());
 						}
+
+						originalHediffs.Clear();
+						foreach (Hediff hediff in PreviewClone.health.hediffSet.hediffs)
+						{
+							Log.Message(hediff);
+							if (hediff.Part is null) continue;
+							Log.Message("Added");
+							originalHediffs.Add(hediff.Part, hediff);
+						}
 						preXenogermInfo = (PreviewClone.genes.Xenotype, PreviewClone.genes.xenotypeName, PreviewClone.genes.iconDef, [.. PreviewClone.genes.GenesListForReading]);
+						selectedSkillChips.Clear();
+						selectedSurgeries.Clear();
+						selectedTraitChips.Clear();
 					},
 					PreviewClone, Color.white));
 				}
