@@ -205,7 +205,7 @@ namespace ProjectSilverSquad
 					}*/
 					record.passion = passion;
 				}
-				this.prevPassions.Add(chip, prevPassions);
+				this.prevPassions.TryAdd(chip, prevPassions);
 			}
 			else
 			{

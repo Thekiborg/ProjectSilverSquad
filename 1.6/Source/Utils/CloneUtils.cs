@@ -18,6 +18,22 @@ namespace ProjectSilverSquad
 		}
 
 
+		public static bool TryGetHediff(this HediffSet HediffSet, HediffDef def, BodyPartRecord part, out Hediff hediff)
+		{
+			for (int i = 0; i < HediffSet.hediffs.Count; i++)
+			{
+				Hediff hd = HediffSet.hediffs[i];
+				if (hd.def == def && hd.Part.customLabel == part.customLabel)
+				{
+					hediff = HediffSet.hediffs[i];
+					return true;
+				}
+			}
+			hediff = null;
+			return false;
+		}
+
+
 		public static StringBuilder AppendLineIfNotEmpty(this StringBuilder stringBuilder, string value)
 		{
 			if (value.Length > 0)

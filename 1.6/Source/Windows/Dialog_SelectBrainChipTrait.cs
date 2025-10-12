@@ -187,22 +187,21 @@ namespace ProjectSilverSquad
 			if (selectedChips[chip])
 			{
 				appliedBrainChips.Add(chip);
-				/*foreach (var traitMod in chip.traitMods)
+				foreach (var traitMod in chip.traitMods)
 				{
 					Trait trait = new(traitMod.traitDef, traitMod.traitDegree);
 					settingsWindow.PreviewClone.story.traits.GainTrait(trait);
-					appliedBrainChips.Add(traitMod);
-				}*/
+				}
 			}
 			else
 			{
 				appliedBrainChips.Remove(chip);
 
-				/*foreach (var traitMod in chip.traitMods)
+				foreach (var traitMod in chip.traitMods)
 				{
 					Trait trait = settingsWindow.PreviewClone.story.traits.GetTrait(traitMod.traitDef);
 					settingsWindow.PreviewClone.story.traits.RemoveTrait(trait);
-				}*/
+				}
 			}
 
 			settingsWindow.PreviewClone.skills.Notify_SkillDisablesChanged();

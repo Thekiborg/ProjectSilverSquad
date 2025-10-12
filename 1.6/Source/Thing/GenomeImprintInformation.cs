@@ -16,8 +16,11 @@
 			RemovePsychologicalTraits(tempPawn);
 			ChangeBackstories(tempPawn);
 			ChangeSkills(origin, tempPawn);
-			RemoveIdeology(tempPawn);
-			ChangeTattoos(tempPawn);
+			if (ModsConfig.IdeologyActive)
+			{
+				RemoveIdeology(tempPawn);
+				ChangeTattoos(tempPawn);
+			}
 			this.clone = tempPawn;
 		}
 

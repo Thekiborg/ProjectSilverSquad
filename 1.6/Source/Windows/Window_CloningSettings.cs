@@ -1,4 +1,6 @@
-﻿namespace ProjectSilverSquad
+﻿using System.Linq;
+
+namespace ProjectSilverSquad
 {
 	internal class Window_CloningSettings : Window
 	{
@@ -33,12 +35,15 @@
 		private Dialog_SelectBrainChipSkill selectBrainChipSkill;
 		private Dialog_SelectBrainChipTrait selectBrainChipTrait;
 		private Dialog_SelectSurgery selectSurgery;
+
+		public Dictionary<BodyPartRecord, Hediff> originalHediffs = [];
+		private readonly Dictionary<PawnCapacityDef, string> initialCloneCapacities = [];
+
+		// Results to be passed to the vat
 		public Dictionary<BrainChipDef, bool> selectedSkillChips = [];
 		public Dictionary<BrainChipDef, bool> selectedTraitChips = [];
 		public Dictionary<(RecipeDef, BodyPartRecord), bool> selectedSurgeries = [];
-		public Dictionary<BodyPartRecord, Hediff> originalHediffs = [];
-
-		private readonly Dictionary<PawnCapacityDef, string> initialCloneCapacities = [];
+		public Xenogerm xenogerm;
 
 		private float Instability
 		{
@@ -308,7 +313,23 @@
 			{
 				if (Widgets.ButtonText(confirmButtonRect, "SilverSquad_CloningVat_Confirm".Translate()))
 				{
-					throw new NotImplementedException();
+					List<BrainChipDef> brainChipsSkill = [.. selectedSkillChips.Where(kvp => kvp.Value).Select(kvp => kvp.Key)];
+					List<BrainChipDef> brainChipsTraits = [.. selectedTraitChips.Where(kvp => kvp.Value).Select(kvp => kvp.Key)];
+
+					List<SurgeryInfoForCloning> surgeries = [];
+					foreach (var surg in selectedSurgeries.Keys)
+					{
+						List<ThingDef> ingredients = [];
+						foreach (IngredientCount ic in surg.Item1.ingredients)
+						{
+							if (ic.filter.AnyAllowedDef.thingCategories.Contains(ThingCategoryDefOf.Medicine)) continue;
+							ingredients.Add(ic.filter.AnyAllowedDef);
+						}
+						surgeries.Add(new SurgeryInfoForCloning(surg.Item1, surg.Item2, ingredients));
+					}
+
+					cloningVat.Settings = new(brainChipsSkill, brainChipsTraits, surgeries, xenogerm);
+					Close();
 				}
 				using (new TextBlock(ColorLibrary.Red))
 				{
@@ -553,9 +574,7 @@
 						originalHediffs.Clear();
 						foreach (Hediff hediff in PreviewClone.health.hediffSet.hediffs)
 						{
-							Log.Message(hediff);
 							if (hediff.Part is null) continue;
-							Log.Message("Added");
 							originalHediffs.Add(hediff.Part, hediff);
 						}
 						preXenogermInfo = (PreviewClone.genes.Xenotype, PreviewClone.genes.xenotypeName, PreviewClone.genes.iconDef, [.. PreviewClone.genes.GenesListForReading]);

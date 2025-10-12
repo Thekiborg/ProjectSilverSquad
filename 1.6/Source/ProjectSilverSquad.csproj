@@ -52,6 +52,7 @@
 		<PackageReference Include="Krafs.Publicizer" Version="2.*"/>
 		<!-- Publicize Include lines like the following are used to specify the members to publicize -->
 		<Publicize Include="Assembly-CSharp:RimWorld.Dialog_SelectXenogerm.selected"/>
+		<Publicize Include="Assembly-CSharp:Verse.ThingFilter.thingDefs"/>
 		<!-- A more advanced example with generics and a nested class is this: -->
 		<!-- <Publicize Include="mscorlib:System.Collections.Generic.Dictionary`2+Entry" /> -->
 		<!-- Details here: https://github.com/krafs/Publicizer -->

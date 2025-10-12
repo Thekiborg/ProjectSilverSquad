@@ -31,6 +31,7 @@ namespace ProjectSilverSquad
 		{
 			this.settingsWindow = settingsWindow;
 			this.map = map;
+			GetAvailableSurgeriesOnPawn(map);
 		}
 
 
@@ -55,7 +56,6 @@ namespace ProjectSilverSquad
 
 		private void ListSurgeries(Rect rect)
 		{
-			GetAvailableSurgeriesOnPawn(map);
 			Widgets.DrawMenuSection(rect);
 			rect = rect.ContractedBy(4f);
 			GUI.BeginGroup(rect);
@@ -124,6 +124,7 @@ namespace ProjectSilverSquad
 					}
 					RegisterSurgeryResult(surgery);
 				}
+				GetAvailableSurgeriesOnPawn(map);
 			}
 			if (selectedSurgeries.TryGetValue(surgery, out var selected) && selected)
 			{
@@ -184,7 +185,7 @@ namespace ProjectSilverSquad
 			}
 			else
 			{
-				settingsWindow.PreviewClone.health.hediffSet.TryGetHediff(surgeryWithPart.Item1.addsHediff, out Hediff foundHediffOnPart);
+				settingsWindow.PreviewClone.health.hediffSet.TryGetHediff(surgeryWithPart.Item1.addsHediff, surgeryWithPart.Item2, out Hediff foundHediffOnPart);
 				if (foundHediffOnPart is not null)
 				{
 					settingsWindow.PreviewClone.health.RemoveHediff(foundHediffOnPart);
@@ -197,7 +198,6 @@ namespace ProjectSilverSquad
 
 		private void RestoreOriginalHediffRecursively(BodyPartRecord part)
 		{
-			Log.Message(part);
 			settingsWindow.originalHediffs.TryGetValue(part, out Hediff hediff);
 			if (hediff is not null)
 			{
@@ -234,6 +234,7 @@ namespace ProjectSilverSquad
 					settingsWindow.PreviewClone.genes.AddGene(gene.def, xenogene: true);
 				}
 			}
+			settingsWindow.xenogerm = xenogerm;
 		}
 
 

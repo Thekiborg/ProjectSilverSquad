@@ -11,6 +11,9 @@ transpile to avoid "assigned ideo to pawn with missing ideo"
 
 for surgeries store the required products in a list excluding medicine
 
+fix left arm surgeries removing right arm surgeries
+fix scribing
+
 POSTPONED
 add skill passion calc -- RECALCULATE PASSIONS ON REMOVAL ON GENES AND TRAITS, ADDING IS DONE
 add skill passion calc
