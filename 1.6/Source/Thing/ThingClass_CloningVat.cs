@@ -78,6 +78,7 @@ namespace ProjectSilverSquad
 			CompPowerTrader.PowerOutput = curState == VatState.Growing ? (0f - CompPowerTrader.Props.PowerConsumption) : (0f - CompPowerTrader.Props.idlePowerDraw);
 			if (curState == VatState.Growing)
 			{
+				thingOwner.Remove(Settings.GenomeImprint);
 				Nutrition -= ModExtension.baseNutConsumptionPerDay / (GenDate.TicksPerDay / (float)GenTicks.TickRareInterval);
 
 				if (CurGrowingPhase == GrowingPhase.Incubation)
@@ -92,7 +93,6 @@ namespace ProjectSilverSquad
 					}
 					else
 					{
-						thingOwner.Remove(Settings.GenomeImprint);
 						PawnGrowTimeLeft -= GenTicks.TickRareInterval;
 
 						float norm = MathUtils.Normalization01((PawnGrowTimeLeft - ModExtension.basePawnGrowTimeTicks) * -1, 0, ModExtension.basePawnGrowTimeTicks);
