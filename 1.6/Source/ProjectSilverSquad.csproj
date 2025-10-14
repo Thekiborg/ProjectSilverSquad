@@ -27,7 +27,7 @@
 		<ErrorReport>prompt</ErrorReport>
 		<WarningLevel>5</WarningLevel>
 		<NoWarn>
-			IDE0130,IDE0032,IDE0040,IDE0011,IDE0008,IDE0058,IDE0290,IDE0045
+			IDE0130,IDE0040,IDE0011,IDE0008,IDE0058,IDE0290,IDE0045,IDE0046,IDE0032
 			<!--CA1000;CA1010;CA1304;CA1305;CA1310;CA1311;CA1707;CA1708;CA1710;CA1711;CA1715;CA1716;CA1720;CA1725;
 			CA1852;CA2201;CA3075;IDE0290-->
 		</NoWarn>
@@ -49,10 +49,9 @@
 		<!-- Details here: https://www.nuget.org/packages/PolySharp/ -->
 
 		<!-- A package for accessing private members. Optional -->
-		<PackageReference Include="Krafs.Publicizer" Version="2.*"/>
+		<PackageReference Include="Krafs.Publicizer" Version="2.*" />
 		<!-- Publicize Include lines like the following are used to specify the members to publicize -->
-		<Publicize Include="Assembly-CSharp:RimWorld.Dialog_SelectXenogerm.selected"/>
-		<Publicize Include="Assembly-CSharp:Verse.ThingFilter.thingDefs"/>
+		<Publicize Include="Assembly-CSharp:RimWorld.Dialog_SelectXenogerm.selected" />
 		<!-- A more advanced example with generics and a nested class is this: -->
 		<!-- <Publicize Include="mscorlib:System.Collections.Generic.Dictionary`2+Entry" /> -->
 		<!-- Details here: https://github.com/krafs/Publicizer -->

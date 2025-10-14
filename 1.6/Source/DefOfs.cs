@@ -22,6 +22,7 @@
 		}
 
 		public static ThingDef SilverSquad_GenomeImprint;
+		public static ThingDef SilverSquad_CloningVat;
 	}
 
 
@@ -33,7 +34,18 @@
 			DefOfHelper.EnsureInitializedInCtor(typeof(SilverSquad_TraitSettingsDefOfs));
 		}
 
-
 		public static TraitSettingsDef SilverSquad_TraitSettings;
+	}
+
+
+	[DefOf]
+	public static class SilverSquad_JobDefOfs
+	{
+		static SilverSquad_JobDefOfs()
+		{
+			DefOfHelper.EnsureInitializedInCtor(typeof(SilverSquad_JobDefOfs));
+		}
+
+		public static JobDef SilverSquad_CarryIngredientsToVat;
 	}
 }

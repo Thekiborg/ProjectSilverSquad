@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+    <SilverSquad_CloningVat_WantedIngredients>Wanted ingredients: </SilverSquad_CloningVat_WantedIngredients>
+    <SilverSquad_CloningVat_StoredNutPaste>Paste stored: {0}</SilverSquad_CloningVat_StoredNutPaste>
+    <SilverSquad_CloningVat_RemainingDays>Progress left: {0}</SilverSquad_CloningVat_RemainingDays>
+    <SilverSquad_CloningVat_Instability>Instability: {0}</SilverSquad_CloningVat_Instability>
+
+</LanguageData>

@@ -198,10 +198,11 @@ namespace ProjectSilverSquad
 
 		private void RestoreOriginalHediffRecursively(BodyPartRecord part)
 		{
-			settingsWindow.originalHediffs.TryGetValue(part, out Hediff hediff);
-			if (hediff is not null)
+			settingsWindow.originalHediffs.TryGetValue(part, out List<Hediff> hediffs);
+			foreach (var hediff in hediffs)
 			{
 				settingsWindow.PreviewClone.health.AddHediff(hediff, part);
+
 			}
 			for (int i = 0; i < part.parts.Count; i++)
 			{

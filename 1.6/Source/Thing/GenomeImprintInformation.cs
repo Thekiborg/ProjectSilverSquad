@@ -3,7 +3,11 @@
 	public class GenomeImprintInformation : IExposable
 	{
 		private Pawn clone;
+		private long originalAge;
+		private BodyTypeDef originalBody;
 		public Pawn Clone => clone;
+		public long OriginalAgeTicks => originalAge;
+		public BodyTypeDef OriginalBody => originalBody;
 
 
 		public GenomeImprintInformation() { }
@@ -22,6 +26,8 @@
 				ChangeTattoos(tempPawn);
 			}
 			this.clone = tempPawn;
+			originalAge = clone.ageTracker.AgeBiologicalTicks;
+			originalBody = clone.story.bodyType;
 		}
 
 
@@ -98,7 +104,9 @@
 
 		public void ExposeData()
 		{
-			Scribe_Deep.Look(ref clone, "SilverSquad_Clone");
+			Scribe_Deep.Look(ref clone, "ProjectSilverSquad_GenomeImprintInformation_Clone");
+			Scribe_Values.Look(ref originalAge, "ProjectSilverSquad_GenomeImprintInformation_OriginalAge");
+			Scribe_Defs.Look(ref originalBody, "ProjectSilverSquad_GenomeImprintInformation_OriginalBody");
 		}
 	}
 }

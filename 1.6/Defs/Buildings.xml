@@ -5,10 +5,12 @@
         <defName>SilverSquad_CloningVat</defName>
         <label>cloning vat</label>
         <thingClass>ProjectSilverSquad.ThingClass_CloningVat</thingClass>
+        <tickerType>Rare</tickerType>
+        <drawerType>MapMeshAndRealTime</drawerType>
         <graphicData>
-            <texPath>Things/Building/Furniture/Table2x2</texPath>
+            <texPath>CloningVat</texPath>
             <graphicClass>Graphic_Multi</graphicClass>
-            <drawSize>(4,4)</drawSize>
+            <drawSize>(2,2)</drawSize>
             <damageData>
                 <cornerTL>Damage/Corner</cornerTL>
                 <cornerTR>Damage/Corner</cornerTR>
@@ -27,7 +29,28 @@
         </statBases>
         <size>(2,2)</size>
         <costStuffCount>50</costStuffCount>
-        <rotatable>false</rotatable>
+        <rotatable>true</rotatable>
+        <comps>
+            <li Class="CompProperties_Power">
+                <compClass>CompPowerTrader</compClass>
+                <basePowerConsumption>900</basePowerConsumption>
+                <idlePowerDraw>100</idlePowerDraw>
+            </li>
+        </comps>
+        <modExtensions>
+            <li Class="ProjectSilverSquad.ModExtension">
+                <maxNutPasteCapacity>7</maxNutPasteCapacity>
+                <baseNutConsumptionPerDay>1</baseNutConsumptionPerDay>
+                <basePawnGrowTimeTicks>720,000</basePawnGrowTimeTicks>
+                <baseEmbryoIncubationTicks>180,000</baseEmbryoIncubationTicks>
+                <ticksOfNoReturn>360,000</ticksOfNoReturn>
+                <embryoGraphicData>
+                    <texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
+                    <graphicClass>Graphic_Single</graphicClass>
+                    <drawSize>(1,1)</drawSize>
+                </embryoGraphicData>
+            </li>
+        </modExtensions>
     </ThingDef>
 
 </Defs>

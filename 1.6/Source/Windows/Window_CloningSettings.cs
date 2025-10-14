@@ -36,7 +36,7 @@ namespace ProjectSilverSquad
 		private Dialog_SelectBrainChipTrait selectBrainChipTrait;
 		private Dialog_SelectSurgery selectSurgery;
 
-		public Dictionary<BodyPartRecord, Hediff> originalHediffs = [];
+		public Dictionary<BodyPartRecord, List<Hediff>> originalHediffs = [];
 		private readonly Dictionary<PawnCapacityDef, string> initialCloneCapacities = [];
 
 		// Results to be passed to the vat
@@ -109,6 +109,8 @@ namespace ProjectSilverSquad
 
 		public override void DoWindowContents(Rect inRect)
 		{
+			if (Event.current.type == EventType.Layout) return;
+
 			Widgets.DrawMenuSection(inRect);
 
 			Rect leftSideRect = new(inRect.x, inRect.y, LeftSectionWidth, inRect.height);
@@ -323,12 +325,20 @@ namespace ProjectSilverSquad
 						foreach (IngredientCount ic in surg.Item1.ingredients)
 						{
 							if (ic.filter.AnyAllowedDef.thingCategories.Contains(ThingCategoryDefOf.Medicine)) continue;
-							ingredients.Add(ic.filter.AnyAllowedDef);
+							for (int i = 0; i < ic.CountFor(surg.Item1); i++)
+							{
+								ingredients.Add(ic.filter.AnyAllowedDef);
+							}
 						}
 						surgeries.Add(new SurgeryInfoForCloning(surg.Item1, surg.Item2, ingredients));
 					}
+					Dictionary<SkillDef, int> skillLevels = [];
+					foreach (var skill in PreviewClone.skills.skills)
+					{
+						skillLevels.TryAdd(skill.def, skill.Level);
+					}
 
-					cloningVat.Settings = new(brainChipsSkill, brainChipsTraits, surgeries, xenogerm);
+					cloningVat.StartCloning(new(brainChipsSkill, brainChipsTraits, surgeries, xenogerm, imprint, Instability, skillLevels));
 					Close();
 				}
 				using (new TextBlock(ColorLibrary.Red))
@@ -575,7 +585,8 @@ namespace ProjectSilverSquad
 						foreach (Hediff hediff in PreviewClone.health.hediffSet.hediffs)
 						{
 							if (hediff.Part is null) continue;
-							originalHediffs.Add(hediff.Part, hediff);
+							originalHediffs.TryAdd(hediff.Part, []);
+							originalHediffs[hediff.Part].Add(hediff);
 						}
 						preXenogermInfo = (PreviewClone.genes.Xenotype, PreviewClone.genes.xenotypeName, PreviewClone.genes.iconDef, [.. PreviewClone.genes.GenesListForReading]);
 						selectedSkillChips.Clear();

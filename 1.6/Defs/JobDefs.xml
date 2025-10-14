@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+
+    <JobDef>
+        <defName>SilverSquad_CarryIngredientsToVat</defName>
+        <driverClass>ProjectSilverSquad.JobDriver_CarryIngredientsToVat</driverClass>
+        <reportString>carrying ingredients to TargetA.</reportString>
+        <suspendable>false</suspendable>
+        <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    </JobDef>
+
+
+</Defs>

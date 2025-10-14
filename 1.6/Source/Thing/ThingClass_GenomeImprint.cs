@@ -2,6 +2,8 @@
 {
 	public class ThingClass_GenomeImprint : ThingWithComps
 	{
+		public override string Label => $"{genome?.Clone?.Name?.ToStringShort ?? ""}'s {base.Label}";
+
 		public GenomeImprintInformation genome;
 
 
