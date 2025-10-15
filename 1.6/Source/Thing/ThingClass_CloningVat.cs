@@ -4,20 +4,7 @@ namespace ProjectSilverSquad
 {
 	public class ThingClass_CloningVat : Building, IThingHolder
 	{
-		public enum VatState
-		{
-			Inactive = 0,
-			AwaitingIngredients = 1,
-			Growing = 2,
-		}
-
-		public enum GrowingPhase
-		{
-			None = 0,
-			Incubation = 1,
-			GrowingBody = 2
-		}
-
+		private Effecter progressBar;
 		private CloningSettings cloningSettings;
 		private ThingOwner thingOwner;
 		private VatState curState = VatState.Inactive;
@@ -78,7 +65,6 @@ namespace ProjectSilverSquad
 			CompPowerTrader.PowerOutput = curState == VatState.Growing ? (0f - CompPowerTrader.Props.PowerConsumption) : (0f - CompPowerTrader.Props.idlePowerDraw);
 			if (curState == VatState.Growing)
 			{
-				thingOwner.Remove(Settings.GenomeImprint);
 				Nutrition -= ModExtension.baseNutConsumptionPerDay / (GenDate.TicksPerDay / (float)GenTicks.TickRareInterval);
 
 				if (CurGrowingPhase == GrowingPhase.Incubation)
@@ -112,14 +98,12 @@ namespace ProjectSilverSquad
 		}
 
 
-		Effecter progressBar;
 
 		private void ApplySurgeries()
 		{
 			var curSurg = Settings.Surgeries.FirstOrFallback(null);
 			if (curSurg is not null)
 			{
-
 				progressBar ??= EffecterDefOf.ProgressBarAlwaysVisible.SpawnAttached(this, Map);
 				progressBar?.EffectTick(this, TargetInfo.Invalid);
 				var progressBarMote = (progressBar.children[0] as SubEffecter_ProgressBar)?.mote;
@@ -162,6 +146,7 @@ namespace ProjectSilverSquad
 
 		public void FinishCloning()
 		{
+			thingOwner.Remove(Settings.GenomeImprint);
 			GenSpawn.Spawn(Settings.Clone, Position, Map);
 			Reset();
 		}

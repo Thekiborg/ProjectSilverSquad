@@ -319,18 +319,20 @@ namespace ProjectSilverSquad
 					List<BrainChipDef> brainChipsTraits = [.. selectedTraitChips.Where(kvp => kvp.Value).Select(kvp => kvp.Key)];
 
 					List<SurgeryInfoForCloning> surgeries = [];
-					foreach (var surg in selectedSurgeries.Keys)
+					foreach (var kvp in selectedSurgeries)
 					{
+						if (!kvp.Value) continue;
+
 						List<ThingDef> ingredients = [];
-						foreach (IngredientCount ic in surg.Item1.ingredients)
+						foreach (IngredientCount ic in kvp.Key.Item1.ingredients)
 						{
 							if (ic.filter.AnyAllowedDef.thingCategories.Contains(ThingCategoryDefOf.Medicine)) continue;
-							for (int i = 0; i < ic.CountFor(surg.Item1); i++)
+							for (int i = 0; i < ic.CountFor(kvp.Key.Item1); i++)
 							{
 								ingredients.Add(ic.filter.AnyAllowedDef);
 							}
 						}
-						surgeries.Add(new SurgeryInfoForCloning(surg.Item1, surg.Item2, ingredients));
+						surgeries.Add(new SurgeryInfoForCloning(kvp.Key.Item1, kvp.Key.Item2, ingredients));
 					}
 					Dictionary<SkillDef, int> skillLevels = [];
 					foreach (var skill in PreviewClone.skills.skills)

@@ -14,7 +14,7 @@ namespace ProjectSilverSquad
 			{
 				return false;
 			}
-			if (cloningVat.State != ThingClass_CloningVat.VatState.AwaitingIngredients)
+			if (cloningVat.State != VatState.AwaitingIngredients)
 			{
 				return false;
 			}
