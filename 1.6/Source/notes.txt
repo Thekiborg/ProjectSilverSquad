@@ -9,9 +9,7 @@ It should also increment the time to grow the clone
 TO-DO
 Do day calc and show it on the window
 
-research def 
 Craft chips at fab bench. Scan someone alive or dead and fresh with gizmo
-Balance the material cost of everything.
 
 Backstory: For both childhood and adulthood will be the same.
 If failed clone set adult backstory to another one that makes them sadder
