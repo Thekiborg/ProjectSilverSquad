@@ -2,13 +2,13 @@
 <ModMetaData>
 	<name>Project: Silver Squad</name>
 
-	<author>Thekiborg!</author>
+	<author>Thekiborg</author>
 
 	<packageId>Thekiborg.ProjectSilverSquad</packageId>
 
 	<description>Inspired by Zenless Zone Zero cloning lore, and the lore of Soldier 0 Anby and Orphie and Magus</description>
 
-	<!--<modDependencies>
+	<modDependencies>
 		<li>
 			<packageId>brrainz.harmony</packageId>
 			<displayName>Harmony</displayName>
@@ -18,7 +18,7 @@
 
 	<loadAfter>
 		<li>brrainz.harmony</li>
-	</loadAfter>-->
+	</loadAfter>
 
 	<supportedVersions>
 		<li>1.6</li>

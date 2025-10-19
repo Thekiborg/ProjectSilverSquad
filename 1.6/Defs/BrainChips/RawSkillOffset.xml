@@ -1,81 +1,186 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
 
-    <ProjectSilverSquad.BrainChipDef ParentName="ResourceBase">
-        <defName>SilverSquad_DummyChip</defName>
-        <label>dummy chip</label>
-        <description>A record of someone's body at a given point; it contains all the data needed to artificially grow a new body in the appropriate cloning vat.</description>
+    <ProjectSilverSquad.BrainChipDef Name="ChipBase" ParentName="ResourceBase" Abstract="True">
         <graphicData>
-            <texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
             <graphicClass>Graphic_Single</graphicClass>
         </graphicData>
         <statBases>
             <MarketValue>400</MarketValue>
-            <MaxHitPoints>60</MaxHitPoints>
+            <MaxHitPoints>100</MaxHitPoints>
             <Flammability>1.0</Flammability>
-            <DeteriorationRate>6</DeteriorationRate>
+            <DeteriorationRate>2</DeteriorationRate>
             <Mass>0.03</Mass>
         </statBases>
         <thingCategories>
             <li>ItemsMisc</li>
         </thingCategories>
+        <recipeMaker>
+            <skillRequirements>
+                <Crafting>5</Crafting>
+            </skillRequirements>
+            <researchPrerequisite>SilverSquad_CloningTech</researchPrerequisite>
+            <recipeUsers>
+                <li>FabricationBench</li>
+            </recipeUsers>
+        </recipeMaker>
         <allowedArchonexusCount>5</allowedArchonexusCount>
+    </ProjectSilverSquad.BrainChipDef>
+
+    <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">
+        <defName>SilverSquad_BrainChip_RawOffset_Shooting</defName>
+        <label>Brain chip (Shooting)</label>
+        <description>A brain chip automatically used when growing clones. It will increase the clone's shooting skill.</description>
+        <graphicData>
+            <texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
+        </graphicData>
         <skillMods>
-            <Shooting>3</Shooting>
+            <Shooting>5</Shooting>
         </skillMods>
         <instabilityOffset>0.1</instabilityOffset>
     </ProjectSilverSquad.BrainChipDef>
 
-    <ProjectSilverSquad.BrainChipDef ParentName="ResourceBase">
-        <defName>SilverSquad_DummyChipTWO</defName>
-        <label>dummy chip 2</label>
-        <description>A record of someone's body at a given point; it contains all the data needed to artificially grow a new body in the appropriate cloning vat.</description>
+    <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">
+        <defName>SilverSquad_BrainChip_RawOffset_Melee</defName>
+        <label>Brain chip (Melee)</label>
+        <description>A brain chip automatically used when growing clones. It will increase the clone's melee skill.</description>
         <graphicData>
             <texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
-            <graphicClass>Graphic_Single</graphicClass>
         </graphicData>
-        <statBases>
-            <MarketValue>400</MarketValue>
-            <MaxHitPoints>60</MaxHitPoints>
-            <Flammability>1.0</Flammability>
-            <DeteriorationRate>6</DeteriorationRate>
-            <Mass>0.03</Mass>
-        </statBases>
-        <thingCategories>
-            <li>ItemsMisc</li>
-        </thingCategories>
-        <allowedArchonexusCount>5</allowedArchonexusCount>
         <skillMods>
-            <Shooting>3</Shooting>
-            <Melee>-4</Melee>
+            <Melee>5</Melee>
         </skillMods>
         <instabilityOffset>0.1</instabilityOffset>
     </ProjectSilverSquad.BrainChipDef>
 
-    <ProjectSilverSquad.BrainChipDef ParentName="ResourceBase">
-        <defName>SilverSquad_DummyChipTHREE</defName>
-        <label>dummy chip 3</label>
-        <description>A record of someone's body at a given point; it contains all the data needed to artificially grow a new body in the appropriate cloning vat.</description>
+    <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">
+        <defName>SilverSquad_BrainChip_RawOffset_Construction</defName>
+        <label>Brain chip (Construction)</label>
+        <description>A brain chip automatically used when growing clones. It will increase the clone's construction skill.</description>
         <graphicData>
             <texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
-            <graphicClass>Graphic_Single</graphicClass>
         </graphicData>
-        <statBases>
-            <MarketValue>400</MarketValue>
-            <MaxHitPoints>60</MaxHitPoints>
-            <Flammability>1.0</Flammability>
-            <DeteriorationRate>6</DeteriorationRate>
-            <Mass>0.03</Mass>
-        </statBases>
-        <thingCategories>
-            <li>ItemsMisc</li>
-        </thingCategories>
-        <allowedArchonexusCount>5</allowedArchonexusCount>
-        <traitMods>
-            <Masochist>0</Masochist>
-            <Brawler>0</Brawler>
-        </traitMods>
-        <instabilityOffset>0.25</instabilityOffset>
+        <skillMods>
+            <Construction>5</Construction>
+        </skillMods>
+        <instabilityOffset>0.1</instabilityOffset>
+    </ProjectSilverSquad.BrainChipDef>
+
+    <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">
+        <defName>SilverSquad_BrainChip_RawOffset_Mining</defName>
+        <label>Brain chip (Mining)</label>
+        <description>A brain chip automatically used when growing clones. It will increase the clone's mining skill.</description>
+        <graphicData>
+            <texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
+        </graphicData>
+        <skillMods>
+            <Mining>5</Mining>
+        </skillMods>
+        <instabilityOffset>0.1</instabilityOffset>
+    </ProjectSilverSquad.BrainChipDef>
+
+    <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">
+        <defName>SilverSquad_BrainChip_RawOffset_Cooking</defName>
+        <label>Brain chip (Cooking)</label>
+        <description>A brain chip automatically used when growing clones. It will increase the clone's cooking skill.</description>
+        <graphicData>
+            <texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
+        </graphicData>
+        <skillMods>
+            <Cooking>5</Cooking>
+        </skillMods>
+        <instabilityOffset>0.1</instabilityOffset>
+    </ProjectSilverSquad.BrainChipDef>
+
+    <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">
+        <defName>SilverSquad_BrainChip_RawOffset_Plants</defName>
+        <label>Brain chip (Plants)</label>
+        <description>A brain chip automatically used when growing clones. It will increase the clone's plants skill.</description>
+        <graphicData>
+            <texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
+        </graphicData>
+        <skillMods>
+            <Plants>5</Plants>
+        </skillMods>
+        <instabilityOffset>0.1</instabilityOffset>
+    </ProjectSilverSquad.BrainChipDef>
+
+    <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">
+        <defName>SilverSquad_BrainChip_RawOffset_Animals</defName>
+        <label>Brain chip (Animals)</label>
+        <description>A brain chip automatically used when growing clones. It will increase the clone's animals skill.</description>
+        <graphicData>
+            <texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
+        </graphicData>
+        <skillMods>
+            <Animals>5</Animals>
+        </skillMods>
+        <instabilityOffset>0.1</instabilityOffset>
+    </ProjectSilverSquad.BrainChipDef>
+
+    <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">
+        <defName>SilverSquad_BrainChip_RawOffset_Crafting</defName>
+        <label>Brain chip (Crafting)</label>
+        <description>A brain chip automatically used when growing clones. It will increase the clone's Crafting skill.</description>
+        <graphicData>
+            <texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
+        </graphicData>
+        <skillMods>
+            <Crafting>5</Crafting>
+        </skillMods>
+        <instabilityOffset>0.1</instabilityOffset>
+    </ProjectSilverSquad.BrainChipDef>
+
+    <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">
+        <defName>SilverSquad_BrainChip_RawOffset_Artistic</defName>
+        <label>Brain chip (Artistic)</label>
+        <description>A brain chip automatically used when growing clones. It will increase the clone's artistic skill.</description>
+        <graphicData>
+            <texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
+        </graphicData>
+        <skillMods>
+            <Artistic>5</Artistic>
+        </skillMods>
+        <instabilityOffset>0.1</instabilityOffset>
+    </ProjectSilverSquad.BrainChipDef>
+
+    <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">
+        <defName>SilverSquad_BrainChip_RawOffset_Medicine</defName>
+        <label>Brain chip (Medicine)</label>
+        <description>A brain chip automatically used when growing clones. It will increase the clone's medicine skill.</description>
+        <graphicData>
+            <texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
+        </graphicData>
+        <skillMods>
+            <Medicine>5</Medicine>
+        </skillMods>
+        <instabilityOffset>0.1</instabilityOffset>
+    </ProjectSilverSquad.BrainChipDef>
+
+    <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">
+        <defName>SilverSquad_BrainChip_RawOffset_Social</defName>
+        <label>Brain chip (Social)</label>
+        <description>A brain chip automatically used when growing clones. It will increase the clone's social skill.</description>
+        <graphicData>
+            <texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
+        </graphicData>
+        <skillMods>
+            <Social>5</Social>
+        </skillMods>
+        <instabilityOffset>0.1</instabilityOffset>
+    </ProjectSilverSquad.BrainChipDef>
+
+    <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">
+        <defName>SilverSquad_BrainChip_RawOffset_Intellectual</defName>
+        <label>Brain chip (Intellectual)</label>
+        <description>A brain chip automatically used when growing clones. It will increase the clone's intellectual skill.</description>
+        <graphicData>
+            <texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
+        </graphicData>
+        <skillMods>
+            <Intellectual>5</Intellectual>
+        </skillMods>
+        <instabilityOffset>0.1</instabilityOffset>
     </ProjectSilverSquad.BrainChipDef>
 
 </Defs>

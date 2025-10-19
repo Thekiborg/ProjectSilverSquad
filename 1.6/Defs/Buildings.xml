@@ -1,35 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
 
-    <ThingDef ParentName="TableGatherSpotBase">
+    <ThingDef ParentName="BuildingBase">
         <defName>SilverSquad_CloningVat</defName>
         <label>cloning vat</label>
+        <description>Todo.</description>
         <thingClass>ProjectSilverSquad.ThingClass_CloningVat</thingClass>
         <tickerType>Rare</tickerType>
         <drawerType>MapMeshAndRealTime</drawerType>
+        <passability>Impassable</passability>
+        <fillPercent>1</fillPercent>
         <graphicData>
             <texPath>CloningVat</texPath>
             <graphicClass>Graphic_Multi</graphicClass>
             <drawSize>(2,2)</drawSize>
-            <damageData>
-                <cornerTL>Damage/Corner</cornerTL>
-                <cornerTR>Damage/Corner</cornerTR>
-                <cornerBL>Damage/Corner</cornerBL>
-                <cornerBR>Damage/Corner</cornerBR>
-            </damageData>
         </graphicData>
+        <size>(2,2)</size>
+        <rotatable>true</rotatable>
+        <defaultPlacingRot>South</defaultPlacingRot>
         <uiIconScale>0.8</uiIconScale>
         <statBases>
-            <MaxHitPoints>100</MaxHitPoints>
-            <WorkToBuild>1500</WorkToBuild>
-            <Mass>10</Mass>
-            <Flammability>1.0</Flammability>
-            <Beauty>1</Beauty>
-            <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">10</StyleDominance>
+            <MaxHitPoints>1500</MaxHitPoints>
+            <WorkToBuild>8000</WorkToBuild>
+            <Mass>230</Mass>
+            <Flammability>0.3</Flammability>
+            <Beauty>-5</Beauty>
         </statBases>
-        <size>(2,2)</size>
-        <costStuffCount>50</costStuffCount>
-        <rotatable>true</rotatable>
+        <costList>
+            <Steel>100</Steel>
+            <Plasteel>100</Plasteel>
+            <Neutroamine>20</Neutroamine>
+            <ComponentIndustrial>6</ComponentIndustrial>
+            <ComponentSpacer>1</ComponentSpacer>
+        </costList>
+        <altitudeLayer>Building</altitudeLayer>
+        <pathCost>42</pathCost>
+        <blockWind>true</blockWind>
+        <canOverlapZones>false</canOverlapZones>
+        <designationCategory>Misc</designationCategory>
+        <!--<hasInteractionCell>true</hasInteractionCell>
+        <interactionCellOffset>(0,0,-1)</interactionCellOffset>-->
+        <researchPrerequisites>
+                <li>SilverSquad_CloningTech</li>
+            </researchPrerequisites>
+        <building>
+            <ai_chillDestination>false</ai_chillDestination>
+            <!--<workTableRoomRole>Laboratory</workTableRoomRole>-->
+        </building>
+        <constructionSkillPrerequisite>12</constructionSkillPrerequisite>
         <comps>
             <li Class="CompProperties_Power">
                 <compClass>CompPowerTrader</compClass>
@@ -44,11 +62,114 @@
                 <basePawnGrowTimeTicks>720,000</basePawnGrowTimeTicks>
                 <baseEmbryoIncubationTicks>180,000</baseEmbryoIncubationTicks>
                 <ticksOfNoReturn>360,000</ticksOfNoReturn>
+                <instabilityPerPeriod>0.5</instabilityPerPeriod>
+                <instabilityPeriod>25,000</instabilityPeriod>
                 <embryoGraphicData>
                     <texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
                     <graphicClass>Graphic_Single</graphicClass>
                     <drawSize>(1,1)</drawSize>
                 </embryoGraphicData>
+                <outcomes>
+                    <li>
+                        <weight>60</weight>
+                        <worker Class="ProjectSilverSquad.OutcomeNothing" />
+                    </li>
+                    <li>
+                        <weight>30</weight>
+                        <worker Class="ProjectSilverSquad.OutcomeGeneAlteredClone">
+                            <preNoReturnChance>0.3</preNoReturnChance>
+                            <postNoReturnChance>0.6</postNoReturnChance>
+                            <numberOfGenes>8~12</numberOfGenes>
+                        </worker>
+                    </li>
+                    <li>
+                        <weight>30</weight>
+                        <worker Class="ProjectSilverSquad.OutcomeHediffAlteredClone">
+                            <preNoReturnChance>0.3</preNoReturnChance>
+                            <postNoReturnChance>0.6</postNoReturnChance>
+                            <numberOfHediffs>10</numberOfHediffs>
+                            <allowedHediffs> <!-- disease free, complications from obelisk clones -->
+                                <li>
+                                    <hediffDef>Carcinoma</hediffDef>
+                                </li>
+                                <li>
+                                    <hediffDef>HeartAttack</hediffDef>
+                                    <parts>
+                                        <li>Heart</li>
+                                    </parts>
+                                </li>
+                                <li>
+                                    <hediffDef>HeartArteryBlockage</hediffDef>
+                                    <parts>
+                                        <li>Heart</li>
+                                    </parts>
+                                </li>
+                                <li>
+                                    <hediffDef>Alzheimers</hediffDef>
+                                    <parts>
+                                        <li>Brain</li>
+                                    </parts>
+                                </li>
+                                <li>
+                                    <hediffDef>Dementia</hediffDef>
+                                    <parts>
+                                        <li>Brain</li>
+                                    </parts>
+                                </li>
+                                <li>
+                                    <hediffDef>BadBack</hediffDef>
+                                    <parts>
+                                        <li>Spine</li>
+                                    </parts>
+                                </li>
+                                <li>
+                                    <hediffDef>Frail</hediffDef>
+                                    <wholeBody>true</wholeBody>
+                                </li>
+                                <li>
+                                    <hediffDef>Cataract</hediffDef>
+                                    <parts>
+                                        <li>Eye</li>
+                                    </parts>
+                                </li>
+                                <li>
+                                    <hediffDef>Asthma</hediffDef>
+                                    <parts>
+                                        <li>Lung</li>
+                                    </parts>
+                                </li>
+                                <li MayRequire="Ludeon.RimWorld.Anomaly">
+                                    <hediffDef>OrganDecay</hediffDef>
+                                    <wholeBody>true</wholeBody>
+                                </li>
+                                <li MayRequire="Ludeon.RimWorld.Anomaly">
+                                    <hediffDef>CrumblingMind</hediffDef>
+                                    <parts>
+                                        <li>Brain</li>
+                                    </parts>
+                                </li>
+                            </allowedHediffs>
+                        </worker>
+                    </li>
+                    <li>
+                        <weight>5</weight>
+                        <worker Class="ProjectSilverSquad.OutcomeSpawnAnomaly">
+                            <allowedAnomalies>
+                                <li>Bulbfreak</li>
+                                <li>Gorehulk</li>
+                            </allowedAnomalies>
+                        </worker>
+                    </li>
+                    <li>
+                        <weight>5</weight>
+                        <worker Class="ProjectSilverSquad.OutcomeMutateClone">
+                            <allowedMutations>
+                                <li>Shambler</li>
+                                <li>Ghoul</li>
+                            </allowedMutations>
+                        </worker>
+                    </li>
+                </outcomes>
             </li>
         </modExtensions>
     </ThingDef>

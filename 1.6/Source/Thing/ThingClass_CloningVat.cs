@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Linq;
+using System.Text;
 
 namespace ProjectSilverSquad
 {
@@ -13,6 +14,7 @@ namespace ProjectSilverSquad
 		private int pawnGrowTimeLeft;
 		private int embryoIncubationTimeLeft;
 		private int surgeryProgBarTicks;
+		private bool passedTicksOfNoReturn;
 
 
 		private int PawnGrowTimeLeft { get => pawnGrowTimeLeft; set => pawnGrowTimeLeft = Math.Max(0, value); }
@@ -31,7 +33,7 @@ namespace ProjectSilverSquad
 		}
 		private int TotalTicksRemaining => PawnGrowTimeLeft + EmbryoIncubationTimeLeft;
 		public CompPowerTrader CompPowerTrader => field ??= GetComp<CompPowerTrader>();
-		private ModExtension ModExtension => field ??= def.GetModExtension<ModExtension>();
+		public ModExtension ModExtension => field ??= def.GetModExtension<ModExtension>();
 		public CloningSettings Settings { get => cloningSettings; private set => cloningSettings = value; }
 		public float Nutrition { get => nutrientPasteNutrition; set => nutrientPasteNutrition = Mathf.Clamp(value, 0f, ModExtension.maxNutPasteCapacity); }
 		public List<ThingDef> WantedIngredients
@@ -51,6 +53,7 @@ namespace ProjectSilverSquad
 			}
 		}
 		public VatState State => curState;
+		public bool PastTicksOfNoReturn => PawnGrowTimeLeft <= ModExtension.ticksOfNoReturn;
 
 
 		public ThingClass_CloningVat()
@@ -65,6 +68,21 @@ namespace ProjectSilverSquad
 			CompPowerTrader.PowerOutput = curState == VatState.Growing ? (0f - CompPowerTrader.Props.PowerConsumption) : (0f - CompPowerTrader.Props.idlePowerDraw);
 			if (curState == VatState.Growing)
 			{
+				if (CompPowerTrader.Off)
+				{
+					MissingResourceInstability();
+				}
+				if (Nutrition <= 0f)
+				{
+					MissingResourceInstability();
+				}
+
+				if (Settings.Instability >= 1)
+				{
+					DoBadOutcome();
+					Reset();
+					return;
+				}
 				Nutrition -= ModExtension.baseNutConsumptionPerDay / (GenDate.TicksPerDay / (float)GenTicks.TickRareInterval);
 
 				if (CurGrowingPhase == GrowingPhase.Incubation)
@@ -83,20 +101,61 @@ namespace ProjectSilverSquad
 
 						float norm = MathUtils.Normalization01((PawnGrowTimeLeft - ModExtension.basePawnGrowTimeTicks) * -1, 0, ModExtension.basePawnGrowTimeTicks);
 						Settings.Clone.ageTracker.AgeBiologicalTicks = (long)Mathf.Lerp(GenDate.TicksPerYear * 3, Settings.GenomeImprint.genome.OriginalAgeTicks, norm);
-						if (Settings.Clone.ageTracker.CurLifeStage == LifeStageDefOf.HumanlikeAdult)
+						if (Settings.Clone.ageTracker.CurLifeStage != LifeStageDefOf.HumanlikeChild)
 						{
 							Settings.Clone.story.bodyType = Settings.GenomeImprint.genome.OriginalBody;
 						}
 
-						if (PawnGrowTimeLeft >= ModExtension.ticksOfNoReturn)
+						if (!passedTicksOfNoReturn && PastTicksOfNoReturn)
 						{
-							ApplyBrainChips();
+							passedTicksOfNoReturn = true;
+							if (Rand.Chance(Settings.Instability))
+							{
+								DoBadOutcome();
+							}
+							else
+							{
+								ApplyBrainChips();
+							}
 						}
 					}
 				}
 			}
 		}
 
+
+		private void MissingResourceInstability()
+		{
+			Settings.Instability += ModExtension.instabilityPerPeriod / (ModExtension.instabilityPeriod / GenTicks.TickRareInterval);
+		}
+
+
+		private void DoBadOutcome()
+		{
+			if (CurGrowingPhase == GrowingPhase.Incubation)
+			{
+				thingOwner.Take(Settings.GenomeImprint).Destroy();
+				thingOwner.TryDropAll(Position, Map, ThingPlaceMode.Near);
+			}
+			else
+			{
+				int totalWeight = ModExtension.OrderedOutcomes.Sum(outcome => outcome.weight);
+				int rand = Rand.RangeInclusive(1, totalWeight);
+
+				foreach (var outcome in ModExtension.OrderedOutcomes)
+				{
+					if (rand <= outcome.weight)
+					{
+						outcome.worker.Do(this, Settings.Clone);
+						break;
+					}
+					else
+					{
+						rand -= outcome.weight;
+					}
+				}
+			}
+		}
 
 
 		private void ApplySurgeries()
@@ -146,7 +205,6 @@ namespace ProjectSilverSquad
 
 		public void FinishCloning()
 		{
-			thingOwner.Remove(Settings.GenomeImprint);
 			GenSpawn.Spawn(Settings.Clone, Position, Map);
 			Reset();
 		}
@@ -158,6 +216,7 @@ namespace ProjectSilverSquad
 			PawnGrowTimeLeft = 0;
 			EmbryoIncubationTimeLeft = 0;
 			curState = VatState.Inactive;
+			passedTicksOfNoReturn = false;
 			thingOwner.ClearAndDestroyContents();
 		}
 
@@ -203,7 +262,21 @@ namespace ProjectSilverSquad
 					action = () =>
 					{
 						if (CurGrowingPhase == GrowingPhase.Incubation) EmbryoIncubationTimeLeft = 0;
-						else if (CurGrowingPhase == GrowingPhase.GrowingBody) PawnGrowTimeLeft = 0;
+						else if ((CurGrowingPhase == GrowingPhase.GrowingBody) && !passedTicksOfNoReturn) PawnGrowTimeLeft = ModExtension.ticksOfNoReturn;
+						else if ((CurGrowingPhase == GrowingPhase.GrowingBody) && passedTicksOfNoReturn) PawnGrowTimeLeft = 0;
+					}
+				};
+				yield return new Command_Action()
+				{
+					defaultLabel = "Fire outcome",
+					action = () =>
+					{
+						List<FloatMenuOption> options = [];
+						foreach (var outcome in ModExtension.OrderedOutcomes)
+						{
+							options.Add(new FloatMenuOption(outcome.worker.ToString(), () => outcome.worker.Do(this, Settings.Clone)));
+						}
+						Find.WindowStack.Add(new FloatMenu(options));
 					}
 				};
 			}
@@ -218,8 +291,11 @@ namespace ProjectSilverSquad
 				sb.AppendLine("SilverSquad_CloningVat_Instability".Translate(Settings.Instability.ToStringPercent()).Colorize(ColorLibrary.RedReadable));
 				sb.AppendLine("SilverSquad_CloningVat_RemainingDays".Translate(TotalTicksRemaining.ToStringTicksToDays()));
 			}
-			sb.AppendLine("SilverSquad_CloningVat_StoredNutPaste".Translate(Nutrition.ToString("F1")));
-			sb.Append(base.GetInspectString());
+			sb.Append("SilverSquad_CloningVat_StoredNutPaste".Translate(Nutrition.ToString("F1")));
+			if (base.GetInspectString().Length > 0)
+			{
+				sb.AppendLine(base.GetInspectString());
+			}
 			if (curState == VatState.AwaitingIngredients)
 			{
 				sb.AppendLine();
@@ -245,8 +321,6 @@ namespace ProjectSilverSquad
 
 		private void ApplyBrainChips()
 		{
-			Log.Message(thingOwner.Count);
-
 			foreach (SkillRecord skill in Settings.Clone.skills.skills)
 			{
 				skill.levelInt = Settings.SkillLevels[skill.def];
@@ -264,8 +338,6 @@ namespace ProjectSilverSquad
 				}
 				thingOwner.RemoveAll(t => t.def == chipTrait);
 			}
-
-			Log.Message(thingOwner.Count);
 		}
 
 
@@ -307,7 +379,7 @@ namespace ProjectSilverSquad
 
 		public void AddIngredient(Thing thing)
 		{
-			thingOwner.TryAddOrTransfer(thing, thing.stackCount);
+			thingOwner.TryAddOrTransfer(thing, thing.stackCount, false);
 			WantedIngredients.Remove(thing.def);
 			if (wantedIngredients.Count <= 0
 				&& GetDirectlyHeldThings().Contains(Settings.GenomeImprint)
@@ -315,6 +387,13 @@ namespace ProjectSilverSquad
 			{
 				StartGrowing();
 			}
+		}
+
+
+		public void LoadPaste(Thing paste)
+		{
+			Nutrition += paste.GetStatValue(StatDefOf.Nutrition) * paste.stackCount;
+			paste.Destroy();
 		}
 
 
@@ -338,6 +417,7 @@ namespace ProjectSilverSquad
 			Scribe_Deep.Look(ref thingOwner, "ProjectSilverSquad_CloningVat_ThingOwner");
 			Scribe_Values.Look(ref curState, "ProjectSilverSquad_CloningVat_CurState");
 			Scribe_Values.Look(ref surgeryProgBarTicks, "ProjectSilverSquad_CloningVat_SurgeryProgBarTicks");
+			Scribe_Values.Look(ref passedTicksOfNoReturn, "ProjectSilverSquad_cloningVat_PassedTicksOfNoReturn");
 		}
 	}
 }

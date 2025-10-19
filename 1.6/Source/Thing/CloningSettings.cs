@@ -16,7 +16,7 @@
 		public List<BrainChipDef> BrainChipsTrait => brainChipsTrait;
 		public List<SurgeryInfoForCloning> Surgeries => surgeries;
 		public ThingClass_GenomeImprint GenomeImprint => genomeImprint;
-		public float Instability => instability;
+		public float Instability { get => instability; set => instability = value; }
 		public Xenogerm Xenogerm => xenogerm;
 		public Pawn Clone => GenomeImprint.genome.Clone;
 

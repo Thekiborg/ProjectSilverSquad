@@ -5,9 +5,28 @@ Down to a minimum of 18 years
 The more 5-10 years that have been reverted, the more injuries get healed (maybe 2 per set of years?)
 It should also increment the time to grow the clone
 
+-------------------------------
+TO-DO
+Do day calc and show it on the window
+
+research def 
+Craft chips at fab bench. Scan someone alive or dead and fresh with gizmo
+Balance the material cost of everything.
+
+Backstory: For both childhood and adulthood will be the same.
+If failed clone set adult backstory to another one that makes them sadder
+Clone. "I will never forget the muffled voices of the scientists outside the glass, and the taste of the paste" permanent -10 mood
+
+Maybe some logs for the story? Tales and stuff for success and failures.
+
+Maybe a raid of failed clones? They could really have some randomized gear, and could be a good way of getting random genes.
+--------------------------------
+
 transpile the birth year to not show it in AgetoolTipString for clones
 
 transpile to avoid "assigned ideo to pawn with missing ideo"
+
+prevent pawn death when removing vital organ somehow and discovery letters using the same method fwiw
 
 POSTPONED
 add skill passion calc -- RECALCULATE PASSIONS ON REMOVAL ON GENES AND TRAITS, ADDING IS DONE

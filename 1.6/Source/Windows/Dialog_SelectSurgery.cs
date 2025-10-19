@@ -165,6 +165,15 @@ namespace ProjectSilverSquad
 		{
 			if (selectedSurgeries[surgeryWithPart])
 			{
+				for (int i = settingsWindow.PreviewClone.health.hediffSet.hediffs.Count - 1; i >= 0; i--)
+				{
+					Hediff hd = settingsWindow.PreviewClone.health.hediffSet.hediffs[i];
+					if (hd.def == HediffDefOf.MissingBodyPart && hd.Part.Label == surgeryWithPart.Item2.Label)
+					{
+						settingsWindow.PreviewClone.health.RemoveHediff(hd);
+						break;
+					}
+				}
 				settingsWindow.PreviewClone.health.AddHediff(surgeryWithPart.Item1.addsHediff, surgeryWithPart.Item2);
 				if (!surgeryWithPart.Item2.parts.NullOrEmpty())
 				{

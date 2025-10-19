@@ -2,9 +2,9 @@
 {
 	public class ThingClass_GenomeImprint : ThingWithComps
 	{
-		public override string Label => $"{genome?.Clone?.Name?.ToStringShort ?? ""}'s {base.Label}";
-
+		public override string Label => genome is null ? base.Label : $"{genome?.Clone?.Name?.ToStringShort ?? ""}'s {base.Label}";
 		public GenomeImprintInformation genome;
+		public Thing pawnToScan;
 
 
 		public override IEnumerable<Gizmo> GetGizmos()
@@ -14,23 +14,47 @@
 				yield return gizmo;
 			}
 
-			yield return new Command_Action()
+			if (genome is not null)
 			{
-				defaultLabel = "Spawn clone",
-				action = () =>
+				yield return new Command_Action()
 				{
-					GenSpawn.Spawn(genome.Clone, Position, Map);
-				}
-			};
+					defaultLabel = "SilverSquad_GenomeImprint_InspectGizmoLabel".Translate(),
+					action = () =>
+					{
+						Find.WindowStack.Add(new Window_InspectClone(genome.Clone));
+					}
+				};
+			}
+			else
+			{
+				yield return new Command_Target()
+				{
+					defaultLabel = "SilverSquad_GenomeImprint_RecordImprint".Translate(),
+					action = target =>
+					{
+						pawnToScan = target.Thing;
+					},
+					targetingParams = new()
+					{
+						canTargetAnimals = false,
+						canTargetBuildings = false,
+						canTargetItems = false,
+						canTargetLocations = false,
+						canTargetPlants = false,
+						canTargetHumans = true,
+						canTargetBloodfeeders = true,
+						canTargetCorpses = true,
+						canTargetFires = false,
+					}
+				};
+			}
+		}
 
-			yield return new Command_Action()
-			{
-				defaultLabel = "SilverSquad_GenomeImprint_InspectGizmoLabel".Translate(),
-				action = () =>
-				{
-					Find.WindowStack.Add(new Window_InspectClone(genome.Clone));
-				}
-			};
+
+		public void RecordGenome(Pawn pawn)
+		{
+			pawnToScan = null;
+			genome = new(pawn);
 		}
 
 
@@ -38,6 +62,7 @@
 		{
 			base.ExposeData();
 			Scribe_Deep.Look(ref genome, "SilverSquad_Genome");
+			Scribe_References.Look(ref pawnToScan, "SilverSquad_Genome_PawnToScan");
 		}
 	}
 }

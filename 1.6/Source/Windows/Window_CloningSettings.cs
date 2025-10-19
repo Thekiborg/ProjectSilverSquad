@@ -104,6 +104,7 @@ namespace ProjectSilverSquad
 		public Window_CloningSettings(ThingClass_CloningVat cloningVat)
 		{
 			this.cloningVat = cloningVat;
+			forcePause = true;
 		}
 
 

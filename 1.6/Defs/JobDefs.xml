@@ -9,5 +9,20 @@
         <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
     </JobDef>
 
+    <JobDef>
+        <defName>SilverSquad_RecordGenome</defName>
+        <driverClass>ProjectSilverSquad.JobDriver_RecordGenome</driverClass>
+        <reportString>recording the genome of TargetA.</reportString>
+        <suspendable>false</suspendable>
+        <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    </JobDef>
+
+    <JobDef>
+        <defName>SilverSquad_LoadPasteIntoVat</defName>
+        <driverClass>ProjectSilverSquad.JobDriver_LoadPasteIntoVat</driverClass>
+        <reportString>loading paste into TargetA.</reportString>
+        <suspendable>false</suspendable>
+        <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    </JobDef>
 
 </Defs>

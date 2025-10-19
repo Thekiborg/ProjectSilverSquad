@@ -1,6 +1,6 @@
 ﻿using System.Reflection.Emit;
 
-namespace ProjectSilverSquad.Harmonee
+namespace ProjectSilverSquad
 {
 	/// <summary>
 	/// Adds brain chip calc and manually added trait skill calc to the aptitudes

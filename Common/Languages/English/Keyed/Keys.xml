@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 
+    <!-- Genome Imprint -->
     <SilverSquad_GenomeImprint_InspectGizmoLabel>See saved info</SilverSquad_GenomeImprint_InspectGizmoLabel>
+    <SilverSquad_GenomeImprint_RecordImprint>Record imprint</SilverSquad_GenomeImprint_RecordImprint>
 
+    <!-- Cloning vat-->
     <SilverSquad_CloningVat_StartGizmoLabel>Start cloning</SilverSquad_CloningVat_StartGizmoLabel>
 
+    <SilverSquad_CloningVat_WantedIngredients>Wanted ingredients: </SilverSquad_CloningVat_WantedIngredients>
+    <SilverSquad_CloningVat_StoredNutPaste>Paste stored: {0}</SilverSquad_CloningVat_StoredNutPaste>
+    <SilverSquad_CloningVat_RemainingDays>Progress left: {0}</SilverSquad_CloningVat_RemainingDays>
+
+    <SilverSquad_Alert_FailingNoNutPasteTitle>Cloning vats without nutrients</SilverSquad_Alert_FailingNoNutPasteTitle>
+    <SilverSquad_Alert_FailingNoNutPaste>There's some cloning vats without nutrient paste stored. They will increase the instability of the clone they're growing.</SilverSquad_Alert_FailingNoNutPaste>
+    <SilverSquad_Alert_FailingNoPowerTitle>Unpowered cloning vats</SilverSquad_Alert_FailingNoPowerTitle>
+    <SilverSquad_Alert_FailingNoPower>While unpowered, cloning vats will increase the instability of the clone they're growing.</SilverSquad_Alert_FailingNoPower>
+
+    <!-- Cloning vat settings window-->
     <SilverSquad_CloningVat_CharacterImprint_Title>Imprint</SilverSquad_CloningVat_CharacterImprint_Title>
     <SilverSquad_CloningVat_CharacterImprint_PortraitTooltip>Select imprint</SilverSquad_CloningVat_CharacterImprint_PortraitTooltip>
     <SilverSquad_CloningVat_CharacterImprint_PortraitFloatMenuEmpty>No imprints found</SilverSquad_CloningVat_CharacterImprint_PortraitFloatMenuEmpty>
@@ -25,5 +38,7 @@
     <SilverSquad_CloningVat_Confirm>Confirm</SilverSquad_CloningVat_Confirm>
     <SilverSquad_CloningVat_Cancel>Cancel</SilverSquad_CloningVat_Cancel>
     <SilverSquad_CloningVat_Instability>Instability: {0}</SilverSquad_CloningVat_Instability>
+
+
 
 </LanguageData>

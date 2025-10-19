@@ -5,8 +5,7 @@ namespace ProjectSilverSquad
 	public class WorkGiver_CarryIngredientsToVat : WorkGiver_Scanner
 	{
 		public override ThingRequest PotentialWorkThingRequest => ThingRequest.ForDef(SilverSquad_ThingDefOfs.SilverSquad_CloningVat);
-		private readonly List<Thing> foundIngredients = [];
-
+		private Thing foundThing;
 
 		public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
 		{
@@ -40,50 +39,51 @@ namespace ProjectSilverSquad
 
 		private bool FindIngredients(Pawn pawn, ThingClass_CloningVat cloningVat)
 		{
-			foundIngredients.Clear();
-
-			Thing genome = GenClosest.ClosestThingReachable(pawn.Position,
+			Thing thing = GenClosest.ClosestThingReachable(pawn.Position,
 				pawn.Map,
-				ThingRequest.ForDef(SilverSquad_ThingDefOfs.SilverSquad_GenomeImprint),
-				PathEndMode.OnCell,
+				ThingRequest.ForGroup(ThingRequestGroup.HaulableEver),
+				PathEndMode.ClosestTouch,
 				TraverseParms.For(pawn),
-				validator: t => t == cloningVat.Settings.GenomeImprint /*&& !t.IsForbidden(pawn.Faction)*/);
-			foundIngredients.Add(genome);
-
-			if (cloningVat.Settings.Xenogerm is not null)
-			{
-				Thing xenogerm = GenClosest.ClosestThingReachable(pawn.Position,
-					pawn.Map,
-					ThingRequest.ForDef(ThingDefOf.Xenogerm),
-					PathEndMode.OnCell,
-					TraverseParms.For(pawn),
-					validator: t => t == cloningVat.Settings.Xenogerm /*&& !t.IsForbidden(pawn.Faction)*/);
-				foundIngredients.Add(xenogerm);
-			}
-
-			foreach (var thingDef in cloningVat.WantedIngredients)
-			{
-				Thing foundIng = GenClosest.ClosestThingReachable(pawn.Position,
-					pawn.Map,
-					ThingRequest.ForDef(thingDef),
-					PathEndMode.Touch,
-					TraverseParms.For(pawn)/*,
-					validator: t => !t.IsForbidden(pawn.Faction)*/);
-				if (foundIng is not null)
+				9999f,
+				validator: (t) =>
 				{
-					foundIngredients.Add(foundIng);
-				}
-			}
+					if (t == cloningVat.Settings.GenomeImprint)
+					{
+						return ItemValidator(t, pawn);
+					}
+					if (t == cloningVat.Settings.Xenogerm)
+					{
+						return ItemValidator(t, pawn);
+					}
+					if (cloningVat.WantedIngredients.Contains(t.def))
+					{
+						return ItemValidator(t, pawn);
+					}
+					return false;
+				});
+			foundThing = thing;
+			return foundThing is not null;
+		}
 
-			return foundIngredients.Count > 0;
+
+		private static bool ItemValidator(Thing t, Pawn pawn)
+		{
+			if (!pawn.CanReserve(t))
+			{
+				return false;
+			}
+			if (t.IsForbidden(pawn))
+			{
+				return false;
+			}
+			return true;
 		}
 
 
 		public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
 		{
-			Job job = JobMaker.MakeJob(SilverSquad_JobDefOfs.SilverSquad_CarryIngredientsToVat, t);
-			job.count = foundIngredients.Count;
-			job.targetQueueB = foundIngredients.ConvertAll<LocalTargetInfo>(t => t);
+			Job job = JobMaker.MakeJob(SilverSquad_JobDefOfs.SilverSquad_CarryIngredientsToVat, t, foundThing);
+			job.count = 2;
 			return job;
 		}
 	}

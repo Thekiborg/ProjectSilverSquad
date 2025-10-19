@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+
+    <ResearchProjectDef>
+        <defName>SilverSquad_CloningTech</defName>
+        <label>cloning technology</label>
+        <description>Investigate how to duplicate the physical data of a person.</description>
+        <baseCost>12000</baseCost>
+        <techLevel>Ultra</techLevel>
+        <prerequisites>
+            <li>Fabrication</li>
+        </prerequisites>
+        <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+        <requiredResearchFacilities>
+            <li>MultiAnalyzer</li>
+        </requiredResearchFacilities>
+        <researchViewX>17.00</researchViewX>
+        <researchViewY>4.20</researchViewY>
+        <generalRules>
+            <rulesStrings>
+                <li>subject->physical cloning technology</li>
+
+                <li>subject_story->found the blueprints of an old project to create an army of perfect soldiers</li>
+                <li>subject_story->discovered the abandoned cloning vats of a secret military program</li>
+                <li>subject_story->found a stash of strange looking chips labeled after people</li>
+
+                <li>subject_gerund->creating his own clone army</li>
+                <li>subject_gerund->filling rooms with repurposed cloning vats</li>
+                <li>subject_gerund->repairing abandoned cloning vats</li>
+                <li>subject_gerund->killing a defective clone</li>
+                <li>subject_gerund->helping a group of defective clones escape their execution</li>
+            </rulesStrings>
+        </generalRules>
+    </ResearchProjectDef>
+    
+</Defs>

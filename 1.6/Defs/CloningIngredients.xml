@@ -11,12 +11,26 @@
             <graphicClass>Graphic_Single</graphicClass>
         </graphicData>
         <statBases>
-            <MarketValue>400</MarketValue>
-            <MaxHitPoints>60</MaxHitPoints>
+            <MarketValue>550</MarketValue>
+            <MaxHitPoints>200</MaxHitPoints>
             <Flammability>1.0</Flammability>
-            <DeteriorationRate>6</DeteriorationRate>
-            <Mass>0.03</Mass>
+            <DeteriorationRate>2</DeteriorationRate>
+            <Mass>0.1</Mass>
         </statBases>
+        <costList>
+            <Silver>50</Silver>
+            <Plasteel>25</Plasteel>
+            <ComponentIndustrial>2</ComponentIndustrial>
+        </costList>
+        <recipeMaker>
+            <skillRequirements>
+                <Crafting>8</Crafting>
+            </skillRequirements>
+            <researchPrerequisite>SilverSquad_CloningTech</researchPrerequisite>
+            <recipeUsers>
+                <li>FabricationBench</li>
+            </recipeUsers>
+        </recipeMaker>
         <thingCategories>
             <li>ItemsMisc</li>
         </thingCategories>

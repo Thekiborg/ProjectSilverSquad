@@ -47,5 +47,7 @@
 		}
 
 		public static JobDef SilverSquad_CarryIngredientsToVat;
+		public static JobDef SilverSquad_RecordGenome;
+		public static JobDef SilverSquad_LoadPasteIntoVat;
 	}
 }

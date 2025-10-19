@@ -12,7 +12,7 @@ namespace ProjectSilverSquad
 			{
 				if (item is Pawn pawn)
 				{
-					ThingClass_GenomeImprint GenomeImprint = (ThingClass_GenomeImprint)ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamed("SilverSquad_GenomeImprint"));
+					ThingClass_GenomeImprint GenomeImprint = (ThingClass_GenomeImprint)ThingMaker.MakeThing(SilverSquad_ThingDefOfs.SilverSquad_GenomeImprint);
 					GenomeImprint.genome = new(pawn);
 					GenSpawn.Spawn(GenomeImprint, pawn.Position, pawn.Map);
 				}
