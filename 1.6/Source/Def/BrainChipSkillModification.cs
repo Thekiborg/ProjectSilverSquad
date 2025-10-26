@@ -35,7 +35,7 @@ namespace ProjectSilverSquad
 		public void LoadDataFromXmlCustom(XmlNode xmlRoot)
 		{
 			DirectXmlCrossRefLoader.RegisterObjectWantsCrossRef(this, "skillDef", xmlRoot.Name);
-			DirectXmlCrossRefLoader.RegisterObjectWantsCrossRef(this, "parent", xmlRoot.ParentNode.ParentNode.SelectSingleNode("/defName").FirstChild.Value);
+			DirectXmlCrossRefLoader.RegisterObjectWantsCrossRef(this, "parent", xmlRoot.ParentNode.ParentNode.SelectSingleNode("./defName").FirstChild.Value);
 			skillOffset = ParseHelper.ParseIntPermissive(xmlRoot.FirstChild.Value);
 
 			/*string[] sections = xmlRoot.FirstChild.Value.Split(',');

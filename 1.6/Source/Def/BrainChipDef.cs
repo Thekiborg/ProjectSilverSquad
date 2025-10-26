@@ -5,6 +5,10 @@
 		public List<BrainChipSkillModification> skillMods;
 		public List<BrainChipTraitModification> traitMods;
 		public float instabilityOffset;
+		public int embryoGrowingTimeTicksOffset;
+		public int pawnGrowingTimeTicksOffset;
+		public float embryoGrowintTimeFactor = 1f;
+		public float pawnGrowingTimeFactor = 1f;
 
 		public BrainChipCategory Category
 		{

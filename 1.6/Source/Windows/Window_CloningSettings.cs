@@ -45,6 +45,11 @@ namespace ProjectSilverSquad
 		public Dictionary<(RecipeDef, BodyPartRecord), bool> selectedSurgeries = [];
 		public Xenogerm xenogerm;
 
+		private Pawn backerPawn;
+		private ThingClass_GenomeImprint imprint;
+		private Vector2 scrollPosition;
+		public (XenotypeDef, string, XenotypeIconDef, List<Gene>) preXenogermInfo;
+
 		private float Instability
 		{
 			get
@@ -63,11 +68,38 @@ namespace ProjectSilverSquad
 				return Mathf.Min(instability, 100);
 			}
 		}
-		private Pawn backerPawn;
-		private ThingClass_GenomeImprint imprint;
-		private Vector2 scrollPosition;
-		public (XenotypeDef, string, XenotypeIconDef, List<Gene>) preXenogermInfo;
 
+		private (int embryoTicks, int pawnTicks) TicksOfWork
+		{
+			get
+			{
+				int embryoTicks = cloningVat.ModExtension.baseEmbryoIncubationTicks;
+				float embryoTicksFactor = 1f;
+				int pawnTicks = cloningVat.ModExtension.basePawnGrowTimeTicks;
+				float pawnTicksFactor = 1f;
+				foreach (var kvp in selectedSkillChips)
+				{
+					if (kvp.Value)
+					{
+						embryoTicks += kvp.Key.embryoGrowingTimeTicksOffset;
+						embryoTicksFactor *= kvp.Key.embryoGrowintTimeFactor;
+						pawnTicks += kvp.Key.pawnGrowingTimeTicksOffset;
+						pawnTicksFactor *= kvp.Key.pawnGrowingTimeFactor;
+					}
+				}
+				foreach (var kvp in selectedTraitChips)
+				{
+					if (kvp.Value)
+					{
+						embryoTicks += kvp.Key.embryoGrowingTimeTicksOffset;
+						embryoTicksFactor *= kvp.Key.embryoGrowintTimeFactor;
+						pawnTicks += kvp.Key.pawnGrowingTimeTicksOffset;
+						pawnTicksFactor *= kvp.Key.pawnGrowingTimeFactor;
+					}
+				}
+				return ((int)(embryoTicks * embryoTicksFactor), (int)(pawnTicks * pawnTicksFactor));
+			}
+		}
 
 		private Dialog_SelectBrainChipSkill Dialog_SelectBrainChipSkill
 		{
@@ -95,9 +127,7 @@ namespace ProjectSilverSquad
 				return selectSurgery;
 			}
 		}
-
 		public override Vector2 InitialSize => new(1400, 800);
-
 		public Pawn PreviewClone => backerPawn;
 
 
@@ -227,9 +257,16 @@ namespace ProjectSilverSquad
 			}
 			else
 			{
-				if (Widgets.ButtonImage(portraitRect,
-					TextureLibrary.potatopic,
-					tooltip: "SilverSquad_CloningVat_CharacterImprint_PortraitTooltip".Translate()))
+				Rect plusSignRect = new(portraitRect.width / 2, portraitRect.yMin, ChipButtonSize, ChipButtonSize);
+				GUI.DrawTexture(plusSignRect, TextureLibrary.PlusSign);
+
+				Widgets.DrawBox(plusSignRect);
+				Log.Message($"{plusSignRect.x} - {plusSignRect.xMin}");
+				Log.Message($"{portraitRect.width} - {portraitRect.width / 2}");
+				Log.Message(contentRect.width);
+
+				TooltipHandler.TipRegion(portraitRect, "SilverSquad_CloningVat_CharacterImprint_PortraitTooltip".Translate());
+				if (Widgets.ButtonInvisible(portraitRect))
 				{
 					DoImprintFloatMenu();
 				}
@@ -341,7 +378,7 @@ namespace ProjectSilverSquad
 						skillLevels.TryAdd(skill.def, skill.Level);
 					}
 
-					cloningVat.StartCloning(new(brainChipsSkill, brainChipsTraits, surgeries, xenogerm, imprint, Instability, skillLevels));
+					cloningVat.StartCloning(new(brainChipsSkill, brainChipsTraits, surgeries, xenogerm, imprint, Instability, skillLevels, TicksOfWork.pawnTicks, TicksOfWork.embryoTicks));
 					Close();
 				}
 				using (new TextBlock(ColorLibrary.Red))
@@ -353,10 +390,18 @@ namespace ProjectSilverSquad
 				}
 			}
 
-			Rect instabilityRect = new(confirmButtonRect.xMin, confirmExitRect.yMin, confirmExitRect.xMax - confirmButtonRect.xMin, confirmButtonRect.yMin - confirmExitRect.yMin);
+			Rect instabilityRect = new(confirmButtonRect.xMin, confirmExitRect.yMin, cancelButtonRect.xMax - confirmButtonRect.xMin, confirmButtonRect.yMin - confirmExitRect.yMin);
+			instabilityRect.width /= 2;
 			using (new TextBlock(GameFont.Medium, TextAnchor.MiddleLeft, ColorLibrary.RedReadable))
 			{
 				Widgets.Label(instabilityRect, "SilverSquad_CloningVat_Instability".Translate(Instability.ToStringPercent("F0")));
+			}
+
+			Rect daysRect = new(instabilityRect.xMax, instabilityRect.y, instabilityRect.width, instabilityRect.height);
+			using (new TextBlock(GameFont.Medium, TextAnchor.MiddleRight))
+			{
+				int totalTicks = TicksOfWork.pawnTicks + TicksOfWork.embryoTicks;
+				Widgets.Label(daysRect, "SilverSquad_CloningVat_DaysLeft".Translate(GenDate.TicksToDays(totalTicks)));
 			}
 		}
 

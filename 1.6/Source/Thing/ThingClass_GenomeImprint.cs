@@ -19,6 +19,7 @@
 				yield return new Command_Action()
 				{
 					defaultLabel = "SilverSquad_GenomeImprint_InspectGizmoLabel".Translate(),
+					icon = TextureLibrary.InspectGenomeIcon,
 					action = () =>
 					{
 						Find.WindowStack.Add(new Window_InspectClone(genome.Clone));
@@ -34,6 +35,7 @@
 					{
 						pawnToScan = target.Thing;
 					},
+					icon = TextureLibrary.InspectGenomeIcon,
 					targetingParams = new()
 					{
 						canTargetAnimals = false,

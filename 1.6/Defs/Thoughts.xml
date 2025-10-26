@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+
+    <ThoughtDef>
+        <defName>SilverSquad_Thought_Clone</defName>
+        <workerClass>ThoughtWorker_AlwaysActive</workerClass>
+        <validWhileDespawned>true</validWhileDespawned>
+        <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+        <requiredTraits>
+            <li>SilverSquad_Trait_Clone</li>
+        </requiredTraits>
+        <stages>
+            <li>
+                <label>clone aftermath</label>
+                <description>I will never forget the muffled voices of the scientists outside the glass, and the taste of the paste...</description>
+                <baseMoodEffect>-8</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+    <ThoughtDef>
+        <defName>SilverSquad_Thought_FailedClone</defName>
+        <workerClass>ThoughtWorker_AlwaysActive</workerClass>
+        <validWhileDespawned>true</validWhileDespawned>
+        <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+        <requiredTraits>
+            <li>SilverSquad_Trait_FailedClone</li>
+        </requiredTraits>
+        <stages>
+            <li>
+                <label>failed clone aftermath</label>
+                <description>Why me? Why have I been created like this? Was I just another experiment, not worth being taken properly cared for?</description>
+                <baseMoodEffect>-8</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+</Defs>

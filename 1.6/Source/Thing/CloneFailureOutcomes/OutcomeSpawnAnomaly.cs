@@ -1,12 +1,13 @@
 ﻿namespace ProjectSilverSquad
 {
-	public class OutcomeSpawnAnomaly : CloneFailureOutcome
+	public class OutcomeSpawnAnomaly : CloneFailureOutcome_Bad
 	{
 		public List<PawnKindDef> allowedAnomalies;
 
 
 		public override void Do(ThingClass_CloningVat vat, Pawn clone)
 		{
+			base.Do(vat, clone);
 			if (!ModsConfig.AnomalyActive) return;
 
 			PawnGenerationRequest req = new(allowedAnomalies.RandomElement(), Faction.OfEntities);

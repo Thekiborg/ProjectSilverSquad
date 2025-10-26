@@ -1,6 +1,6 @@
 ﻿namespace ProjectSilverSquad
 {
-	public class OutcomeGeneAlteredClone : CloneFailureOutcome
+	public class OutcomeGeneAlteredClone : CloneFailureOutcome_Bad
 	{
 		public float preNoReturnChance;
 		public float postNoReturnChance;
@@ -10,6 +10,7 @@
 
 		public override void Do(ThingClass_CloningVat vat, Pawn clone)
 		{
+			base.Do(vat, clone);
 			if (!ModsConfig.BiotechActive) return;
 
 			if (vat.PastTicksOfNoReturn)

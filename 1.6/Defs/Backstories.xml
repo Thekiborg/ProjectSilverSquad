@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+
+    <BackstoryDef Name="SilverSquad_CloneBackstoryBase" Abstract="true">
+        <shuffleable>false</shuffleable>
+        <forcedTraits>
+            <SilverSquad_Trait_Clone />
+        </forcedTraits>
+    </BackstoryDef>
+
+    <BackstoryDef ParentName="SilverSquad_CloneBackstoryBase">
+        <defName>SilverSquad_Backstory_CloneChild</defName>
+        <title>vatborn clone</title>
+        <titleShort>clone</titleShort>
+        <description>[PAWN_nameDef] was created in a cloning vat after someone else. [PAWN_possessive] earliest memories are the voices of scientists from the other side of the glass and the taste of nutrient paste.</description>
+        <slot>Childhood</slot>
+    </BackstoryDef>
+
+    <BackstoryDef ParentName="SilverSquad_CloneBackstoryBase">
+        <defName>SilverSquad_Backstory_CloneAdult</defName>
+        <title>vatborn clone</title>
+        <titleShort>clone</titleShort>
+        <description>[PAWN_nameDef] was created in a cloning vat after someone else. [PAWN_possessive] earliest memories are the voices of scientists from the other side of the glass and the taste of nutrient paste.</description>
+        <slot>Adulthood</slot>
+    </BackstoryDef>
+
+    <BackstoryDef ParentName="SilverSquad_CloneBackstoryBase">
+        <defName>SilverSquad_Backstory_FailedClone</defName>
+        <title>failed vatborn clone</title>
+        <titleShort>failed clone</titleShort>
+        <description>[PAWN_nameDef]'s cloning process failed at some point. While [PAWN_pronoun] is lucky to be alive, [PAWN_possessive] first experience out of the vat is being ill outside [PAWN_pronoun] control.</description>
+        <slot>Adulthood</slot>
+        <forcedTraits>
+            <SilverSquad_Trait_FailedClone />
+        </forcedTraits>
+    </BackstoryDef>
+
+</Defs>

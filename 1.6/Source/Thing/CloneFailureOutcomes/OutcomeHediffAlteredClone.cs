@@ -1,6 +1,6 @@
 ﻿namespace ProjectSilverSquad
 {
-	public class OutcomeHediffAlteredClone : CloneFailureOutcome
+	public class OutcomeHediffAlteredClone : CloneFailureOutcome_Bad
 	{
 		public float preNoReturnChance;
 		public float postNoReturnChance;
@@ -10,6 +10,7 @@
 
 		public override void Do(ThingClass_CloningVat vat, Pawn clone)
 		{
+			base.Do(vat, clone);
 			if (vat.PastTicksOfNoReturn)
 			{
 				SpawnPawnWithDefectsOrKill(vat, clone, postNoReturnChance);
@@ -29,8 +30,8 @@
 
 				for (int i = 0; i < rand; i++)
 				{
-					Log.Message(i);
 					var hdAndPart = allowedHediffs.RandomElement();
+					Log.Message(hdAndPart.hediffDef);
 					BodyPartRecord part = null;
 					if (!hdAndPart.wholeBody)
 					{

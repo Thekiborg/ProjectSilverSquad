@@ -4,6 +4,8 @@
     <ProjectSilverSquad.TraitSettingsDef>
         <defName>SilverSquad_TraitSettings</defName>
         <traitsArePsychological>
+            <SilverSquad_Trait_Clone>true</SilverSquad_Trait_Clone>
+            <SilverSquad_Trait_FailedClone>true</SilverSquad_Trait_FailedClone>
             <Nudist>True</Nudist>
             <Bloodlust>True</Bloodlust>
             <Kind>True</Kind>

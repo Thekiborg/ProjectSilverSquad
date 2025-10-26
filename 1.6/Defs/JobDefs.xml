@@ -25,4 +25,12 @@
         <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
     </JobDef>
 
+    <JobDef>
+        <defName>SilverSquad_EmptyVat</defName>
+        <driverClass>ProjectSilverSquad.JobDriver_EmptyVat</driverClass>
+        <reportString>releasing clone from TargetA.</reportString>
+        <suspendable>false</suspendable>
+        <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    </JobDef>
+
 </Defs>

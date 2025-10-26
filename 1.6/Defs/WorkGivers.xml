@@ -19,8 +19,8 @@
         <label>scan someone's genome</label>
         <giverClass>ProjectSilverSquad.WorkGiver_RecordGenome</giverClass>
         <workType>Hauling</workType>
-        <verb>carry</verb>
-        <gerund>carrying</gerund>
+        <verb>scan</verb>
+        <gerund>scanning</gerund>
         <priorityInType>90</priorityInType>
         <requiredCapacities>
             <li>Manipulation</li>
@@ -32,8 +32,26 @@
         <label>loading paste into cloning vat</label>
         <giverClass>ProjectSilverSquad.WorkGiver_LoadPasteIntoVat</giverClass>
         <workType>Hauling</workType>
-        <verb>carry</verb>
-        <gerund>carrying</gerund>
+        <verb>load</verb>
+        <gerund>loading</gerund>
+        <priorityInType>90</priorityInType>
+        <requiredCapacities>
+            <li>Manipulation</li>
+        </requiredCapacities>
+        <modExtensions>
+            <li Class="ProjectSilverSquad.ModExtension">
+                <loadNutPasteThreshold>3</loadNutPasteThreshold>
+            </li>
+        </modExtensions>
+    </WorkGiverDef>
+
+    <WorkGiverDef>
+        <defName>SilverSquad_EmptyVat</defName>
+        <label>taking clone out of cloning vat</label>
+        <giverClass>ProjectSilverSquad.WorkGiver_EmptyVat</giverClass>
+        <workType>Hauling</workType>
+        <verb>haul</verb>
+        <gerund>hauling</gerund>
         <priorityInType>90</priorityInType>
         <requiredCapacities>
             <li>Manipulation</li>

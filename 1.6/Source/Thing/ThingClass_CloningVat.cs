@@ -17,8 +17,8 @@ namespace ProjectSilverSquad
 		private bool passedTicksOfNoReturn;
 
 
-		private int PawnGrowTimeLeft { get => pawnGrowTimeLeft; set => pawnGrowTimeLeft = Math.Max(0, value); }
-		private int EmbryoIncubationTimeLeft { get => embryoIncubationTimeLeft; set => embryoIncubationTimeLeft = Math.Max(0, value); }
+		public int PawnGrowTimeLeft { get => pawnGrowTimeLeft; private set => pawnGrowTimeLeft = Math.Max(0, value); }
+		public int EmbryoIncubationTimeLeft { get => embryoIncubationTimeLeft; private set => embryoIncubationTimeLeft = Math.Max(0, value); }
 		private GrowingPhase CurGrowingPhase
 		{
 			get
@@ -53,7 +53,7 @@ namespace ProjectSilverSquad
 			}
 		}
 		public VatState State => curState;
-		public bool PastTicksOfNoReturn => PawnGrowTimeLeft <= ModExtension.ticksOfNoReturn;
+		public bool PastTicksOfNoReturn => PawnGrowTimeLeft <= cloningSettings.PawnGrowTicks / 2;
 
 
 		public ThingClass_CloningVat()
@@ -112,6 +112,7 @@ namespace ProjectSilverSquad
 							if (Rand.Chance(Settings.Instability))
 							{
 								DoBadOutcome();
+								Reset();
 							}
 							else
 							{
@@ -205,7 +206,7 @@ namespace ProjectSilverSquad
 
 		public void FinishCloning()
 		{
-			GenSpawn.Spawn(Settings.Clone, Position, Map);
+			GenSpawn.Spawn(Settings.Clone, InteractionCell, Map);
 			Reset();
 		}
 
@@ -231,6 +232,7 @@ namespace ProjectSilverSquad
 				yield return new Command_Action()
 				{
 					defaultLabel = "SilverSquad_CloningVat_StartGizmoLabel".Translate(),
+					icon = TextureLibrary.CreateCloneIcon,
 					action = () =>
 					{
 						Find.WindowStack.Add(new Window_CloningSettings(this));
@@ -238,14 +240,14 @@ namespace ProjectSilverSquad
 				};
 			}
 
-			yield return new Command_Action()
-			{
-				defaultLabel = "RELEASE HIM",
-				action = FinishCloning
-			};
 
-			if (Prefs.DevMode)
+			if (DebugSettings.godMode)
 			{
+				yield return new Command_Action()
+				{
+					defaultLabel = "RELEASE HIM",
+					action = FinishCloning
+				};
 				yield return new Command_Action()
 				{
 					defaultLabel = "Set nut to full",
@@ -262,7 +264,7 @@ namespace ProjectSilverSquad
 					action = () =>
 					{
 						if (CurGrowingPhase == GrowingPhase.Incubation) EmbryoIncubationTimeLeft = 0;
-						else if ((CurGrowingPhase == GrowingPhase.GrowingBody) && !passedTicksOfNoReturn) PawnGrowTimeLeft = ModExtension.ticksOfNoReturn;
+						else if ((CurGrowingPhase == GrowingPhase.GrowingBody) && !passedTicksOfNoReturn) PawnGrowTimeLeft = cloningSettings.PawnGrowTicks / 2;
 						else if ((CurGrowingPhase == GrowingPhase.GrowingBody) && passedTicksOfNoReturn) PawnGrowTimeLeft = 0;
 					}
 				};
@@ -294,7 +296,8 @@ namespace ProjectSilverSquad
 			sb.Append("SilverSquad_CloningVat_StoredNutPaste".Translate(Nutrition.ToString("F1")));
 			if (base.GetInspectString().Length > 0)
 			{
-				sb.AppendLine(base.GetInspectString());
+				sb.AppendLine();
+				sb.Append(base.GetInspectString());
 			}
 			if (curState == VatState.AwaitingIngredients)
 			{
@@ -344,10 +347,14 @@ namespace ProjectSilverSquad
 		protected override void DrawAt(Vector3 drawLoc, bool flip = false)
 		{
 			base.DrawAt(drawLoc, flip);
+			Vector3 drawPos = DrawPos;
+			drawPos.y = Altitudes.AltitudeFor(AltitudeLayer.PawnUnused);
+			ModExtension.vatAboveGraphicData.Graphic.color = this.DrawColor;
+			ModExtension.vatAboveGraphicData.Graphic.Draw(drawPos, Rotation, this);
 			if (CurGrowingPhase == GrowingPhase.Incubation)
 			{
 				Vector3 loc = drawLoc;
-				loc.y = Altitudes.AltitudeFor(AltitudeLayer.BuildingOnTop);
+				loc.y = Altitudes.AltitudeFor(AltitudeLayer.Pawn);
 				ModExtension.embryoGraphicData.Graphic.Draw(loc, Rotation, this);
 			}
 		}
@@ -359,7 +366,7 @@ namespace ProjectSilverSquad
 			if (CurGrowingPhase == GrowingPhase.GrowingBody)
 			{
 				Vector3 loc = drawLoc;
-				loc.y = Altitudes.AltitudeFor(AltitudeLayer.BuildingOnTop);
+				loc.y = Altitudes.AltitudeFor(AltitudeLayer.Pawn);
 				Settings.Clone.Drawer.renderer.DynamicDrawPhaseAt(phase, loc, Rotation);
 			}
 		}
@@ -399,9 +406,10 @@ namespace ProjectSilverSquad
 
 		public void StartGrowing()
 		{
-			pawnGrowTimeLeft = ModExtension.basePawnGrowTimeTicks;
-			embryoIncubationTimeLeft = ModExtension.baseEmbryoIncubationTicks;
+			pawnGrowTimeLeft = cloningSettings.PawnGrowTicks;
+			embryoIncubationTimeLeft = cloningSettings.EmbryoGrowTicks;
 			Settings.Clone.ageTracker.AgeBiologicalTicks = GenDate.TicksPerYear * 3;
+			Settings.Clone.ageTracker.AgeChronologicalTicks = 0;
 			Settings.Clone.story.bodyType = PawnGenerator.GetBodyTypeFor(Settings.Clone);
 			curState = VatState.Growing;
 		}

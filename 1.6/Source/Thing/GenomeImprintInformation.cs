@@ -12,6 +12,7 @@
 
 		public GenomeImprintInformation() { }
 
+
 		public GenomeImprintInformation(Pawn origin)
 		{
 			Pawn tempPawn = Find.PawnDuplicator.Duplicate(origin);
@@ -69,8 +70,8 @@
 
 		private static void ChangeBackstories(Pawn pawn)
 		{
-			pawn.story.Childhood = SilverSquad_BackstoryDefOfs.ColonyChild59;
-			pawn.story.Adulthood = SilverSquad_BackstoryDefOfs.ColonyChild59;
+			pawn.story.Childhood = SilverSquad_BackstoryDefOfs.SilverSquad_Backstory_CloneChild;
+			pawn.story.Adulthood = SilverSquad_BackstoryDefOfs.SilverSquad_Backstory_CloneAdult;
 			pawn.Notify_DisabledWorkTypesChanged();
 		}
 

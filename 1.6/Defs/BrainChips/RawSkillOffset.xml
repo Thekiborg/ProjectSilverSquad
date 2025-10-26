@@ -24,6 +24,10 @@
                 <li>FabricationBench</li>
             </recipeUsers>
         </recipeMaker>
+        <costList>
+            <Steel>30</Steel>
+            <ComponentIndustrial>1</ComponentIndustrial>
+        </costList>
         <allowedArchonexusCount>5</allowedArchonexusCount>
     </ProjectSilverSquad.BrainChipDef>
 
@@ -38,6 +42,8 @@
             <Shooting>5</Shooting>
         </skillMods>
         <instabilityOffset>0.1</instabilityOffset>
+        <embryoGrowingTimeTicksOffset>60000</embryoGrowingTimeTicksOffset>
+        <pawnGrowingTimeTicksOffset>60000</pawnGrowingTimeTicksOffset>
     </ProjectSilverSquad.BrainChipDef>
 
     <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">
@@ -51,6 +57,8 @@
             <Melee>5</Melee>
         </skillMods>
         <instabilityOffset>0.1</instabilityOffset>
+        <embryoGrowintTimeFactor>0.5</embryoGrowintTimeFactor>
+        <pawnGrowingTimeFactor>2</pawnGrowingTimeFactor>
     </ProjectSilverSquad.BrainChipDef>
 
     <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">

@@ -9,7 +9,9 @@
 			DefOfHelper.EnsureInitializedInCtor(typeof(SilverSquad_BackstoryDefOfs));
 		}
 
-		public static BackstoryDef ColonyChild59;
+		public static BackstoryDef SilverSquad_Backstory_CloneChild;
+		public static BackstoryDef SilverSquad_Backstory_CloneAdult;
+		public static BackstoryDef SilverSquad_Backstory_FailedClone;
 	}
 
 
@@ -49,5 +51,6 @@
 		public static JobDef SilverSquad_CarryIngredientsToVat;
 		public static JobDef SilverSquad_RecordGenome;
 		public static JobDef SilverSquad_LoadPasteIntoVat;
+		public static JobDef SilverSquad_EmptyVat;
 	}
 }

@@ -7,6 +7,8 @@
 		private List<BrainChipDef> brainChipsTrait;
 		private List<SurgeryInfoForCloning> surgeries;
 		private ThingClass_GenomeImprint genomeImprint;
+		private int pawnGrowTicks;
+		private int embryoGrowTicks;
 		private float instability;
 		private Xenogerm xenogerm;
 
@@ -19,12 +21,14 @@
 		public float Instability { get => instability; set => instability = value; }
 		public Xenogerm Xenogerm => xenogerm;
 		public Pawn Clone => GenomeImprint.genome.Clone;
+		public int PawnGrowTicks => pawnGrowTicks;
+		public int EmbryoGrowTicks => embryoGrowTicks;
 
 
 		public CloningSettings() { }
 
 
-		public CloningSettings(List<BrainChipDef> brainChipsSkill, List<BrainChipDef> brainChipsTrait, List<SurgeryInfoForCloning> surgeries, Xenogerm xenogerm, ThingClass_GenomeImprint genomeImprint, float instability, Dictionary<SkillDef, int> skillLevels)
+		public CloningSettings(List<BrainChipDef> brainChipsSkill, List<BrainChipDef> brainChipsTrait, List<SurgeryInfoForCloning> surgeries, Xenogerm xenogerm, ThingClass_GenomeImprint genomeImprint, float instability, Dictionary<SkillDef, int> skillLevels, int pawnGrowTicks, int embryoGrowTicks)
 		{
 			this.brainChipsSkill = brainChipsSkill;
 			this.brainChipsTrait = brainChipsTrait;
@@ -33,6 +37,8 @@
 			this.genomeImprint = genomeImprint;
 			this.instability = instability;
 			this.skillLevels = skillLevels;
+			this.pawnGrowTicks = pawnGrowTicks;
+			this.embryoGrowTicks = embryoGrowTicks;
 		}
 
 
@@ -58,6 +64,8 @@
 			Scribe_Deep.Look(ref xenogerm, "ProjectSilverSquad_CloningSettings_Xenogerm");
 			Scribe_References.Look(ref genomeImprint, "ProjectSilverSquad_CloningSettings_GenomeImprint");
 			Scribe_Values.Look(ref instability, "ProjectSilverSquad_CloningSettings_Instability");
+			Scribe_Values.Look(ref pawnGrowTicks, "ProjectSilverSquad_CloningSettings_PawnGrowTicks");
+			Scribe_Values.Look(ref embryoGrowTicks, "ProjectSilverSquad_CloningSettings_EmbryoGrowTicks");
 		}
 	}
 }

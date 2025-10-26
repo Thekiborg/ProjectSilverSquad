@@ -10,12 +10,12 @@ namespace ProjectSilverSquad
 		public float baseNutConsumptionPerDay;
 		public int basePawnGrowTimeTicks;
 		public int baseEmbryoIncubationTicks;
-		public int ticksOfNoReturn;
 		public float instabilityPerPeriod;
 		public int instabilityPeriod;
 #pragma warning disable CS0649
 		private List<WeightedCloneFailureOutcomes> outcomes;
 #pragma warning restore
+		public GraphicData vatAboveGraphicData;
 		public IEnumerable<WeightedCloneFailureOutcomes> OrderedOutcomes => outcomes.OrderByDescending(outcome => outcome.weight);
 
 

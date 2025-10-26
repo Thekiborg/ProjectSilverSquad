@@ -10,15 +10,18 @@
         <drawerType>MapMeshAndRealTime</drawerType>
         <passability>Impassable</passability>
         <fillPercent>1</fillPercent>
+        <altitudeLayer>BuildingOnTop</altitudeLayer>
+        <uiIconScale>1</uiIconScale>
+        <uiIconOffset>(0, 0.1)</uiIconOffset>
         <graphicData>
-            <texPath>CloningVat</texPath>
+            <texPath>ProjectSilverSquad/CloningVat/CloningVat</texPath>
             <graphicClass>Graphic_Multi</graphicClass>
-            <drawSize>(2,2)</drawSize>
+            <shaderType>CutoutComplex</shaderType>
+            <drawSize>(4,4)</drawSize>
         </graphicData>
-        <size>(2,2)</size>
+        <size>(3,2)</size>
         <rotatable>true</rotatable>
         <defaultPlacingRot>South</defaultPlacingRot>
-        <uiIconScale>0.8</uiIconScale>
         <statBases>
             <MaxHitPoints>1500</MaxHitPoints>
             <WorkToBuild>8000</WorkToBuild>
@@ -38,8 +41,8 @@
         <blockWind>true</blockWind>
         <canOverlapZones>false</canOverlapZones>
         <designationCategory>Misc</designationCategory>
-        <!--<hasInteractionCell>true</hasInteractionCell>
-        <interactionCellOffset>(0,0,-1)</interactionCellOffset>-->
+        <hasInteractionCell>true</hasInteractionCell>
+        <interactionCellOffset>(0,0,2)</interactionCellOffset>
         <researchPrerequisites>
                 <li>SilverSquad_CloningTech</li>
             </researchPrerequisites>
@@ -59,16 +62,21 @@
             <li Class="ProjectSilverSquad.ModExtension">
                 <maxNutPasteCapacity>7</maxNutPasteCapacity>
                 <baseNutConsumptionPerDay>1</baseNutConsumptionPerDay>
-                <basePawnGrowTimeTicks>720,000</basePawnGrowTimeTicks>
                 <baseEmbryoIncubationTicks>180,000</baseEmbryoIncubationTicks>
-                <ticksOfNoReturn>360,000</ticksOfNoReturn>
-                <instabilityPerPeriod>0.5</instabilityPerPeriod>
-                <instabilityPeriod>25,000</instabilityPeriod>
+                <basePawnGrowTimeTicks>720,000</basePawnGrowTimeTicks>
+                <instabilityPerPeriod>0.5</instabilityPerPeriod> <!-- Given each 250 ticks -->
+                <instabilityPeriod>25,000</instabilityPeriod> <!-- Should reach 100% in 10 hours-->
                 <embryoGraphicData>
                     <texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
                     <graphicClass>Graphic_Single</graphicClass>
                     <drawSize>(1,1)</drawSize>
                 </embryoGraphicData>
+                <vatAboveGraphicData>
+                    <texPath>ProjectSilverSquad/CloningVat/CloningVatAbove</texPath>
+                    <graphicClass>Graphic_Multi</graphicClass>
+                    <shaderType>CutoutComplex</shaderType>
+                    <drawSize>(4,4)</drawSize>
+                </vatAboveGraphicData>
                 <outcomes>
                     <li>
                         <weight>60</weight>
@@ -88,7 +96,7 @@
                             <preNoReturnChance>0.3</preNoReturnChance>
                             <postNoReturnChance>0.6</postNoReturnChance>
                             <numberOfHediffs>10</numberOfHediffs>
-                            <allowedHediffs> <!-- disease free, complications from obelisk clones -->
+                            <allowedHediffs>
                                 <li>
                                     <hediffDef>Carcinoma</hediffDef>
                                 </li>
@@ -140,7 +148,11 @@
                                 </li>
                                 <li MayRequire="Ludeon.RimWorld.Anomaly">
                                     <hediffDef>OrganDecay</hediffDef>
-                                    <wholeBody>true</wholeBody>
+                                    <parts>
+                                        <li>Heart</li>
+                                        <li>Lung</li>
+                                        <li>Kidney</li>
+                                    </parts>
                                 </li>
                                 <li MayRequire="Ludeon.RimWorld.Anomaly">
                                     <hediffDef>CrumblingMind</hediffDef>
