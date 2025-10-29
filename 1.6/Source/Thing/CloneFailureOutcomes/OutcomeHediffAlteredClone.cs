@@ -1,6 +1,6 @@
 ﻿namespace ProjectSilverSquad
 {
-	public class OutcomeHediffAlteredClone : CloneFailureOutcome_Bad
+	public class OutcomeHediffAlteredClone : CloneFailureOutcome_CloneEffect
 	{
 		public float preNoReturnChance;
 		public float postNoReturnChance;
@@ -19,6 +19,12 @@
 			{
 				SpawnPawnWithDefectsOrKill(vat, clone, preNoReturnChance);
 			}
+		}
+
+
+		public override void SendLetter(string letterBodyKey, Pawn clone)
+		{
+			base.SendLetter("SilverSquad_FailedCloneDesc_Hediff", clone);
 		}
 
 

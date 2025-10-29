@@ -5,9 +5,11 @@
 		private Pawn clone;
 		private long originalAge;
 		private BodyTypeDef originalBody;
+		private BeardDef originalBeard;
 		public Pawn Clone => clone;
 		public long OriginalAgeTicks => originalAge;
 		public BodyTypeDef OriginalBody => originalBody;
+		public BeardDef OriginalBeard => originalBeard;
 
 
 		public GenomeImprintInformation() { }
@@ -27,6 +29,10 @@
 				ChangeTattoos(tempPawn);
 			}
 			this.clone = tempPawn;
+
+			originalBeard = clone.style.beardDef;
+			clone.style.beardDef = null;
+
 			originalAge = clone.ageTracker.AgeBiologicalTicks;
 			originalBody = clone.story.bodyType;
 		}
@@ -116,6 +122,7 @@
 			Scribe_Deep.Look(ref clone, "ProjectSilverSquad_GenomeImprintInformation_Clone");
 			Scribe_Values.Look(ref originalAge, "ProjectSilverSquad_GenomeImprintInformation_OriginalAge");
 			Scribe_Defs.Look(ref originalBody, "ProjectSilverSquad_GenomeImprintInformation_OriginalBody");
+			Scribe_Defs.Look(ref originalBeard, "ProjectSilverSquad_GenomeImprintInformation_OriginalBeard");
 		}
 	}
 }

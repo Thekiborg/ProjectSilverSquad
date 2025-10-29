@@ -7,6 +7,7 @@
 
     <!-- Cloning vat-->
     <SilverSquad_CloningVat_StartGizmoLabel>Start cloning</SilverSquad_CloningVat_StartGizmoLabel>
+    <SilverSquad_CloningVat_CancelGizmoLabel>Abort cloning</SilverSquad_CloningVat_CancelGizmoLabel>
 
     <SilverSquad_CloningVat_WantedIngredients>Wanted ingredients: </SilverSquad_CloningVat_WantedIngredients>
     <SilverSquad_CloningVat_StoredNutPaste>Paste stored: {0}</SilverSquad_CloningVat_StoredNutPaste>
@@ -16,6 +17,13 @@
     <SilverSquad_Alert_FailingNoNutPaste>There's some cloning vats without nutrient paste stored. They will increase the instability of the clone they're growing.</SilverSquad_Alert_FailingNoNutPaste>
     <SilverSquad_Alert_FailingNoPowerTitle>Unpowered cloning vats</SilverSquad_Alert_FailingNoPowerTitle>
     <SilverSquad_Alert_FailingNoPower>While unpowered, cloning vats will increase the instability of the clone they're growing.</SilverSquad_Alert_FailingNoPower>
+
+    <SilverSquad_FailedCloneTitle>Cloning aborted</SilverSquad_FailedCloneTitle>
+    <SilverSquad_FailedCloneDesc>The growing process has failed and the clone was incinerated.</SilverSquad_FailedCloneDesc>
+    <SilverSquad_FailedCloneDesc_Genes>The growing process has aborted. Due to the instability, the clone has developed multiple genetic mutations.</SilverSquad_FailedCloneDesc_Genes>
+    <SilverSquad_FailedCloneDesc_Hediff>The growing process has aborted. Due to the instability, the clone has developed multiple health complications.</SilverSquad_FailedCloneDesc_Hediff>
+    <SilverSquad_FailedCloneDesc_Mutant>The growing process has aborted. Due to the instability, the clone has mutated beyond a human.</SilverSquad_FailedCloneDesc_Mutant>
+
 
     <!-- Cloning vat settings window-->
     <SilverSquad_CloningVat_CharacterImprint_Title>Imprint</SilverSquad_CloningVat_CharacterImprint_Title>

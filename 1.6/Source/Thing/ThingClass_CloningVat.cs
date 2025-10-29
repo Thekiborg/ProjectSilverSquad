@@ -101,9 +101,10 @@ namespace ProjectSilverSquad
 
 						float norm = MathUtils.Normalization01((PawnGrowTimeLeft - ModExtension.basePawnGrowTimeTicks) * -1, 0, ModExtension.basePawnGrowTimeTicks);
 						Settings.Clone.ageTracker.AgeBiologicalTicks = (long)Mathf.Lerp(GenDate.TicksPerYear * 3, Settings.GenomeImprint.genome.OriginalAgeTicks, norm);
-						if (Settings.Clone.ageTracker.CurLifeStage != LifeStageDefOf.HumanlikeChild)
+						if (Settings.Clone.DevelopmentalStage.Adult())
 						{
 							Settings.Clone.story.bodyType = Settings.GenomeImprint.genome.OriginalBody;
+							Settings.Clone.style.beardDef = Settings.GenomeImprint.genome.OriginalBeard;
 						}
 
 						if (!passedTicksOfNoReturn && PastTicksOfNoReturn)
@@ -240,6 +241,20 @@ namespace ProjectSilverSquad
 				};
 			}
 
+			if (curState == VatState.AwaitingIngredients)
+			{
+				yield return new Command_Action()
+				{
+					defaultLabel = "SilverSquad_CloningVat_CancelGizmoLabel".Translate(),
+					icon = TextureLibrary.CancelLoadingIcon,
+					action = () =>
+					{
+						thingOwner.TryDropAll(InteractionCell, Map, ThingPlaceMode.Near);
+						Reset();
+					}
+				};
+			}
+
 
 			if (DebugSettings.godMode)
 			{
@@ -354,11 +369,13 @@ namespace ProjectSilverSquad
 			{
 				Vector3 loc = drawLoc;
 				loc.y = Altitudes.AltitudeFor(AltitudeLayer.Pawn);
+
 				ModExtension.embryoGraphicData.Graphic.GetColoredVersion(
-					ModExtension.embryoGraphicData.Graphic.Shader,
+					ShaderUtility.GetSkinShader(Settings.Clone),
 					Settings.Clone.story.SkinColor,
-					Color.white)
+					Settings.Clone.story.SkinColor)
 					.Draw(loc, Rot4.North, this);
+
 			}
 		}
 

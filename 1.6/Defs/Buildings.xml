@@ -74,7 +74,7 @@
                 <embryoGraphicData>
                     <texPath>ProjectSilverSquad/Items/Fleshmass/Fleshmass</texPath>
                     <graphicClass>Graphic_Single</graphicClass>
-                    <shaderType>CutoutComplex</shaderType>
+                    <shaderType>Cutout</shaderType>
                     <drawSize>(1,1)</drawSize>
                 </embryoGraphicData>
                 <vatAboveGraphicData>
@@ -85,7 +85,7 @@
                 </vatAboveGraphicData>
                 <outcomes>
                     <li>
-                        <weight>60</weight>
+                        <weight>30</weight>
                         <worker Class="ProjectSilverSquad.OutcomeNothing" />
                     </li>
                     <li>
@@ -101,7 +101,7 @@
                         <worker Class="ProjectSilverSquad.OutcomeHediffAlteredClone">
                             <preNoReturnChance>0.3</preNoReturnChance>
                             <postNoReturnChance>0.6</postNoReturnChance>
-                            <numberOfHediffs>10</numberOfHediffs>
+                            <numberOfHediffs>4</numberOfHediffs>
                             <allowedHediffs>
                                 <li>
                                     <hediffDef>Carcinoma</hediffDef>

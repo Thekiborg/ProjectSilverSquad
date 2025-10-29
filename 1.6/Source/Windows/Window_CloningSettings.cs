@@ -261,9 +261,9 @@ namespace ProjectSilverSquad
 				GUI.DrawTexture(plusSignRect, TextureLibrary.PlusSign);
 
 				Widgets.DrawBox(plusSignRect);
-				Log.Message($"{plusSignRect.x} - {plusSignRect.xMin}");
-				Log.Message($"{portraitRect.width} - {portraitRect.width / 2}");
-				Log.Message(contentRect.width);
+				//Log.Message($"{plusSignRect.x} - {plusSignRect.xMin}"); HERE
+				//Log.Message($"{portraitRect.width} - {portraitRect.width / 2}");
+				//Log.Message(contentRect.width);
 
 				TooltipHandler.TipRegion(portraitRect, "SilverSquad_CloningVat_CharacterImprint_PortraitTooltip".Translate());
 				if (Widgets.ButtonInvisible(portraitRect))
@@ -468,7 +468,7 @@ namespace ProjectSilverSquad
 			using (new TextBlock(CharacterCardUtility.StackElementBackground))
 			{
 				GUI.DrawTexture(chipButtonRect, BaseContent.WhiteTex);
-				if (Widgets.ButtonImage(chipButtonRect, TextureLibrary.potatopic))
+				if (Widgets.ButtonImage(chipButtonRect, TextureLibrary.PlusSign))
 				{
 					if (PreviewClone is not null)
 					{
@@ -504,7 +504,7 @@ namespace ProjectSilverSquad
 			using (new TextBlock(CharacterCardUtility.StackElementBackground))
 			{
 				GUI.DrawTexture(chipButtonRect, BaseContent.WhiteTex);
-				if (Widgets.ButtonImage(chipButtonRect, TextureLibrary.potatopic))
+				if (Widgets.ButtonImage(chipButtonRect, TextureLibrary.PlusSign))
 				{
 					if (PreviewClone is not null)
 					{
@@ -620,6 +620,7 @@ namespace ProjectSilverSquad
 					{
 						this.imprint = imprint;
 						backerPawn = Find.PawnDuplicator.Duplicate(imprint?.genome?.Clone);
+						backerPawn.style.beardDef = imprint.genome.OriginalBeard;
 
 						initialCloneCapacities.Clear();
 						foreach (PawnCapacityDef cap in ProjectSilverSquad.AllHumanlikeCapacities)

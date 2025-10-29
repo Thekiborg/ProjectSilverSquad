@@ -4,6 +4,7 @@
 	{
 		public override void Do(ThingClass_CloningVat vat, Pawn clone)
 		{
+			base.Do(vat, clone);
 		}
 	}
 }
