@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+
+    <TattooDef MayRequire="ludeon.rimworld.ideology">
+        <defName>SilverSquad_CloneTattoo</defName>
+        <label>clone markings</label>
+        <texPath>ProjectSilverSquad/Tattoo/CloneTattoo</texPath>
+        <tattooType>Body</tattooType>
+    </TattooDef>
+
+</Defs>

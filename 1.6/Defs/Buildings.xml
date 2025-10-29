@@ -13,6 +13,7 @@
         <altitudeLayer>BuildingOnTop</altitudeLayer>
         <uiIconScale>1</uiIconScale>
         <uiIconOffset>(0, 0.1)</uiIconOffset>
+        <stackLimit>1</stackLimit>
         <graphicData>
             <texPath>ProjectSilverSquad/CloningVat/CloningVat</texPath>
             <graphicClass>Graphic_Multi</graphicClass>
@@ -52,6 +53,10 @@
         </building>
         <constructionSkillPrerequisite>12</constructionSkillPrerequisite>
         <comps>
+            <li Class="CompProperties_Glower">
+                <glowRadius>3</glowRadius>
+                <glowColor>(156, 255, 250)</glowColor>
+            </li>
             <li Class="CompProperties_Power">
                 <compClass>CompPowerTrader</compClass>
                 <basePowerConsumption>900</basePowerConsumption>
@@ -67,8 +72,9 @@
                 <instabilityPerPeriod>0.5</instabilityPerPeriod> <!-- Given each 250 ticks -->
                 <instabilityPeriod>25,000</instabilityPeriod> <!-- Should reach 100% in 10 hours-->
                 <embryoGraphicData>
-                    <texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
+                    <texPath>ProjectSilverSquad/Items/Fleshmass/Fleshmass</texPath>
                     <graphicClass>Graphic_Single</graphicClass>
+                    <shaderType>CutoutComplex</shaderType>
                     <drawSize>(1,1)</drawSize>
                 </embryoGraphicData>
                 <vatAboveGraphicData>
@@ -186,4 +192,69 @@
         </modExtensions>
     </ThingDef>
 
+    <ThingDef ParentName="BenchBase">
+        <defName>SilverSquad_ChipWorkbench</defName>
+        <label>chip workbench</label>
+        <description>A work station for producing the chips involved in the cloning process.</description>
+        <thingClass>Building_WorkTable</thingClass>
+        <graphicData>
+            <texPath>ProjectSilverSquad/ChipBench/ChipBench</texPath>
+            <graphicClass>Graphic_Multi</graphicClass>
+            <drawSize>(2,2)</drawSize>
+        </graphicData>
+        <castEdgeShadows>true</castEdgeShadows>
+        <staticSunShadowHeight>0.20</staticSunShadowHeight>
+        <costList>
+            <Steel>80</Steel>
+            <ComponentIndustrial>5</ComponentIndustrial>
+        </costList>
+        <altitudeLayer>Building</altitudeLayer>
+        <fillPercent>0.5</fillPercent>
+        <useHitPoints>True</useHitPoints>
+        <statBases>
+            <WorkToBuild>3000</WorkToBuild>
+            <MaxHitPoints>180</MaxHitPoints>
+            <Flammability>1.0</Flammability>
+            <Cleanliness>-2</Cleanliness>
+        </statBases>
+        <size>(2,1)</size>
+        <designationCategory>Misc</designationCategory>
+        <uiOrder>2520</uiOrder>
+        <passability>PassThroughOnly</passability>
+        <pathCost>50</pathCost>
+        <hasInteractionCell>True</hasInteractionCell>
+        <interactionCellOffset>(1,0,-1)</interactionCellOffset>
+        <surfaceType>Item</surfaceType>
+        <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+        <inspectorTabs>
+            <li>ITab_Bills</li>
+        </inspectorTabs>
+        <comps>
+            <li Class="CompProperties_Power">
+                <compClass>CompPowerTrader</compClass>
+                <shortCircuitInRain>true</shortCircuitInRain>
+                <basePowerConsumption>350</basePowerConsumption>
+            </li>
+            <li Class="CompProperties_Flickable" />
+            <li Class="CompProperties_AffectedByFacilities">
+                <linkableFacilities>
+                    <li>ToolCabinet</li>
+                </linkableFacilities>
+            </li>
+            <li Class="CompProperties_Breakdownable" />
+        </comps>
+        <building>
+            <spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+            <workTableRoomRole>Workshop</workTableRoomRole>
+            <workTableNotInRoomRoleFactor>0.8</workTableNotInRoomRoleFactor>
+        </building>
+        <constructEffect>ConstructMetal</constructEffect>
+        <researchPrerequisites>
+            <li>SilverSquad_CloningTech</li>
+        </researchPrerequisites>
+        <placeWorkers>
+            <li>PlaceWorker_ShowFacilitiesConnections</li>
+            <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+        </placeWorkers>
+    </ThingDef>
 </Defs>

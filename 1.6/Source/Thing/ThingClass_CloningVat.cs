@@ -349,13 +349,16 @@ namespace ProjectSilverSquad
 			base.DrawAt(drawLoc, flip);
 			Vector3 drawPos = DrawPos;
 			drawPos.y = Altitudes.AltitudeFor(AltitudeLayer.PawnUnused);
-			ModExtension.vatAboveGraphicData.Graphic.color = this.DrawColor;
 			ModExtension.vatAboveGraphicData.Graphic.Draw(drawPos, Rotation, this);
 			if (CurGrowingPhase == GrowingPhase.Incubation)
 			{
 				Vector3 loc = drawLoc;
 				loc.y = Altitudes.AltitudeFor(AltitudeLayer.Pawn);
-				ModExtension.embryoGraphicData.Graphic.Draw(loc, Rotation, this);
+				ModExtension.embryoGraphicData.Graphic.GetColoredVersion(
+					ModExtension.embryoGraphicData.Graphic.Shader,
+					Settings.Clone.story.SkinColor,
+					Color.white)
+					.Draw(loc, Rot4.North, this);
 			}
 		}
 

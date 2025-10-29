@@ -7,8 +7,10 @@
         <thingClass>ProjectSilverSquad.ThingClass_GenomeImprint</thingClass>
         <description>A record of someone's body at a given point; it contains all the data needed to artificially grow a new body in the appropriate cloning vat.</description>
         <graphicData>
-            <texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
+            <texPath>ProjectSilverSquad/Items/Chips/GenomeImprint</texPath>
             <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+            <drawSize>(0.9,0.9)</drawSize>
         </graphicData>
         <statBases>
             <MarketValue>550</MarketValue>
@@ -28,13 +30,18 @@
             </skillRequirements>
             <researchPrerequisite>SilverSquad_CloningTech</researchPrerequisite>
             <recipeUsers>
-                <li>FabricationBench</li>
+                <li>SilverSquad_ChipWorkbench</li>
             </recipeUsers>
         </recipeMaker>
         <thingCategories>
             <li>ItemsMisc</li>
         </thingCategories>
         <allowedArchonexusCount>5</allowedArchonexusCount>
+        <comps>
+            <li>
+                <compClass>CompColorable</compClass>
+            </li>
+        </comps>
     </ThingDef>
     
 </Defs>

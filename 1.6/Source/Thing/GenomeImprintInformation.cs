@@ -71,7 +71,15 @@
 		private static void ChangeBackstories(Pawn pawn)
 		{
 			pawn.story.Childhood = SilverSquad_BackstoryDefOfs.SilverSquad_Backstory_CloneChild;
+			foreach (var bsTrait in pawn.story.Childhood.forcedTraits)
+			{
+				pawn.story.traits.GainTrait(new(bsTrait.def, bsTrait.degree, true), true);
+			}
 			pawn.story.Adulthood = SilverSquad_BackstoryDefOfs.SilverSquad_Backstory_CloneAdult;
+			foreach (var bsTrait in pawn.story.Adulthood.forcedTraits)
+			{
+				pawn.story.traits.GainTrait(new(bsTrait.def, bsTrait.degree, true), true);
+			}
 			pawn.Notify_DisabledWorkTypesChanged();
 		}
 
@@ -85,7 +93,7 @@
 		private static void ChangeTattoos(Pawn pawn)
 		{
 			pawn.style.FaceTattoo = null;
-			pawn.style?.BodyTattoo = null;
+			pawn.style?.BodyTattoo = SilverSquad_TattooDefOfs.SilverSquad_CloneTattoo;
 		}
 
 

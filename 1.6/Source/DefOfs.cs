@@ -53,4 +53,16 @@
 		public static JobDef SilverSquad_LoadPasteIntoVat;
 		public static JobDef SilverSquad_EmptyVat;
 	}
+
+
+	[DefOf]
+	public static class SilverSquad_TattooDefOfs
+	{
+		static SilverSquad_TattooDefOfs()
+		{
+			DefOfHelper.EnsureInitializedInCtor(typeof(SilverSquad_TattooDefOfs));
+		}
+
+		public static TattooDef SilverSquad_CloneTattoo;
+	}
 }

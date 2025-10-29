@@ -7,6 +7,11 @@ It should also increment the time to grow the clone
 
 -------------------------------
 TO-DO
+
+fix fleshmass colors
+
+fix beards on children (save it and spawn it later like bodytypes)
+
 Maybe some logs for the story? Tales and stuff for success and failures.
 
 Maybe a raid of failed clones? They could really have some randomized gear, and could be a good way of getting random genes.
