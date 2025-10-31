@@ -13,6 +13,7 @@
         <altitudeLayer>BuildingOnTop</altitudeLayer>
         <uiIconScale>1</uiIconScale>
         <uiIconOffset>(0, 0.1)</uiIconOffset>
+        <uiOrder>2520</uiOrder>
         <stackLimit>1</stackLimit>
         <graphicData>
             <texPath>ProjectSilverSquad/CloningVat/CloningVat</texPath>

@@ -63,4 +63,20 @@
         </modExtensions>
     </WorkGiverDef>
 
+    <WorkGiverDef>
+        <defName>SilverSquad_CraftChips</defName>
+        <label>craft chips</label>
+        <giverClass>WorkGiver_DoBill</giverClass>
+        <workType>Crafting</workType>
+        <priorityInType>40</priorityInType>
+        <fixedBillGiverDefs>
+            <li>SilverSquad_ChipWorkbench</li>
+        </fixedBillGiverDefs>
+        <verb>craft at</verb>
+        <gerund>crafting at</gerund>
+        <requiredCapacities>
+            <li>Manipulation</li>
+        </requiredCapacities>
+        <prioritizeSustains>true</prioritizeSustains>
+    </WorkGiverDef>
 </Defs>

@@ -13,6 +13,7 @@
             <MarketValue>400</MarketValue>
             <MaxHitPoints>100</MaxHitPoints>
             <Flammability>1.0</Flammability>
+            <WorkToMake>2000</WorkToMake>
             <DeteriorationRate>2</DeteriorationRate>
             <Mass>0.03</Mass>
         </statBases>
@@ -27,6 +28,9 @@
             <recipeUsers>
                 <li>SilverSquad_ChipWorkbench</li>
             </recipeUsers>
+            <effectWorking>Cook</effectWorking>
+            <soundWorking>Recipe_Machining</soundWorking>
+            <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
         </recipeMaker>
         <costList>
             <Steel>30</Steel>
