@@ -225,33 +225,36 @@ namespace ProjectSilverSquad
 
 				if (PreviewClone.genes is not null)
 				{
-					Rect xenoRect = new(contentRect.x, ageRowRect.yMax, ageRowRect.width, CharacterTextHeight);
-					if (Mouse.IsOver(xenoRect))
+					if (ModsConfig.BiotechActive)
 					{
-						Widgets.DrawHighlight(xenoRect);
-					}
-					Rect xenoIconRect = new(xenoRect.x, xenoRect.y, xenoRect.height, xenoRect.height);
-					using (new TextBlock(XenotypeDef.IconColor))
-					{
-						GUI.DrawTexture(xenoIconRect, PreviewClone.genes.XenotypeIcon);
-					}
-					using (new TextBlock(GameFont.Medium, TextAnchor.MiddleLeft))
-					{
-						Rect xenoLabelRect = new(xenoIconRect.xMax, xenoRect.y, xenoRect.width - xenoIconRect.width, xenoRect.height);
-						Widgets.Label(xenoLabelRect, PreviewClone.genes.XenotypeLabelCap);
-					}
-					if (Mouse.IsOver(xenoRect))
-					{
-						TooltipHandler.TipRegion(xenoRect, () =>
-							("Xenotype".Translate() + ": " + PreviewClone.genes.XenotypeLabelCap)
-							.Colorize(ColoredText.TipSectionTitleColor) +
-								"\n\n" + PreviewClone.genes.XenotypeDescShort +
-								"\n\n" + "ViewGenesDesc".Translate(PreviewClone.Named("PAWN")).ToString().StripTags()
-							.Colorize(ColoredText.SubtleGrayColor), 5416952);
-					}
-					if (Widgets.ButtonInvisible(xenoRect))
-					{
-						Find.WindowStack.Add(new Dialog_ViewGenes(PreviewClone));
+						Rect xenoRect = new(contentRect.x, ageRowRect.yMax, ageRowRect.width, CharacterTextHeight);
+						if (Mouse.IsOver(xenoRect))
+						{
+							Widgets.DrawHighlight(xenoRect);
+						}
+						Rect xenoIconRect = new(xenoRect.x, xenoRect.y, xenoRect.height, xenoRect.height);
+						using (new TextBlock(XenotypeDef.IconColor))
+						{
+							GUI.DrawTexture(xenoIconRect, PreviewClone.genes.XenotypeIcon);
+						}
+						using (new TextBlock(GameFont.Medium, TextAnchor.MiddleLeft))
+						{
+							Rect xenoLabelRect = new(xenoIconRect.xMax, xenoRect.y, xenoRect.width - xenoIconRect.width, xenoRect.height);
+							Widgets.Label(xenoLabelRect, PreviewClone.genes.XenotypeLabelCap);
+						}
+						if (Mouse.IsOver(xenoRect))
+						{
+							TooltipHandler.TipRegion(xenoRect, () =>
+								("Xenotype".Translate() + ": " + PreviewClone.genes.XenotypeLabelCap)
+								.Colorize(ColoredText.TipSectionTitleColor) +
+									"\n\n" + PreviewClone.genes.XenotypeDescShort +
+									"\n\n" + "ViewGenesDesc".Translate(PreviewClone.Named("PAWN")).ToString().StripTags()
+								.Colorize(ColoredText.SubtleGrayColor), 5416952);
+						}
+						if (Widgets.ButtonInvisible(xenoRect))
+						{
+							Find.WindowStack.Add(new Dialog_ViewGenes(PreviewClone));
+						}
 					}
 				}
 			}

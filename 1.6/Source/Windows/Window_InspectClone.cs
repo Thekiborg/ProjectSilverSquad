@@ -322,7 +322,7 @@ namespace ProjectSilverSquad
 
 		private void TryDoXenotypeArea(Rect inRect, Rect namesRect, out Rect? rect)
 		{
-			if (clone.genes is not null)
+			if (ModsConfig.BiotechActive)
 			{
 				float xenotypeLabelWidth = Text.CalcSize(clone.genes.XenotypeLabelCap).x;
 				Rect xenotypeRectBg = new(inRect.xMax - xenotypeLabelWidth - XenotypeIconSize - AgeXenotypeAreasExtraWidth,

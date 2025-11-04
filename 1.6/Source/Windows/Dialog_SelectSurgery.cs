@@ -255,7 +255,10 @@ namespace ProjectSilverSquad
 		private void GetAvailableSurgeriesOnPawn(Map map)
 		{
 			recipes.Clear();
-			recipes.Add((RecipeDefOf.ImplantXenogerm, null));
+			if (ModsConfig.BiotechActive)
+			{
+				recipes.Add((RecipeDefOf.ImplantXenogerm, null));
+			}
 			foreach (var surg in selectedSurgeries)
 			{
 				if (surg.Value)
