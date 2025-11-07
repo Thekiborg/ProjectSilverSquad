@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+
+    <ProjectSilverSquad.BrainChipDef Name="SilverSquad_ChipBase" ParentName="ResourceBase" Abstract="True">
+        <stackLimit>1</stackLimit>
+        <graphicData>
+            <texPath>ProjectSilverSquad/Items/Chips/Chip</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+            <drawSize>(0.9,0.9)</drawSize>
+        </graphicData>
+        <statBases>
+            <MarketValue>400</MarketValue>
+            <MaxHitPoints>100</MaxHitPoints>
+            <Flammability>1.0</Flammability>
+            <WorkToMake>2000</WorkToMake>
+            <DeteriorationRate>2</DeteriorationRate>
+            <Mass>0.03</Mass>
+        </statBases>
+        <thingCategories>
+            <li>ItemsMisc</li>
+        </thingCategories>
+        <recipeMaker>
+            <researchPrerequisite>SilverSquad_CloningTech</researchPrerequisite>
+            <recipeUsers>
+                <li>SilverSquad_ChipWorkbench</li>
+            </recipeUsers>
+            <effectWorking>Cook</effectWorking>
+            <soundWorking>Recipe_Machining</soundWorking>
+            <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+        </recipeMaker>
+        <allowedArchonexusCount>5</allowedArchonexusCount>
+        <comps>
+            <li>
+                <compClass>CompColorable</compClass>
+            </li>
+        </comps>
+    </ProjectSilverSquad.BrainChipDef>
+
+    <ProjectSilverSquad.BrainChipDef Name="SilverSquad_WeakSkillChipBase" ParentName="SilverSquad_ChipBase" Abstract="True">
+        <recipeMaker>
+            <skillRequirements>
+                <Crafting>5</Crafting>
+            </skillRequirements>
+        </recipeMaker>
+        <costList>
+            <Steel>30</Steel>
+            <ComponentIndustrial>1</ComponentIndustrial>
+        </costList>
+    </ProjectSilverSquad.BrainChipDef>
+
+    <ProjectSilverSquad.BrainChipDef Name="SilverSquad_StrongSkillChipBase" ParentName="SilverSquad_ChipBase" Abstract="True">
+        <colorGenerator Class="ColorGenerator_Single">
+            <color>(25, 25, 25)</color>
+        </colorGenerator>
+        <recipeMaker>
+            <skillRequirements>
+                <Crafting>10</Crafting>
+            </skillRequirements>
+        </recipeMaker>
+        <costList>
+            <Silver>10</Silver>
+            <Gold>1</Gold>
+            <ComponentSpacer>2</ComponentSpacer>
+        </costList>
+    </ProjectSilverSquad.BrainChipDef>
+
+</Defs>

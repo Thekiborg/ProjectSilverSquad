@@ -1,171 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
 
-    <ProjectSilverSquad.BrainChipDef Name="ChipBase" ParentName="ResourceBase" Abstract="True">
-        <stackLimit>1</stackLimit>
-        <graphicData>
-            <texPath>ProjectSilverSquad/Items/Chips/Chip</texPath>
-            <graphicClass>Graphic_Single</graphicClass>
-            <shaderType>CutoutComplex</shaderType>
-            <drawSize>(0.9,0.9)</drawSize>
-        </graphicData>
-        <statBases>
-            <MarketValue>400</MarketValue>
-            <MaxHitPoints>100</MaxHitPoints>
-            <Flammability>1.0</Flammability>
-            <WorkToMake>2000</WorkToMake>
-            <DeteriorationRate>2</DeteriorationRate>
-            <Mass>0.03</Mass>
-        </statBases>
-        <thingCategories>
-            <li>ItemsMisc</li>
-        </thingCategories>
-        <recipeMaker>
-            <skillRequirements>
-                <Crafting>5</Crafting>
-            </skillRequirements>
-            <researchPrerequisite>SilverSquad_CloningTech</researchPrerequisite>
-            <recipeUsers>
-                <li>SilverSquad_ChipWorkbench</li>
-            </recipeUsers>
-            <effectWorking>Cook</effectWorking>
-            <soundWorking>Recipe_Machining</soundWorking>
-            <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
-        </recipeMaker>
-        <costList>
-            <Steel>30</Steel>
-            <ComponentIndustrial>1</ComponentIndustrial>
-        </costList>
-        <allowedArchonexusCount>5</allowedArchonexusCount>
-        <comps>
-            <li>
-                <compClass>CompColorable</compClass>
-            </li>
-        </comps>
-    </ProjectSilverSquad.BrainChipDef>
-
-    <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_WeakSkillChipBase">
         <defName>SilverSquad_BrainChip_RawOffset_Shooting</defName>
-        <label>Brain chip (Shooting)</label>
+        <label>Brain chip (Weak Shooting)</label>
         <description>A brain chip automatically used when growing clones. It will increase the clone's shooting skill.</description>
         <skillMods>
             <Shooting>5</Shooting>
         </skillMods>
-        <instabilityOffset>0.1</instabilityOffset>
+        <instabilityOffset>0.05</instabilityOffset>
         <embryoGrowingTimeTicksOffset>60000</embryoGrowingTimeTicksOffset>
         <pawnGrowingTimeTicksOffset>60000</pawnGrowingTimeTicksOffset>
     </ProjectSilverSquad.BrainChipDef>
 
-    <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_WeakSkillChipBase">
         <defName>SilverSquad_BrainChip_RawOffset_Melee</defName>
-        <label>Brain chip (Melee)</label>
+        <label>Brain chip (Weak Melee)</label>
         <description>A brain chip automatically used when growing clones. It will increase the clone's melee skill.</description>
         <skillMods>
             <Melee>5</Melee>
         </skillMods>
-        <instabilityOffset>0.1</instabilityOffset>
+        <instabilityOffset>0.05</instabilityOffset>
         <embryoGrowintTimeFactor>0.5</embryoGrowintTimeFactor>
         <pawnGrowingTimeFactor>2</pawnGrowingTimeFactor>
     </ProjectSilverSquad.BrainChipDef>
 
-    <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_WeakSkillChipBase">
         <defName>SilverSquad_BrainChip_RawOffset_Construction</defName>
-        <label>Brain chip (Construction)</label>
+        <label>Brain chip (Weak Construction)</label>
         <description>A brain chip automatically used when growing clones. It will increase the clone's construction skill.</description>
         <skillMods>
             <Construction>5</Construction>
         </skillMods>
-        <instabilityOffset>0.1</instabilityOffset>
+        <instabilityOffset>0.05</instabilityOffset>
     </ProjectSilverSquad.BrainChipDef>
 
-    <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_WeakSkillChipBase">
         <defName>SilverSquad_BrainChip_RawOffset_Mining</defName>
-        <label>Brain chip (Mining)</label>
+        <label>Brain chip (Weak Mining)</label>
         <description>A brain chip automatically used when growing clones. It will increase the clone's mining skill.</description>
         <skillMods>
             <Mining>5</Mining>
         </skillMods>
-        <instabilityOffset>0.1</instabilityOffset>
+        <instabilityOffset>0.05</instabilityOffset>
     </ProjectSilverSquad.BrainChipDef>
 
-    <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_WeakSkillChipBase">
         <defName>SilverSquad_BrainChip_RawOffset_Cooking</defName>
-        <label>Brain chip (Cooking)</label>
+        <label>Brain chip (Weak Cooking)</label>
         <description>A brain chip automatically used when growing clones. It will increase the clone's cooking skill.</description>
         <skillMods>
             <Cooking>5</Cooking>
         </skillMods>
-        <instabilityOffset>0.1</instabilityOffset>
+        <instabilityOffset>0.05</instabilityOffset>
     </ProjectSilverSquad.BrainChipDef>
 
-    <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_WeakSkillChipBase">
         <defName>SilverSquad_BrainChip_RawOffset_Plants</defName>
-        <label>Brain chip (Plants)</label>
+        <label>Brain chip (Weak Plants)</label>
         <description>A brain chip automatically used when growing clones. It will increase the clone's plants skill.</description>
         <skillMods>
             <Plants>5</Plants>
         </skillMods>
-        <instabilityOffset>0.1</instabilityOffset>
+        <instabilityOffset>0.05</instabilityOffset>
     </ProjectSilverSquad.BrainChipDef>
 
-    <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_WeakSkillChipBase">
         <defName>SilverSquad_BrainChip_RawOffset_Animals</defName>
-        <label>Brain chip (Animals)</label>
+        <label>Brain chip (Weak Animals)</label>
         <description>A brain chip automatically used when growing clones. It will increase the clone's animals skill.</description>
         <skillMods>
             <Animals>5</Animals>
         </skillMods>
-        <instabilityOffset>0.1</instabilityOffset>
+        <instabilityOffset>0.05</instabilityOffset>
     </ProjectSilverSquad.BrainChipDef>
 
-    <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_WeakSkillChipBase">
         <defName>SilverSquad_BrainChip_RawOffset_Crafting</defName>
-        <label>Brain chip (Crafting)</label>
+        <label>Brain chip (Weak Crafting)</label>
         <description>A brain chip automatically used when growing clones. It will increase the clone's Crafting skill.</description>
         <skillMods>
             <Crafting>5</Crafting>
         </skillMods>
-        <instabilityOffset>0.1</instabilityOffset>
+        <instabilityOffset>0.05</instabilityOffset>
     </ProjectSilverSquad.BrainChipDef>
 
-    <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_WeakSkillChipBase">
         <defName>SilverSquad_BrainChip_RawOffset_Artistic</defName>
-        <label>Brain chip (Artistic)</label>
+        <label>Brain chip (Weak Artistic)</label>
         <description>A brain chip automatically used when growing clones. It will increase the clone's artistic skill.</description>
         <skillMods>
             <Artistic>5</Artistic>
         </skillMods>
-        <instabilityOffset>0.1</instabilityOffset>
+        <instabilityOffset>0.05</instabilityOffset>
     </ProjectSilverSquad.BrainChipDef>
 
-    <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_WeakSkillChipBase">
         <defName>SilverSquad_BrainChip_RawOffset_Medicine</defName>
-        <label>Brain chip (Medicine)</label>
+        <label>Brain chip (Weak Medicine)</label>
         <description>A brain chip automatically used when growing clones. It will increase the clone's medicine skill.</description>
         <skillMods>
             <Medicine>5</Medicine>
         </skillMods>
-        <instabilityOffset>0.1</instabilityOffset>
+        <instabilityOffset>0.05</instabilityOffset>
     </ProjectSilverSquad.BrainChipDef>
 
-    <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_WeakSkillChipBase">
         <defName>SilverSquad_BrainChip_RawOffset_Social</defName>
-        <label>Brain chip (Social)</label>
+        <label>Brain chip (Weak Social)</label>
         <description>A brain chip automatically used when growing clones. It will increase the clone's social skill.</description>
         <skillMods>
             <Social>5</Social>
         </skillMods>
-        <instabilityOffset>0.1</instabilityOffset>
+        <instabilityOffset>0.05</instabilityOffset>
     </ProjectSilverSquad.BrainChipDef>
 
-    <ProjectSilverSquad.BrainChipDef ParentName="ChipBase">
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_WeakSkillChipBase">
         <defName>SilverSquad_BrainChip_RawOffset_Intellectual</defName>
-        <label>Brain chip (Intellectual)</label>
+        <label>Brain chip (Weak Intellectual)</label>
         <description>A brain chip automatically used when growing clones. It will increase the clone's intellectual skill.</description>
         <skillMods>
             <Intellectual>5</Intellectual>
         </skillMods>
-        <instabilityOffset>0.1</instabilityOffset>
+        <instabilityOffset>0.05</instabilityOffset>
     </ProjectSilverSquad.BrainChipDef>
 
 </Defs>
