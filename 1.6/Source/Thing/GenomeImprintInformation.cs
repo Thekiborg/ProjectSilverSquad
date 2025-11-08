@@ -21,6 +21,8 @@
 			PurgeRelations(tempPawn);
 			AdjustHediffs(origin, tempPawn);
 			RemovePsychologicalTraits(tempPawn);
+			tempPawn.guest.Recruitable = true;
+			tempPawn.SetFaction(Faction.OfPlayer);
 			ChangeBackstories(tempPawn);
 			ChangeSkills(origin, tempPawn);
 			if (ModsConfig.IdeologyActive)
