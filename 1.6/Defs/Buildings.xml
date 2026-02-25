@@ -69,7 +69,7 @@
                 <maxNutPasteCapacity>7</maxNutPasteCapacity>
                 <baseNutConsumptionPerDay>1</baseNutConsumptionPerDay>
                 <baseEmbryoIncubationTicks>180,000</baseEmbryoIncubationTicks>
-                <basePawnGrowTimeTicks>720,000</basePawnGrowTimeTicks>
+                <basePawnGrowTimeTicks>420,000</basePawnGrowTimeTicks>
                 <instabilityPerPeriod>0.5</instabilityPerPeriod> <!-- Given each 250 ticks -->
                 <instabilityPeriod>25,000</instabilityPeriod> <!-- Should reach 100% in 10 hours-->
                 <embryoGraphicData>
