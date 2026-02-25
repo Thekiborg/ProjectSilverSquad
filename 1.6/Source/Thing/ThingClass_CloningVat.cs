@@ -426,8 +426,8 @@ namespace ProjectSilverSquad
 
 		public void StartGrowing()
 		{
-			pawnGrowTimeLeft = cloningSettings.PawnGrowTicks;
-			embryoIncubationTimeLeft = cloningSettings.EmbryoGrowTicks;
+			PawnGrowTimeLeft = cloningSettings.PawnGrowTicks;
+			EmbryoIncubationTimeLeft = cloningSettings.EmbryoGrowTicks;
 			Settings.Clone.ageTracker.AgeBiologicalTicks = GenDate.TicksPerYear * 3;
 			Settings.Clone.ageTracker.AgeChronologicalTicks = 0;
 			Settings.Clone.story.bodyType = PawnGenerator.GetBodyTypeFor(Settings.Clone);

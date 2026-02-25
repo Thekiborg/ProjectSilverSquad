@@ -7,6 +7,9 @@
 
 
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Required by game")]
-		public GameComponent_CloneSkillMods(Game game) { }
+		public GameComponent_CloneSkillMods(Game game)
+		{
+			ProjectSilverSquad.CloneSkillMods = this;
+		}
 	}
 }

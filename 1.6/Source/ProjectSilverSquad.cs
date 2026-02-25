@@ -15,16 +15,14 @@ namespace ProjectSilverSquad
 		internal static bool VREAndroidsActive = ModsConfig.IsActive("vanillaracesexpanded.android");
 		internal static bool VREStarJacksActive = ModsConfig.IsActive("vanillaracesexpanded.starjack");
 
+		public static GameComponent_CloneSkillMods CloneSkillMods;
+
 		public static readonly List<GeneDef> PotentiallyNonGameBreakingGenes = [.. DefDatabase<GeneDef>.AllDefsListForReading.Where(gene =>
 			gene.GetType() == typeof(GeneDef) && // Want to get all genes that are base Rimworld Genedefs. Not subtypes
 			(!VREAndroidsActive || !gene.defName.Contains("VREA_")) &&
 			(!VREStarJacksActive || !gene.defName.Contains("_Astrogene"))
 		)];
-		private static GameComponent_CloneSkillMods cloneSkillMods;
 		public static readonly List<PawnCapacityDef> AllHumanlikeCapacities = [.. DefDatabase<PawnCapacityDef>.AllDefs.Where(x => x.showOnHumanlikes).OrderBy(capDef => capDef.listOrder)];
-
-
-		public static GameComponent_CloneSkillMods CloneSkillMods => cloneSkillMods ??= Current.Game.GetComponent<GameComponent_CloneSkillMods>();
 
 
 		static ProjectSilverSquad()
