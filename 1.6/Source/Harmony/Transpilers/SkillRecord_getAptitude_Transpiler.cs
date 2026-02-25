@@ -3,8 +3,8 @@
 namespace ProjectSilverSquad
 {
 	/// <summary>
-	/// Adds brain chip calc and manually added trait skill calc to the aptitudes
-	/// Aptitudes was the cleanest way to make this work after 2 days of rewrites
+	/// Adds brain chip calc and manually added trait skill calc to the aptitudes<br></br>
+	/// Aptitudes was the cleanest way to make this work after 2 days of rewrites<br></br>
 	/// Shouldn't have any performance impact on pawns that are not the fake one from the window
 	/// </summary>
 	[HarmonyPatch(typeof(SkillRecord), nameof(SkillRecord.Aptitude), MethodType.Getter)]

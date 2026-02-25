@@ -48,14 +48,19 @@
 
 		private static void AdjustHediffs(Pawn origin, Pawn clone)
 		{
-			foreach (Hediff hd in origin.health?.hediffSet?.hediffs)
+			for (int i = origin.health.hediffSet.hediffs.Count; i > 0; i--)
 			{
-				if (hd is Hediff_AddedPart or Hediff_Implant)
+				Hediff hd = origin.health.hediffSet.hediffs[i];
+				if (hd is Hediff_AddedPart)
 				{
 					Hediff_MissingPart missingBodyPart = (Hediff_MissingPart)HediffMaker.MakeHediff(HediffDefOf.MissingBodyPart, clone);
 					missingBodyPart.IsFresh = false;
 					missingBodyPart.Part = hd.Part;
 					clone.health?.hediffSet.AddDirect(missingBodyPart);
+				}
+				if (hd is Hediff_Implant)
+				{
+					clone.health?.RemoveHediff(hd);
 				}
 			}
 		}

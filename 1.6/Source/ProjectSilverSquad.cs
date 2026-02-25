@@ -9,6 +9,7 @@ using System.Linq;
 
 namespace ProjectSilverSquad
 {
+	[StaticConstructorOnStartup]
 	public static class ProjectSilverSquad
 	{
 		internal static bool VREAndroidsActive = ModsConfig.IsActive("vanillaracesexpanded.android");
@@ -19,8 +20,12 @@ namespace ProjectSilverSquad
 			(!VREAndroidsActive || !gene.defName.Contains("VREA_")) &&
 			(!VREStarJacksActive || !gene.defName.Contains("_Astrogene"))
 		)];
-		public static readonly GameComponent_CloneSkillMods CloneSkillMods = Current.Game.GetComponent<GameComponent_CloneSkillMods>();
+		private static GameComponent_CloneSkillMods cloneSkillMods;
 		public static readonly List<PawnCapacityDef> AllHumanlikeCapacities = [.. DefDatabase<PawnCapacityDef>.AllDefs.Where(x => x.showOnHumanlikes).OrderBy(capDef => capDef.listOrder)];
+
+
+		public static GameComponent_CloneSkillMods CloneSkillMods => cloneSkillMods ??= Current.Game.GetComponent<GameComponent_CloneSkillMods>();
+
 
 		static ProjectSilverSquad()
 		{
