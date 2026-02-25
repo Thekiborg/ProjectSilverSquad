@@ -44,8 +44,8 @@ namespace ProjectSilverSquad
 
 		private IEnumerable<Toil> DispenserToils()
 		{
-			yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.InteractionCell).FailOnDespawnedNullOrForbidden(TargetIndex.A);
-			yield return Toils_Ingest.TakeMealFromDispenser(TargetIndex.A, pawn);
+			yield return Toils_Goto.GotoThing(TargetIndex.B, PathEndMode.InteractionCell).FailOnDespawnedNullOrForbidden(TargetIndex.A);
+			yield return Toils_Ingest.TakeMealFromDispenser(TargetIndex.B, pawn);
 			yield return Toils_Goto.GotoCell(TargetA.Thing.InteractionCell, PathEndMode.OnCell);
 			yield return Toils_General.WaitWith(TargetIndex.A, 20, true);
 			yield return Toils_General.Do(() => (TargetA.Thing as ThingClass_CloningVat).LoadPaste(pawn.carryTracker.CarriedThing));

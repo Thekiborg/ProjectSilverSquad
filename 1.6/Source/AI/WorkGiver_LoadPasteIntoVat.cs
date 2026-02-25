@@ -39,7 +39,7 @@ namespace ProjectSilverSquad
 		{
 			Thing potentialNutDispenser = GenClosest.ClosestThingReachable(pawn.Position,
 				pawn.Map,
-				ThingRequest.ForDef(ThingDefOf.MealNutrientPaste),
+				ThingRequest.ForDef(ThingDefOf.NutrientPasteDispenser),
 				PathEndMode.ClosestTouch,
 				TraverseParms.For(pawn),
 				9999f,
@@ -47,18 +47,22 @@ namespace ProjectSilverSquad
 				{
 					if (t is not Building_NutrientPasteDispenser nutDis)
 					{
+						Log.Message("Not class");
 						return false;
 					}
 					if (!nutDis.CanDispenseNow)
 					{
+						Log.Message("Cant dispense");
 						return false;
 					}
 					if (!pawn.CanReserve(t))
 					{
+						Log.Message("Cant reserve");
 						return false;
 					}
 					if (t.IsForbidden(pawn))
 					{
+						Log.Message("Forbidden");
 						return false;
 					}
 					return true;
