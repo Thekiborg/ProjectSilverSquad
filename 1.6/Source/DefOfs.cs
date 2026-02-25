@@ -63,6 +63,7 @@
 			DefOfHelper.EnsureInitializedInCtor(typeof(SilverSquad_TattooDefOfs));
 		}
 
+		[MayRequireIdeology]
 		public static TattooDef SilverSquad_CloneTattoo;
 	}
 }

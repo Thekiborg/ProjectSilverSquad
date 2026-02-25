@@ -618,7 +618,7 @@ namespace ProjectSilverSquad
 				if (!thing.PositionHeld.Fogged(cloningVat.Map))
 				{
 					ThingClass_GenomeImprint imprint = thing as ThingClass_GenomeImprint;
-					if (imprint?.genome.Clone is null) continue;
+					if (imprint?.genome?.Clone is null) continue;
 					options.Add(new(imprint.genome.Clone.Name.ToStringFull, () =>
 					{
 						this.imprint = imprint;

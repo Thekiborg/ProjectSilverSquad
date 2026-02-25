@@ -170,7 +170,7 @@
                             </allowedHediffs>
                         </worker>
                     </li>
-                    <li>
+                    <li MayRequire="Ludeon.Rimworld.Anomaly">
                         <weight>5</weight>
                         <worker Class="ProjectSilverSquad.OutcomeSpawnAnomaly">
                             <allowedAnomalies>
@@ -179,7 +179,7 @@
                             </allowedAnomalies>
                         </worker>
                     </li>
-                    <li>
+                    <li MayRequire="Ludeon.Rimworld.Anomaly">
                         <weight>5</weight>
                         <worker Class="ProjectSilverSquad.OutcomeMutateClone">
                             <allowedMutations>

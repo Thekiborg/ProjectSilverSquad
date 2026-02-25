@@ -6,6 +6,7 @@
         <label>genome imprint</label>
         <thingClass>ProjectSilverSquad.ThingClass_GenomeImprint</thingClass>
         <description>A record of someone's body at a given point; it contains all the data needed to artificially grow a new body in the appropriate cloning vat.</description>
+        <stackLimit>1</stackLimit>
         <graphicData>
             <texPath>ProjectSilverSquad/Items/Chips/GenomeImprint</texPath>
             <graphicClass>Graphic_Single</graphicClass>

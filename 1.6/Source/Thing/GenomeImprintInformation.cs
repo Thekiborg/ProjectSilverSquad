@@ -100,8 +100,11 @@
 
 		private static void ChangeTattoos(Pawn pawn)
 		{
-			pawn.style.FaceTattoo = null;
-			pawn.style?.BodyTattoo = SilverSquad_TattooDefOfs.SilverSquad_CloneTattoo;
+			pawn.style?.FaceTattoo = null;
+			if (SilverSquad_TattooDefOfs.SilverSquad_CloneTattoo is not null)
+			{
+				pawn.style?.BodyTattoo = SilverSquad_TattooDefOfs.SilverSquad_CloneTattoo;
+			}
 		}
 
 
