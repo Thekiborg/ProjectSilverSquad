@@ -48,7 +48,7 @@
 
 		private static void AdjustHediffs(Pawn origin, Pawn clone)
 		{
-			for (int i = origin.health.hediffSet.hediffs.Count; i > 0; i--)
+			for (int i = origin.health.hediffSet.hediffs.Count - 1; i >= 0; i--)
 			{
 				Hediff hd = origin.health.hediffSet.hediffs[i];
 				if (hd is Hediff_AddedPart)

@@ -6,7 +6,7 @@ namespace ProjectSilverSquad
 	{
 		private ModExtension ModExtension => field ??= def.GetModExtension<ModExtension>();
 		public override ThingRequest PotentialWorkThingRequest => ThingRequest.ForDef(SilverSquad_ThingDefOfs.SilverSquad_CloningVat);
-		private Thing foundPaste;
+		private Thing foundPasteOrDispenser;
 
 
 		public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
@@ -37,7 +37,37 @@ namespace ProjectSilverSquad
 
 		private bool FindIngredients(Pawn pawn)
 		{
-			Thing thing = GenClosest.ClosestThingReachable(pawn.Position,
+			Thing potentialNutDispenser = GenClosest.ClosestThingReachable(pawn.Position,
+				pawn.Map,
+				ThingRequest.ForDef(ThingDefOf.MealNutrientPaste),
+				PathEndMode.ClosestTouch,
+				TraverseParms.For(pawn),
+				9999f,
+				validator: (t) =>
+				{
+					if (t is not Building_NutrientPasteDispenser nutDis)
+					{
+						return false;
+					}
+					if (!nutDis.CanDispenseNow)
+					{
+						return false;
+					}
+					if (!pawn.CanReserve(t))
+					{
+						return false;
+					}
+					if (t.IsForbidden(pawn))
+					{
+						return false;
+					}
+					return true;
+				});
+			foundPasteOrDispenser = potentialNutDispenser;
+
+			if (potentialNutDispenser is null)
+			{
+				Thing potentialNut = GenClosest.ClosestThingReachable(pawn.Position,
 				pawn.Map,
 				ThingRequest.ForDef(ThingDefOf.MealNutrientPaste),
 				PathEndMode.ClosestTouch,
@@ -55,8 +85,10 @@ namespace ProjectSilverSquad
 					}
 					return true;
 				});
-			foundPaste = thing;
-			return foundPaste is not null;
+				foundPasteOrDispenser = potentialNut;
+			}
+
+			return foundPasteOrDispenser is not null;
 		}
 
 
@@ -64,8 +96,8 @@ namespace ProjectSilverSquad
 		{
 			ThingClass_CloningVat cloningVat = t as ThingClass_CloningVat;
 
-			Job job = JobMaker.MakeJob(SilverSquad_JobDefOfs.SilverSquad_LoadPasteIntoVat, cloningVat, foundPaste);
-			job.count = (int)((cloningVat.ModExtension.maxNutPasteCapacity - cloningVat.Nutrition) / foundPaste.GetStatValue(StatDefOf.Nutrition));
+			Job job = JobMaker.MakeJob(SilverSquad_JobDefOfs.SilverSquad_LoadPasteIntoVat, cloningVat, foundPasteOrDispenser);
+			job.count = (int)((cloningVat.ModExtension.maxNutPasteCapacity - cloningVat.Nutrition) / foundPasteOrDispenser.GetStatValue(StatDefOf.Nutrition));
 			return job;
 		}
 	}
