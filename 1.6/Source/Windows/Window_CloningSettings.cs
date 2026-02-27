@@ -585,7 +585,7 @@ namespace ProjectSilverSquad
 						Rect skillBarRect = new(skillLevelRect.xMax, skillLabelRect.y, passionRect.xMin - skillLevelRect.xMax - UIUtils.TinyPadding, skillLabelRect.height);
 						float fillPercent = Math.Max(0.01f, skillRecord.Level / (float)SkillRecord.MaxLevel);
 						Texture2D fillTex = TextureLibrary.SkillBarFillTex;
-						if ((ModsConfig.BiotechActive || ModsConfig.AnomalyActive) && skillRecord.Aptitude != 0)
+						if (skillRecord.Aptitude != 0)
 						{
 							fillTex = (skillRecord.Aptitude > 0) ? TextureLibrary.SkillBarAptitudePositiveTex : TextureLibrary.SkillBarAptitudeNegativeTex;
 						}
