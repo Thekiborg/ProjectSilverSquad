@@ -558,7 +558,7 @@ namespace ProjectSilverSquad
 						using (new TextBlock(TextAnchor.MiddleCenter))
 						{
 							TextBlock colorBlock;
-							if ((ModsConfig.BiotechActive || ModsConfig.AnomalyActive) && skillRecord.Level == 0 && skillRecord.Aptitude != 0)
+							if (skillRecord.Level == 0 && skillRecord.Aptitude != 0)
 							{
 								colorBlock = new((skillRecord.Aptitude > 0) ? ColorLibrary.BrightGreen : ColorLibrary.RedReadable);
 							}

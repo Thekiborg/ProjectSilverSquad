@@ -72,7 +72,7 @@ namespace ProjectSilverSquad
 
 			codeMatcher.End();
 			codeMatcher.MatchStartBackwards(instructionsToMatch);
-			codeMatcher.Advance(-1);
+			//codeMatcher.Advance(-1);
 
 			if (codeMatcher.IsInvalid)
 			{
