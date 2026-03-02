@@ -37,7 +37,7 @@
         </comps>
     </ProjectSilverSquad.BrainChipDef>
 
-    <ProjectSilverSquad.BrainChipDef Name="SilverSquad_WeakSkillChipBase" ParentName="SilverSquad_ChipBase" Abstract="True">
+    <ProjectSilverSquad.BrainChipDef Name="SilverSquad_WeakPositiveOffsetChipBase" ParentName="SilverSquad_ChipBase" Abstract="True">
         <recipeMaker>
             <skillRequirements>
                 <Crafting>5</Crafting>
@@ -47,9 +47,10 @@
             <Steel>30</Steel>
             <ComponentIndustrial>1</ComponentIndustrial>
         </costList>
+        <instabilityOffset>0.05</instabilityOffset>
     </ProjectSilverSquad.BrainChipDef>
 
-    <ProjectSilverSquad.BrainChipDef Name="SilverSquad_StrongSkillChipBase" ParentName="SilverSquad_ChipBase" Abstract="True">
+    <ProjectSilverSquad.BrainChipDef Name="SilverSquad_StrongPositiveOffsetChipBase" ParentName="SilverSquad_ChipBase" Abstract="True">
         <colorGenerator Class="ColorGenerator_Single">
             <color>(25, 25, 25)</color>
         </colorGenerator>
@@ -63,6 +64,23 @@
             <Gold>1</Gold>
             <ComponentSpacer>2</ComponentSpacer>
         </costList>
+        <instabilityOffset>0.2</instabilityOffset>
     </ProjectSilverSquad.BrainChipDef>
 
+    <ProjectSilverSquad.BrainChipDef Name="SilverSquad_GrowthModifierChipBase" ParentName="SilverSquad_ChipBase" Abstract="True">
+        <colorGenerator Class="ColorGenerator_Single">
+            <color>(255, 92, 92)</color>
+        </colorGenerator>
+        <recipeMaker>
+            <skillRequirements>
+                <Crafting>10</Crafting>
+            </skillRequirements>
+        </recipeMaker>
+        <costList>
+            <Silver>10</Silver>
+            <Gold>1</Gold>
+            <ComponentIndustrial>1</ComponentIndustrial>
+        </costList>
+    </ProjectSilverSquad.BrainChipDef>
+    
 </Defs>

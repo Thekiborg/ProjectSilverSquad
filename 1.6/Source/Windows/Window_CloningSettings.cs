@@ -55,17 +55,24 @@ namespace ProjectSilverSquad
 			get
 			{
 				float instability = 0f;
+				float instabilityFactor = 1f;
 				foreach (var kvp in selectedSkillChips)
 				{
 					if (kvp.Value)
+					{
 						instability += kvp.Key.instabilityOffset;
+						instabilityFactor *= kvp.Key.instabilityFactor;
+					}
 				}
 				foreach (var kvp in selectedTraitChips)
 				{
 					if (kvp.Value)
+					{
 						instability += kvp.Key.instabilityOffset;
+						instabilityFactor *= kvp.Key.instabilityFactor;
+					}
 				}
-				return Mathf.Min(instability, 100);
+				return Mathf.Min(instability * instabilityFactor, 100);
 			}
 		}
 
@@ -82,7 +89,7 @@ namespace ProjectSilverSquad
 					if (kvp.Value)
 					{
 						embryoTicks += kvp.Key.embryoGrowingTimeTicksOffset;
-						embryoTicksFactor *= kvp.Key.embryoGrowintTimeFactor;
+						embryoTicksFactor *= kvp.Key.embryoGrowingTimeFactor;
 						pawnTicks += kvp.Key.pawnGrowingTimeTicksOffset;
 						pawnTicksFactor *= kvp.Key.pawnGrowingTimeFactor;
 					}
@@ -92,7 +99,7 @@ namespace ProjectSilverSquad
 					if (kvp.Value)
 					{
 						embryoTicks += kvp.Key.embryoGrowingTimeTicksOffset;
-						embryoTicksFactor *= kvp.Key.embryoGrowintTimeFactor;
+						embryoTicksFactor *= kvp.Key.embryoGrowingTimeFactor;
 						pawnTicks += kvp.Key.pawnGrowingTimeTicksOffset;
 						pawnTicksFactor *= kvp.Key.pawnGrowingTimeFactor;
 					}

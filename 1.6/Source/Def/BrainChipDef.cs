@@ -5,10 +5,12 @@
 		public List<BrainChipSkillModification> skillMods;
 		public List<BrainChipTraitModification> traitMods;
 		public float instabilityOffset;
+		public float instabilityFactor = 1f;
 		public int embryoGrowingTimeTicksOffset;
 		public int pawnGrowingTimeTicksOffset;
-		public float embryoGrowintTimeFactor = 1f;
+		public float embryoGrowingTimeFactor = 1f;
 		public float pawnGrowingTimeFactor = 1f;
+
 
 		public BrainChipCategory Category
 		{
@@ -31,9 +33,16 @@
 				yield return error;
 			}
 
-			if (skillMods.NullOrEmpty() && traitMods.NullOrEmpty())
+			if (skillMods.NullOrEmpty()
+				&& traitMods.NullOrEmpty()
+				&& instabilityOffset == default
+				&& instabilityFactor == 1f
+				&& embryoGrowingTimeTicksOffset == default
+				&& pawnGrowingTimeTicksOffset == default
+				&& embryoGrowingTimeFactor == 1f
+				&& pawnGrowingTimeFactor == 1f)
 			{
-				yield return "SkillMods and TraitMods are empty. The chip will not do anything";
+				yield return "No settings specified. The chip will not do anything";
 			}
 			/*else
 			{

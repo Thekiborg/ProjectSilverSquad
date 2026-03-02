@@ -4,7 +4,7 @@
     <ThingDef ParentName="BuildingBase">
         <defName>SilverSquad_CloningVat</defName>
         <label>cloning vat</label>
-        <description>Todo.</description>
+        <description>An extremely precise and programmable growth vat. The vat will perfectly replicate the information stored in a genome imprint, and can be inputted chips to influence on the growth process and the qualities of the clone.\n\nThe vat incorporates a feeding system, a life support system and a surgery system.\n\nWARNING: The cloning process is a delicate one, the vat must be kept powered and loaded in nutrient paste to guarantee a successful outcome. Furthemore, the vat will replicate with precision any injuries present on the genome, but it will not create non organic parts.</description>
         <thingClass>ProjectSilverSquad.ThingClass_CloningVat</thingClass>
         <tickerType>Rare</tickerType>
         <drawerType>MapMeshAndRealTime</drawerType>

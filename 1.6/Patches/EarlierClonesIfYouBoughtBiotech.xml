@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+
+    <!-- Is this pay to win-ning? -->
+    <Operation Class="PatchOperationFindMod">
+        <mods>
+            <li>Biotech</li>
+        </mods>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ResearchProjectDef[defName="SilverSquad_CloningTech"]/prerequisites</xpath>
+            <value>
+                <prerequisites>
+                    <li>GrowthVats</li>
+                </prerequisites>
+            </value>
+        </match>
+    </Operation>
+
+</Patch>

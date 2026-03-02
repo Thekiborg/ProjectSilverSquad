@@ -8,14 +8,11 @@
         <baseCost>12000</baseCost>
         <techLevel>Ultra</techLevel>
         <prerequisites>
-            <li>Fabrication</li>
+            <li>Cryptosleep</li>
         </prerequisites>
         <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-        <requiredResearchFacilities>
-            <li>MultiAnalyzer</li>
-        </requiredResearchFacilities>
-        <researchViewX>17.00</researchViewX>
-        <researchViewY>4.20</researchViewY>
+        <researchViewX>16.00</researchViewX>
+        <researchViewY>2.40</researchViewY>
         <generalRules>
             <rulesStrings>
                 <li>subject->physical cloning technology</li>
