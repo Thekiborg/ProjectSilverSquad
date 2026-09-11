@@ -1,0 +1,18 @@
+
+
+Code path done:
+Scale instability of the chip based on how many trait it adds plus how many individual levels per skill
+Assign color from def on spawn i guess?
+
+Pawns cant scan themselves
+skillrecord transpiler doesnt work
+
+
+		- Make GUI to erase unwanted ones if i feel like it
+
+3. Make new recipe that interacts with that thingclass. Creates the Thing and adds the fields manually.
+	- Color override for BrainChipDef.
+	- Label override for BrainChipDef.
+4. Empty chips will be used to copy other chips. This way, you still need to pay the price for the blank chip.
+5. Same thing for the imprints.
+6. nut paste compat

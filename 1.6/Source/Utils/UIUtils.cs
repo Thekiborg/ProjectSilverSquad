@@ -10,7 +10,7 @@
 		public static readonly Color DisabledSkillColor = new(1f, 1f, 1f, 0.5f);
 
 
-		public static void DoTraitMosaic(Rect boundsRect, Pawn clone, Dictionary<BrainChipDef, bool> allChips)
+		public static void DoTraitMosaic(Rect boundsRect, Pawn clone, Dictionary<ThingClass_BrainChip, bool> allChips)
 		{
 			List<Trait> traits = clone.story.traits.TraitsSorted;
 			float traitRectX = boundsRect.xMin;
@@ -61,7 +61,7 @@
 		}
 
 
-		private static bool AddedByChip(TraitDef trait, Dictionary<BrainChipDef, bool> allChips)
+		private static bool AddedByChip(TraitDef trait, Dictionary<ThingClass_BrainChip, bool> allChips)
 		{
 			if (allChips is null) return false;
 
@@ -69,7 +69,7 @@
 			{
 				if (!kvp.Value) continue;
 
-				foreach (var traitMods in kvp.Key.traitMods)
+				foreach (var traitMods in kvp.Key.data.traitMods)
 				{
 					if (trait == traitMods.traitDef)
 					{

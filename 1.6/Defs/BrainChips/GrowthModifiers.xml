@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
 
-    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_GrowthModifierChipBase">
+    <!--<ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_GrowthModifierChipBase">
         <defName>SilverSquad_BrainChip_GrowthModifier_Hasty</defName>
         <label>System chip (Hasty process)</label>
         <description>A chip used to adjust how the cloning vat will function. It will make the vat work way faster, but it will increase the instability gained proportionately.</description>
@@ -18,6 +18,6 @@
         <embryoGrowingTimeFactor>1.5</embryoGrowingTimeFactor>
         <pawnGrowingTimeFactor>1.5</pawnGrowingTimeFactor>
         <instabilityFactor>0.5</instabilityFactor>
-    </ProjectSilverSquad.BrainChipDef>
+    </ProjectSilverSquad.BrainChipDef>-->
     
 </Defs>

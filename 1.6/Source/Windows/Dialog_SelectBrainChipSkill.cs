@@ -12,9 +12,8 @@ namespace ProjectSilverSquad
 		private float scrollViewHeight;
 		private Vector2 scrollPosition;
 		private readonly Window_CloningSettings settingsWindow;
-		private readonly Dictionary<BrainChipDef, bool> selectedChips = [];
-		private readonly Dictionary<BrainChipDef, List<Tuple<BrainChipSkillModification, Passion>>> prevPassions = [];
-		private readonly List<BrainChipDef> chipsOnMap = [];
+		private readonly Dictionary<ThingClass_BrainChip, bool> selectedChips = [];
+		private readonly List<ThingClass_BrainChip> chipsOnMap = [];
 
 
 		public override Vector2 InitialSize => new(500f, 600f);
@@ -23,13 +22,17 @@ namespace ProjectSilverSquad
 		public Dialog_SelectBrainChipSkill(Window_CloningSettings settingsWindow, Map map)
 		{
 			this.settingsWindow = settingsWindow;
-			foreach (Thing chip in map.listerThings.AllThings.Where(t => t.def is BrainChipDef bcd && bcd.Category.HasFlag(BrainChipCategory.SkillOnly)))
+			foreach (Thing chip in map.listerThings.AllThings.Where(t =>
+				t is ThingClass_BrainChip tChip
+				&& t.def is BrainChipDef
+				&& CloneUtils.CategoryFor(tChip).HasFlag(BrainChipCategory.SkillOnly)))
 			{
 				if (!chip.PositionHeld.Fogged(map))
 				{
-					chipsOnMap.AddDistinct(chip.def as BrainChipDef);
+					chipsOnMap.Add(chip as ThingClass_BrainChip);
 				}
 			}
+			selectedChips = settingsWindow.selectedSkillChips;
 		}
 
 
@@ -92,6 +95,20 @@ namespace ProjectSilverSquad
 			}
 			if (Widgets.ButtonInvisible(rect))
 			{
+				// Select the trait chip from this dialog if it's hybrid
+				if (CloneUtils.CategoryFor(chip) == BrainChipCategory.Hybrid)
+				{
+					if (!settingsWindow.selectedTraitChips.TryGetValue(chip, out bool val))
+					{
+						settingsWindow.selectedTraitChips.Add(chip, true);
+					}
+					else
+					{
+						settingsWindow.selectedTraitChips[chip] = !val;
+					}
+					settingsWindow.Dialog_SelectBrainChipTrait.RegisterLateAddedTraitWithSkills(chip);
+				}
+
 				if (!selectedChips.TryGetValue(chip, out bool value))
 				{
 					selectedChips.Add(chip, true);
@@ -112,7 +129,7 @@ namespace ProjectSilverSquad
 				Widgets.Label(rect, $"{chip.LabelCap}:");
 				rect.xMin += textWidth + UIUtils.TinyPadding;
 			}
-			foreach (var skillMod in chip.skillMods)
+			foreach (var skillMod in chip.data.skillMods)
 			{
 				string skillReadout = $"{skillMod.skillDef.LabelCap} {skillMod.skillOffset.ToStringWithSign()}";
 				float textWidth = Text.CalcSize(skillReadout).x;
@@ -149,9 +166,9 @@ namespace ProjectSilverSquad
 						Widgets.DrawHighlight(doesntFitRect);
 
 						StringBuilder sb = new();
-						for (int i = chip.skillMods.IndexOf(skillMod); i < chip.skillMods.Count; i++)
+						for (int i = chip.data.skillMods.IndexOf(skillMod); i < chip.data.skillMods.Count; i++)
 						{
-							sb.AppendLine(chip.skillMods[i].ToString());
+							sb.AppendLine(chip.data.skillMods[i].ToString());
 							sb.AppendLine();
 						}
 
@@ -174,16 +191,9 @@ namespace ProjectSilverSquad
 		}
 
 
-		public override void Close(bool doCloseSound = true)
+		internal void RegisterBrainChip(ThingClass_BrainChip chip)
 		{
-			settingsWindow.selectedSkillChips = selectedChips;
-			base.Close(doCloseSound);
-		}
-
-
-		private void RegisterBrainChip(BrainChipDef chip)
-		{
-			if (!ProjectSilverSquad.CloneSkillMods.AppliedSkillBrainChipsPerPawn.TryGetValue(settingsWindow.PreviewClone, out List<BrainChipDef> appliedBrainChips))
+			if (!ProjectSilverSquad.CloneSkillMods.AppliedSkillBrainChipsPerPawn.TryGetValue(settingsWindow.PreviewClone, out List<ThingClass_BrainChip> appliedBrainChips))
 			{
 				appliedBrainChips = [];
 				ProjectSilverSquad.CloneSkillMods.AppliedSkillBrainChipsPerPawn.Add(settingsWindow.PreviewClone, appliedBrainChips);
@@ -194,7 +204,7 @@ namespace ProjectSilverSquad
 				appliedBrainChips.Add(chip);
 
 				List<Tuple<BrainChipSkillModification, Passion>> prevPassions = [];
-				foreach (var skillMod in chip.skillMods)
+				foreach (var skillMod in chip.data.skillMods)
 				{
 					var record = settingsWindow.PreviewClone.skills.GetSkill(skillMod.skillDef);
 					Passion passion = record.passion;
@@ -205,25 +215,10 @@ namespace ProjectSilverSquad
 					}*/
 					record.passion = passion;
 				}
-				this.prevPassions.TryAdd(chip, prevPassions);
 			}
 			else
 			{
 				appliedBrainChips.Remove(chip);
-
-				var prevPassions = this.prevPassions[chip];
-				foreach (var skillModAndPassion in prevPassions)
-				{
-					var record = settingsWindow.PreviewClone.skills.GetSkill(skillModAndPassion.Item1.skillDef);
-					Passion passion = record.passion;
-					/*if (skillModAndPassion.Item1.passionMod == PassionMod.PassionModType.AddOneLevel)
-					{
-						passion = skillModAndPassion.Item2;
-					}*/
-					record.passion = passion;
-				}
-
-				this.prevPassions.Remove(chip);
 			}
 
 			settingsWindow.PreviewClone.skills.Notify_SkillDisablesChanged();

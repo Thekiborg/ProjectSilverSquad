@@ -40,8 +40,8 @@ namespace ProjectSilverSquad
 		private readonly Dictionary<PawnCapacityDef, string> initialCloneCapacities = [];
 
 		// Results to be passed to the vat
-		public Dictionary<BrainChipDef, bool> selectedSkillChips = [];
-		public Dictionary<BrainChipDef, bool> selectedTraitChips = [];
+		public Dictionary<ThingClass_BrainChip, bool> selectedSkillChips = [];
+		public Dictionary<ThingClass_BrainChip, bool> selectedTraitChips = [];
 		public Dictionary<(RecipeDef, BodyPartRecord), bool> selectedSurgeries = [];
 		public Xenogerm xenogerm;
 
@@ -60,16 +60,16 @@ namespace ProjectSilverSquad
 				{
 					if (kvp.Value)
 					{
-						instability += kvp.Key.instabilityOffset;
-						instabilityFactor *= kvp.Key.instabilityFactor;
+						instability += kvp.Key.data.instabilityOffset;
+						instabilityFactor *= kvp.Key.data.instabilityFactor;
 					}
 				}
 				foreach (var kvp in selectedTraitChips)
 				{
 					if (kvp.Value)
 					{
-						instability += kvp.Key.instabilityOffset;
-						instabilityFactor *= kvp.Key.instabilityFactor;
+						instability += kvp.Key.data.instabilityOffset;
+						instabilityFactor *= kvp.Key.data.instabilityFactor;
 					}
 				}
 				return Mathf.Min(instability * instabilityFactor, 100);
@@ -88,27 +88,27 @@ namespace ProjectSilverSquad
 				{
 					if (kvp.Value)
 					{
-						embryoTicks += kvp.Key.embryoGrowingTimeTicksOffset;
-						embryoTicksFactor *= kvp.Key.embryoGrowingTimeFactor;
-						pawnTicks += kvp.Key.pawnGrowingTimeTicksOffset;
-						pawnTicksFactor *= kvp.Key.pawnGrowingTimeFactor;
+						embryoTicks += kvp.Key.data.embryoGrowingTimeTicksOffset;
+						embryoTicksFactor *= kvp.Key.data.embryoGrowingTimeFactor;
+						pawnTicks += kvp.Key.data.pawnGrowingTimeTicksOffset;
+						pawnTicksFactor *= kvp.Key.data.pawnGrowingTimeFactor;
 					}
 				}
 				foreach (var kvp in selectedTraitChips)
 				{
 					if (kvp.Value)
 					{
-						embryoTicks += kvp.Key.embryoGrowingTimeTicksOffset;
-						embryoTicksFactor *= kvp.Key.embryoGrowingTimeFactor;
-						pawnTicks += kvp.Key.pawnGrowingTimeTicksOffset;
-						pawnTicksFactor *= kvp.Key.pawnGrowingTimeFactor;
+						embryoTicks += kvp.Key.data.embryoGrowingTimeTicksOffset;
+						embryoTicksFactor *= kvp.Key.data.embryoGrowingTimeFactor;
+						pawnTicks += kvp.Key.data.pawnGrowingTimeTicksOffset;
+						pawnTicksFactor *= kvp.Key.data.pawnGrowingTimeFactor;
 					}
 				}
 				return ((int)(embryoTicks * embryoTicksFactor), (int)(pawnTicks * pawnTicksFactor));
 			}
 		}
 
-		private Dialog_SelectBrainChipSkill Dialog_SelectBrainChipSkill
+		internal Dialog_SelectBrainChipSkill Dialog_SelectBrainChipSkill
 		{
 			get
 			{
@@ -117,7 +117,7 @@ namespace ProjectSilverSquad
 			}
 		}
 
-		private Dialog_SelectBrainChipTrait Dialog_SelectBrainChipTrait
+		internal Dialog_SelectBrainChipTrait Dialog_SelectBrainChipTrait
 		{
 			get
 			{
@@ -363,8 +363,8 @@ namespace ProjectSilverSquad
 			{
 				if (Widgets.ButtonText(confirmButtonRect, "SilverSquad_CloningVat_Confirm".Translate()))
 				{
-					List<BrainChipDef> brainChipsSkill = [.. selectedSkillChips.Where(kvp => kvp.Value).Select(kvp => kvp.Key)];
-					List<BrainChipDef> brainChipsTraits = [.. selectedTraitChips.Where(kvp => kvp.Value).Select(kvp => kvp.Key)];
+					List<ThingClass_BrainChip> brainChipsSkill = [.. selectedSkillChips.Where(kvp => kvp.Value).Select(kvp => kvp.Key)];
+					List<ThingClass_BrainChip> brainChipsTraits = [.. selectedTraitChips.Where(kvp => kvp.Value).Select(kvp => kvp.Key)];
 
 					List<SurgeryInfoForCloning> surgeries = [];
 					foreach (var kvp in selectedSurgeries)
@@ -382,13 +382,8 @@ namespace ProjectSilverSquad
 						}
 						surgeries.Add(new SurgeryInfoForCloning(kvp.Key.Item1, kvp.Key.Item2, ingredients));
 					}
-					Dictionary<SkillDef, int> skillLevels = [];
-					foreach (var skill in PreviewClone.skills.skills)
-					{
-						skillLevels.TryAdd(skill.def, skill.Level);
-					}
 
-					cloningVat.StartCloning(new(brainChipsSkill, brainChipsTraits, surgeries, xenogerm, imprint, Instability, skillLevels, TicksOfWork.pawnTicks, TicksOfWork.embryoTicks));
+					cloningVat.StartCloning(new(brainChipsSkill, brainChipsTraits, surgeries, xenogerm, imprint, Instability, TicksOfWork.pawnTicks, TicksOfWork.embryoTicks));
 					Close();
 				}
 				using (new TextBlock(ColorLibrary.Red))
@@ -562,6 +557,20 @@ namespace ProjectSilverSquad
 					}
 					else
 					{
+						int selectedSkillsLevel = 0;
+						foreach (var kvp in selectedSkillChips)
+						{
+							if (kvp.Value)
+							{
+								foreach (var mod in kvp.Key.data.skillMods)
+								{
+									if (mod.skillDef == skillRecord.def)
+										selectedSkillsLevel += mod.skillOffset;
+								}
+							}
+						}
+						int simulatedLevel = skillRecord.Level + selectedSkillsLevel;
+
 						using (new TextBlock(TextAnchor.MiddleCenter))
 						{
 							TextBlock colorBlock;
@@ -569,7 +578,7 @@ namespace ProjectSilverSquad
 							{
 								colorBlock = new((skillRecord.Aptitude > 0) ? ColorLibrary.BrightGreen : ColorLibrary.RedReadable);
 							}
-							Widgets.Label(skillLevelRect, skillRecord.Level.ToStringCached());
+							Widgets.Label(skillLevelRect, simulatedLevel.ToStringCached());
 						}
 
 						Rect passionRect = new(skillsRect.xMax - UIUtils.PassionIconSize, skillLabelRect.y, UIUtils.PassionIconSize, UIUtils.PassionIconSize);
@@ -590,7 +599,8 @@ namespace ProjectSilverSquad
 
 
 						Rect skillBarRect = new(skillLevelRect.xMax, skillLabelRect.y, passionRect.xMin - skillLevelRect.xMax - UIUtils.TinyPadding, skillLabelRect.height);
-						float fillPercent = Math.Max(0.01f, skillRecord.Level / (float)SkillRecord.MaxLevel);
+
+						float fillPercent = Math.Max(0.01f, simulatedLevel / (float)SkillRecord.MaxLevel);
 						Texture2D fillTex = TextureLibrary.SkillBarFillTex;
 						if (skillRecord.Aptitude != 0)
 						{
@@ -652,7 +662,7 @@ namespace ProjectSilverSquad
 						selectedSurgeries.Clear();
 						selectedTraitChips.Clear();
 					},
-					PreviewClone, Color.white));
+					imprint?.genome?.Clone, Color.white));
 				}
 			}
 			if (options.Empty())

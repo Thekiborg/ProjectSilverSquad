@@ -10,6 +10,7 @@ namespace ProjectSilverSquad
 		private ThingOwner thingOwner;
 		private VatState curState = VatState.Inactive;
 		private List<ThingDef> wantedIngredients;
+		private List<Thing> wantedUniqueIngredients;
 		private float nutrientPasteNutrition;
 		private int pawnGrowTimeLeft;
 		private int embryoIncubationTimeLeft;
@@ -50,6 +51,23 @@ namespace ProjectSilverSquad
 					wantedIngredients = ingredients;
 				}
 				return wantedIngredients;
+			}
+		}
+		public List<Thing> WantedUniqueIngredients
+		{
+			get
+			{
+				if (wantedUniqueIngredients.NullOrEmpty())
+				{
+					var ingredients = Settings.GetUniqueIngredients();
+					foreach (var thing in GetDirectlyHeldThings())
+					{
+						if (ingredients.Contains(thing))
+							ingredients.Remove(thing);
+					}
+					wantedUniqueIngredients = ingredients;
+				}
+				return wantedUniqueIngredients;
 			}
 		}
 		public VatState State => curState;
@@ -339,22 +357,36 @@ namespace ProjectSilverSquad
 
 		private void ApplyBrainChips()
 		{
-			foreach (SkillRecord skill in Settings.Clone.skills.skills)
+			foreach (var skillChip in Settings.BrainChipsSkill)
 			{
-				skill.levelInt = Settings.SkillLevels[skill.def];
-			}
-			foreach (var skillTrait in Settings.BrainChipsSkill)
-			{
-				thingOwner.RemoveAll(t => t.def == skillTrait);
+				foreach (var skillMod in skillChip.data.skillMods)
+				{
+					SkillRecord foundSkillRec = null;
+
+					foreach (var skillRec in Settings.Clone.skills.skills)
+					{
+						if (skillRec.def == skillMod.skillDef)
+						{
+							foundSkillRec = skillRec;
+							break;
+						}
+					}
+
+					if (foundSkillRec is not null)
+					{
+						foundSkillRec.levelInt += skillMod.skillOffset;
+					}
+				}
+				thingOwner.RemoveAll(t => t == skillChip);
 			}
 			foreach (var chipTrait in Settings.BrainChipsTrait)
 			{
-				foreach (var traitMod in chipTrait.traitMods)
+				foreach (var traitMod in chipTrait.data.traitMods)
 				{
 					Trait trait = new(traitMod.traitDef, traitMod.traitDegree);
 					Settings.Clone.story.traits.GainTrait(trait);
 				}
-				thingOwner.RemoveAll(t => t.def == chipTrait);
+				thingOwner.RemoveAll(t => t == chipTrait);
 			}
 		}
 

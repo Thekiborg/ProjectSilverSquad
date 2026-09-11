@@ -59,6 +59,10 @@ namespace ProjectSilverSquad
 					{
 						return ItemValidator(t, pawn);
 					}
+					if (cloningVat.WantedUniqueIngredients.Contains(t))
+					{
+						return ItemValidator(t, pawn);
+					}
 					return false;
 				});
 			foundThing = thing;

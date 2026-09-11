@@ -12,8 +12,8 @@ namespace ProjectSilverSquad
 		private float scrollViewHeight;
 		private Vector2 scrollPosition;
 		private readonly Window_CloningSettings settingsWindow;
-		private readonly Dictionary<BrainChipDef, bool> selectedChips = [];
-		private readonly List<BrainChipDef> chipsOnMap = [];
+		private readonly Dictionary<ThingClass_BrainChip, bool> selectedChips = [];
+		private readonly List<ThingClass_BrainChip> chipsOnMap = [];
 
 
 		public override Vector2 InitialSize => new(500f, 600f);
@@ -22,13 +22,17 @@ namespace ProjectSilverSquad
 		public Dialog_SelectBrainChipTrait(Window_CloningSettings settingsWindow, Map map)
 		{
 			this.settingsWindow = settingsWindow;
-			foreach (Thing chip in map.listerThings.AllThings.Where(t => t.def is BrainChipDef bcd && bcd.Category.HasFlag(BrainChipCategory.TraitOnly)))
+			foreach (Thing chip in map.listerThings.AllThings.Where(t =>
+				t is ThingClass_BrainChip tChip
+				&& t.def is BrainChipDef
+				&& CloneUtils.CategoryFor(tChip).HasFlag(BrainChipCategory.TraitOnly)))
 			{
 				if (!chip.PositionHeld.Fogged(map))
 				{
-					chipsOnMap.AddDistinct(chip.def as BrainChipDef);
+					chipsOnMap.Add(chip as ThingClass_BrainChip);
 				}
 			}
+			selectedChips = settingsWindow.selectedTraitChips;
 		}
 
 
@@ -91,6 +95,20 @@ namespace ProjectSilverSquad
 			}
 			if (Widgets.ButtonInvisible(rect))
 			{
+				// Select the skill chip from this dialog if it's hybrid
+				if (CloneUtils.CategoryFor(chip) == BrainChipCategory.Hybrid)
+				{
+					if (!settingsWindow.selectedSkillChips.TryGetValue(chip, out bool val))
+					{
+						settingsWindow.selectedSkillChips.Add(chip, true);
+					}
+					else
+					{
+						settingsWindow.selectedSkillChips[chip] = !val;
+					}
+					settingsWindow.Dialog_SelectBrainChipSkill.RegisterBrainChip(chip);
+				}
+
 				if (!selectedChips.TryGetValue(chip, out bool value))
 				{
 					selectedChips.Add(chip, true);
@@ -112,7 +130,7 @@ namespace ProjectSilverSquad
 				Widgets.Label(rect, $"{chip.LabelCap}:");
 				rect.xMin += textWidth + UIUtils.TinyPadding;
 			}
-			foreach (var traitMod in chip.traitMods)
+			foreach (var traitMod in chip.data.traitMods)
 			{
 				string traitReadout = $"{traitMod.traitDef.DataAtDegree(traitMod.traitDegree).LabelCap}";
 				float textWidth = Text.CalcSize(traitReadout).x;
@@ -140,9 +158,9 @@ namespace ProjectSilverSquad
 						Widgets.DrawHighlight(doesntFitRect);
 
 						StringBuilder sb = new();
-						for (int i = chip.traitMods.IndexOf(traitMod); i < chip.traitMods.Count; i++)
+						for (int i = chip.data.traitMods.IndexOf(traitMod); i < chip.data.traitMods.Count; i++)
 						{
-							sb.AppendLine(chip.traitMods[i].ToString());
+							sb.AppendLine(chip.data.traitMods[i].ToString());
 							sb.AppendLine();
 						}
 
@@ -169,25 +187,18 @@ namespace ProjectSilverSquad
 		}
 
 
-		public override void Close(bool doCloseSound = true)
+		internal void RegisterLateAddedTraitWithSkills(ThingClass_BrainChip chip)
 		{
-			settingsWindow.selectedTraitChips = selectedChips;
-			base.Close(doCloseSound);
-		}
-
-
-		private void RegisterLateAddedTraitWithSkills(BrainChipDef chip)
-		{
-			if (!ProjectSilverSquad.CloneSkillMods.AppliedBrainChipModsTrait.TryGetValue(settingsWindow.PreviewClone, out List<BrainChipDef> appliedBrainChips))
+			if (!ProjectSilverSquad.CloneSkillMods.AppliedTraitBrainChipsPerPawn.TryGetValue(settingsWindow.PreviewClone, out List<ThingClass_BrainChip> appliedBrainChips))
 			{
 				appliedBrainChips = [];
-				ProjectSilverSquad.CloneSkillMods.AppliedBrainChipModsTrait.Add(settingsWindow.PreviewClone, appliedBrainChips);
+				ProjectSilverSquad.CloneSkillMods.AppliedTraitBrainChipsPerPawn.Add(settingsWindow.PreviewClone, appliedBrainChips);
 			}
 
 			if (selectedChips[chip])
 			{
 				appliedBrainChips.Add(chip);
-				foreach (var traitMod in chip.traitMods)
+				foreach (var traitMod in chip.data.traitMods)
 				{
 					Trait trait = new(traitMod.traitDef, traitMod.traitDegree);
 					settingsWindow.PreviewClone.story.traits.GainTrait(trait);
@@ -197,10 +208,11 @@ namespace ProjectSilverSquad
 			{
 				appliedBrainChips.Remove(chip);
 
-				foreach (var traitMod in chip.traitMods)
+				foreach (var traitMod in chip.data.traitMods)
 				{
 					Trait trait = settingsWindow.PreviewClone.story.traits.GetTrait(traitMod.traitDef);
-					settingsWindow.PreviewClone.story.traits.RemoveTrait(trait);
+					if (trait != null)
+						settingsWindow.PreviewClone.story.traits.RemoveTrait(trait);
 				}
 			}
 

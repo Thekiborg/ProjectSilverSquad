@@ -12,11 +12,11 @@ namespace ProjectSilverSquad
 	{
 		private static void NewAptitudeCalcs(Pawn pawn, SkillDef def, ref int? aptitudeCached)
 		{
-			if (ProjectSilverSquad.CloneSkillMods.AppliedSkillBrainChipsPerPawn.TryGetValue(pawn, out List<BrainChipDef> skillBrainChips))
+			if (ProjectSilverSquad.CloneSkillMods.AppliedSkillBrainChipsPerPawn.TryGetValue(pawn, out List<ThingClass_BrainChip> skillBrainChips))
 			{
 				foreach (var brainChip in skillBrainChips)
 				{
-					foreach (var skillMod in brainChip.skillMods)
+					foreach (var skillMod in brainChip.data.skillMods)
 					{
 						if (skillMod.skillDef != def) continue;
 
@@ -24,11 +24,11 @@ namespace ProjectSilverSquad
 					}
 				}
 			}
-			if (ProjectSilverSquad.CloneSkillMods.AppliedBrainChipModsTrait.TryGetValue(pawn, out List<BrainChipDef> traitBrainChips))
+			if (ProjectSilverSquad.CloneSkillMods.AppliedTraitBrainChipsPerPawn.TryGetValue(pawn, out List<ThingClass_BrainChip> traitBrainChips))
 			{
 				foreach (var brainChip in traitBrainChips)
 				{
-					foreach (var traitMod in brainChip.traitMods)
+					foreach (var traitMod in brainChip.data.traitMods)
 					{
 						Trait trait = pawn.story.traits.GetTrait(traitMod.traitDef);
 

@@ -2,59 +2,24 @@
 {
 	public class BrainChipDef : ThingDef
 	{
-		public List<BrainChipSkillModification> skillMods;
-		public List<BrainChipTraitModification> traitMods;
-		public float instabilityOffset;
-		public float instabilityFactor = 1f;
-		public int embryoGrowingTimeTicksOffset;
-		public int pawnGrowingTimeTicksOffset;
-		public float embryoGrowingTimeFactor = 1f;
-		public float pawnGrowingTimeFactor = 1f;
+		public Color generatedSkillChipColor;
+		public Color generatedTraitChipColor;
+		public Color generatedHybridChipColor;
 
+		public float chanceForHybridGeneratedChip;
+		/// <summary>
+		/// This chance works for both types. For 0.6, it'd be 0.6 for a skill chip and 0.4 for a trait chip.
+		/// </summary>
+		public float chanceForSkillVsTraitChip;
+		public float chanceForCloningVatParameters;
+		public IntRange randomTraitCount;
+		public IntRange randomSkillCount;
 
-		public BrainChipCategory Category
-		{
-			get
-			{
-				BrainChipCategory cat = BrainChipCategory.None;
-				if (!skillMods.NullOrEmpty())
-					cat |= BrainChipCategory.SkillOnly;
-				if (!traitMods.NullOrEmpty())
-					cat |= BrainChipCategory.TraitOnly;
-				return cat;
-			}
-		}
-
-
-		public override IEnumerable<string> ConfigErrors()
-		{
-			foreach (string error in base.ConfigErrors())
-			{
-				yield return error;
-			}
-
-			if (skillMods.NullOrEmpty()
-				&& traitMods.NullOrEmpty()
-				&& instabilityOffset == default
-				&& instabilityFactor == 1f
-				&& embryoGrowingTimeTicksOffset == default
-				&& pawnGrowingTimeTicksOffset == default
-				&& embryoGrowingTimeFactor == 1f
-				&& pawnGrowingTimeFactor == 1f)
-			{
-				yield return "No settings specified. The chip will not do anything";
-			}
-			/*else
-			{
-				if (skillMods.GroupBy(x => x).Any(g => g.Count() > 1))
-				{
-					yield return "Duplicate skills found in SkillMods list";
-				}
-				if (traitMods.GroupBy(x => x).Any(g => g.Count() > 1))
-				{
-					yield return "Duplicate traits found in TraitMods list";
-				}
-			}*/
-		}
+		public FloatRange randomInstabilityOffset;
+		public FloatRange randomInstabilityFactor;
+		public IntRange randomEmbryoGrowingTimeTicksOffset;
+		public IntRange randomPawnGrowingTimeTicksOffset;
+		public FloatRange randomEmbryoGrowingTimeFactor;
+		public FloatRange randomPawnGrowingTimeFactor;
 	}
 }

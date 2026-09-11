@@ -37,50 +37,32 @@
         </comps>
     </ProjectSilverSquad.BrainChipDef>
 
-    <ProjectSilverSquad.BrainChipDef Name="SilverSquad_WeakPositiveOffsetChipBase" ParentName="SilverSquad_ChipBase" Abstract="True">
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_ChipBase">
+        <defName>SilverSquad_BrainChip_BlankBase</defName>
+        <label>Cloning configuration disk</label>
+        <description>A disk containing that can hold instructions readable by a cloning vat.\n\nWhen empty, it has the capability of copying the data of other disk. Otherwise, it can be slotted into the cloning vat to modify the characteristics of a clone.</description>
+        <thingClass>ProjectSilverSquad.ThingClass_BrainChip</thingClass>
         <recipeMaker>
             <skillRequirements>
                 <Crafting>5</Crafting>
             </skillRequirements>
         </recipeMaker>
-        <costList>
+        <costList> <!-- Probably buff this, too cheap? -->
             <Steel>30</Steel>
             <ComponentIndustrial>1</ComponentIndustrial>
         </costList>
-        <instabilityOffset>0.05</instabilityOffset>
-    </ProjectSilverSquad.BrainChipDef>
+        <chanceForHybridGeneratedChip>1</chanceForHybridGeneratedChip>
+        <chanceForSkillVsTraitChip>0.5</chanceForSkillVsTraitChip>
+        <chanceForCloningVatParameters>0.3</chanceForCloningVatParameters>
+        <randomTraitCount>1~5</randomTraitCount>
+        <randomSkillCount>1~3</randomSkillCount>
 
-    <ProjectSilverSquad.BrainChipDef Name="SilverSquad_StrongPositiveOffsetChipBase" ParentName="SilverSquad_ChipBase" Abstract="True">
-        <colorGenerator Class="ColorGenerator_Single">
-            <color>(25, 25, 25)</color>
-        </colorGenerator>
-        <recipeMaker>
-            <skillRequirements>
-                <Crafting>10</Crafting>
-            </skillRequirements>
-        </recipeMaker>
-        <costList>
-            <Silver>10</Silver>
-            <Gold>1</Gold>
-            <ComponentSpacer>2</ComponentSpacer>
-        </costList>
-        <instabilityOffset>0.2</instabilityOffset>
-    </ProjectSilverSquad.BrainChipDef>
-
-    <ProjectSilverSquad.BrainChipDef Name="SilverSquad_GrowthModifierChipBase" ParentName="SilverSquad_ChipBase" Abstract="True">
-        <colorGenerator Class="ColorGenerator_Single">
-            <color>(255, 92, 92)</color>
-        </colorGenerator>
-        <recipeMaker>
-            <skillRequirements>
-                <Crafting>10</Crafting>
-            </skillRequirements>
-        </recipeMaker>
-        <costList>
-            <Silver>10</Silver>
-            <Gold>1</Gold>
-            <ComponentIndustrial>1</ComponentIndustrial>
-        </costList>
+        <randomInstabilityOffset>-1~1</randomInstabilityOffset>
+        <randomInstabilityFactor>0.1~3</randomInstabilityFactor>
+        <randomEmbryoGrowingTimeTicksOffset>0~100000</randomEmbryoGrowingTimeTicksOffset>
+        <randomPawnGrowingTimeTicksOffset>0~200000</randomPawnGrowingTimeTicksOffset>
+        <randomEmbryoGrowingTimeFactor>0.1~3</randomEmbryoGrowingTimeFactor>
+        <randomPawnGrowingTimeFactor>0.1~3</randomPawnGrowingTimeFactor>
     </ProjectSilverSquad.BrainChipDef>
     
 </Defs>
