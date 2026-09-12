@@ -1,4 +1,5 @@
 
+fix mosaic text showing type name instead of trait names
 
 4. Empty chips will be used to copy other chips. This way, you still need to pay the price for the blank chip.
 5. Same thing for the imprints.
