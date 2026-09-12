@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 
+    <SilverSquad_CopyChipData_Label>Copy data from another chip</SilverSquad_CopyChipData_Label>
+
     <!-- Genome Imprint -->
     <SilverSquad_GenomeImprint_InspectGizmoLabel>See saved info</SilverSquad_GenomeImprint_InspectGizmoLabel>
     <SilverSquad_GenomeImprint_RecordImprint>Record imprint</SilverSquad_GenomeImprint_RecordImprint>
+
+    <!-- Brain Chip -->
+    <SilverSquad_BrainChip_SkillTitle>Skills: </SilverSquad_BrainChip_SkillTitle>
+    <SilverSquad_BrainChip_TraitTitle>Traits: </SilverSquad_BrainChip_TraitTitle>
+    <SilverSquad_BrainChip_instabilityOffsetTitle>Instability offset: {0}</SilverSquad_BrainChip_instabilityOffsetTitle>
+    <SilverSquad_BrainChip_instabilityFactor>Instability factor: {0}</SilverSquad_BrainChip_instabilityFactor>
+    <SilverSquad_BrainChip_embryoGrowTicksOffset>Embryo phase duration offset: {0}</SilverSquad_BrainChip_embryoGrowTicksOffset>
+    <SilverSquad_BrainChip_pawnGrowTicksOffset>Clone phase duration offset: {0}</SilverSquad_BrainChip_pawnGrowTicksOffset>
+    <SilverSquad_BrainChip_embryoGrowTicksFactor>Embryo phase duration factor: {0}</SilverSquad_BrainChip_embryoGrowTicksFactor>
+    <SilverSquad_BrainChip_pawnGrowTicksFactor>Clone phase duration factor: {0}</SilverSquad_BrainChip_pawnGrowTicksFactor>
+
 
     <!-- Cloning vat-->
     <SilverSquad_CloningVat_StartGizmoLabel>Start cloning</SilverSquad_CloningVat_StartGizmoLabel>

@@ -15,7 +15,6 @@ namespace ProjectSilverSquad
 		internal static bool VREAndroidsActive = ModsConfig.IsActive("vanillaracesexpanded.android");
 		internal static bool VREStarJacksActive = ModsConfig.IsActive("vanillaracesexpanded.starjack");
 
-		public static GameComponent_CloneSkillMods CloneSkillMods;
 
 		public static readonly List<GeneDef> PotentiallyNonGameBreakingGenes = [.. DefDatabase<GeneDef>.AllDefsListForReading.Where(gene =>
 			gene.GetType() == typeof(GeneDef) && // Want to get all genes that are base Rimworld Genedefs. Not subtypes
@@ -28,6 +27,7 @@ namespace ProjectSilverSquad
 		static ProjectSilverSquad()
 		{
 			Harmony harmony = new("Thekiborg.ProjectSilverSquad");
+			Harmony.DEBUG = true;
 			harmony.PatchAll();
 		}
 	}

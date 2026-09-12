@@ -18,6 +18,14 @@
     </JobDef>
 
     <JobDef>
+        <defName>SilverSquad_CopyData</defName>
+        <driverClass>ProjectSilverSquad.JobDriver_CopyChipData</driverClass>
+        <reportString>copying data from TargetB.</reportString>
+        <suspendable>true</suspendable>
+        <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    </JobDef>
+
+    <JobDef>
         <defName>SilverSquad_LoadPasteIntoVat</defName>
         <driverClass>ProjectSilverSquad.JobDriver_LoadPasteIntoVat</driverClass>
         <reportString>loading paste into TargetA.</reportString>

@@ -106,7 +106,7 @@ namespace ProjectSilverSquad
 					{
 						settingsWindow.selectedSkillChips[chip] = !val;
 					}
-					settingsWindow.Dialog_SelectBrainChipSkill.RegisterBrainChip(chip);
+					settingsWindow.Dialog_SelectBrainChipSkill.RegisterBrainChip();
 				}
 
 				if (!selectedChips.TryGetValue(chip, out bool value))
@@ -189,15 +189,8 @@ namespace ProjectSilverSquad
 
 		internal void RegisterLateAddedTraitWithSkills(ThingClass_BrainChip chip)
 		{
-			if (!ProjectSilverSquad.CloneSkillMods.AppliedTraitBrainChipsPerPawn.TryGetValue(settingsWindow.PreviewClone, out List<ThingClass_BrainChip> appliedBrainChips))
-			{
-				appliedBrainChips = [];
-				ProjectSilverSquad.CloneSkillMods.AppliedTraitBrainChipsPerPawn.Add(settingsWindow.PreviewClone, appliedBrainChips);
-			}
-
 			if (selectedChips[chip])
 			{
-				appliedBrainChips.Add(chip);
 				foreach (var traitMod in chip.data.traitMods)
 				{
 					Trait trait = new(traitMod.traitDef, traitMod.traitDegree);
@@ -206,8 +199,6 @@ namespace ProjectSilverSquad
 			}
 			else
 			{
-				appliedBrainChips.Remove(chip);
-
 				foreach (var traitMod in chip.data.traitMods)
 				{
 					Trait trait = settingsWindow.PreviewClone.story.traits.GetTrait(traitMod.traitDef);
@@ -216,7 +207,7 @@ namespace ProjectSilverSquad
 				}
 			}
 
-			settingsWindow.PreviewClone.skills.Notify_SkillDisablesChanged();
+				settingsWindow.PreviewClone.skills.Notify_SkillDisablesChanged();
 			settingsWindow.PreviewClone.skills.DirtyAptitudes();
 		}
 	}

@@ -25,14 +25,15 @@ namespace ProjectSilverSquad
 		{
 			yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.OnCell);
 			yield return Toils_Haul.StartCarryThing(TargetIndex.A);
-			yield return Toils_Goto.GotoThing(TargetIndex.B, PathEndMode.Touch);
+			yield return Toils_Goto.GotoThing(TargetIndex.B, PathEndMode.OnCell);
 			Toil scanToil = ToilMaker.MakeToil("ScanToil");
 			scanToil.initAction = delegate
 			{
 				if (PawnToScan is Pawn pawnToScan)
 				{
 					pawn.pather.StopDead();
-					PawnUtility.ForceWait(pawnToScan, 15000, null, maintainPosture: true);
+					if (PawnToScan != pawn)
+						PawnUtility.ForceWait(pawnToScan, 15000, null, maintainPosture: true);
 				}
 			};
 			scanToil.AddFinishAction(delegate

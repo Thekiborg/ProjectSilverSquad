@@ -25,7 +25,7 @@
 
 		public static ThingDef SilverSquad_GenomeImprint;
 		public static ThingDef SilverSquad_CloningVat;
-		public static BrainChipDef SilverSquad_BrainChip_BlankBase;
+		public static BrainChipDef SilverSquad_BrainChip_LootFound;
 	}
 
 
@@ -53,6 +53,7 @@
 		public static JobDef SilverSquad_RecordGenome;
 		public static JobDef SilverSquad_LoadPasteIntoVat;
 		public static JobDef SilverSquad_EmptyVat;
+		public static JobDef SilverSquad_CopyData;
 	}
 
 

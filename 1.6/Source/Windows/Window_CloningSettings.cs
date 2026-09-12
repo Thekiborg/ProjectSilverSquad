@@ -54,25 +54,35 @@ namespace ProjectSilverSquad
 		{
 			get
 			{
+				List<ThingClass_BrainChip> accountedChips = [];
+
 				float instability = 0f;
 				float instabilityFactor = 1f;
 				foreach (var kvp in selectedSkillChips)
 				{
+					if (accountedChips.Contains(kvp.Key))
+						continue;
+
 					if (kvp.Value)
 					{
-						instability += kvp.Key.data.instabilityOffset;
+						instability += kvp.Key.Instability;
 						instabilityFactor *= kvp.Key.data.instabilityFactor;
+						accountedChips.Add(kvp.Key);
 					}
 				}
 				foreach (var kvp in selectedTraitChips)
 				{
+					if (accountedChips.Contains(kvp.Key))
+						continue;
+
 					if (kvp.Value)
 					{
-						instability += kvp.Key.data.instabilityOffset;
+						instability += kvp.Key.Instability;
 						instabilityFactor *= kvp.Key.data.instabilityFactor;
+						accountedChips.Add(kvp.Key);
 					}
 				}
-				return Mathf.Min(instability * instabilityFactor, 100);
+				return Mathf.Min(instability * instabilityFactor, 1f);
 			}
 		}
 
@@ -574,9 +584,9 @@ namespace ProjectSilverSquad
 						using (new TextBlock(TextAnchor.MiddleCenter))
 						{
 							TextBlock colorBlock;
-							if (skillRecord.Level == 0 && skillRecord.Aptitude != 0)
+							if (simulatedLevel != 0)
 							{
-								colorBlock = new((skillRecord.Aptitude > 0) ? ColorLibrary.BrightGreen : ColorLibrary.RedReadable);
+								colorBlock = new((simulatedLevel > 0) ? ColorLibrary.BrightGreen : ColorLibrary.RedReadable);
 							}
 							Widgets.Label(skillLevelRect, simulatedLevel.ToStringCached());
 						}

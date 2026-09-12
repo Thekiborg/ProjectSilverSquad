@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+
+    <ProjectSilverSquad.BrainChipDef Name="SilverSquad_ChipBase" ParentName="ResourceBase" Abstract="True">
+        <thingClass>ProjectSilverSquad.ThingClass_BrainChip</thingClass>
+        <stackLimit>1</stackLimit>
+        <graphicData>
+            <texPath>ProjectSilverSquad/Items/Chips/Chip</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+            <drawSize>(0.9,0.9)</drawSize>
+        </graphicData>
+        <statBases>
+            <MarketValue>400</MarketValue>
+            <MaxHitPoints>100</MaxHitPoints>
+            <Flammability>1.0</Flammability>
+            <WorkToMake>2000</WorkToMake>
+            <DeteriorationRate>2</DeteriorationRate>
+            <Mass>0.03</Mass>
+        </statBases>
+        <thingCategories>
+            <li>ItemsMisc</li>
+        </thingCategories>
+        <allowedArchonexusCount>5</allowedArchonexusCount>
+        <comps>
+            <li>
+                <compClass>CompColorable</compClass>
+            </li>
+        </comps>
+        <!-- Def specific -->
+        <skillChipColor>(0.702, 0.851, 0.329, 1)</skillChipColor>
+        <traitChipColor>(0.439, 0.765, 0.929, 1)</traitChipColor>
+        <hybridChipColor>(0.376, 0.831, 0.741, 1)</hybridChipColor>
+    </ProjectSilverSquad.BrainChipDef>
+
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_ChipBase">
+        <defName>SilverSquad_BrainChip_LootFound</defName>
+        <label>Cloning configuration disk</label>
+        <description>A disk containing that can hold instructions readable by a cloning vat.\n\It can be slotted into the cloning vat to modify the characteristics of a clone.</description>
+
+        <chanceForHybridGeneratedChip>0.3</chanceForHybridGeneratedChip>
+        <chanceForSkillVsTraitChip>0.5</chanceForSkillVsTraitChip>
+        <chanceForCloningVatParameters>0.3</chanceForCloningVatParameters>
+        <randomTraitCount>1~5</randomTraitCount>
+        <randomSkillCount>1~3</randomSkillCount>
+
+        <randomInstabilityOffset>-1~1</randomInstabilityOffset>
+        <randomInstabilityFactor>0.1~3</randomInstabilityFactor>
+        <randomEmbryoGrowingTimeTicksOffset>0~100000</randomEmbryoGrowingTimeTicksOffset>
+        <randomPawnGrowingTimeTicksOffset>0~200000</randomPawnGrowingTimeTicksOffset>
+        <randomEmbryoGrowingTimeFactor>0.1~3</randomEmbryoGrowingTimeFactor>
+        <randomPawnGrowingTimeFactor>0.1~3</randomPawnGrowingTimeFactor>
+
+        <instabilityPerTrait>0.1</instabilityPerTrait>
+        <instabilityPerSkillPoint>0.01</instabilityPerSkillPoint>
+    </ProjectSilverSquad.BrainChipDef>
+
+
+    <!-- CRAFTABLE CHIPS -->
+    <ProjectSilverSquad.BrainChipDef Name="SilverSquad_CraftableChipBase" ParentName="SilverSquad_ChipBase" Abstract="True">
+        <recipeMaker>
+            <researchPrerequisite>SilverSquad_CloningTech</researchPrerequisite>
+            <recipeUsers>
+                <li>SilverSquad_ChipWorkbench</li>
+            </recipeUsers>
+            <effectWorking>Smelt</effectWorking>
+            <soundWorking>Recipe_Machining</soundWorking>
+            <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+        </recipeMaker>
+        <recipeMaker>
+            <skillRequirements>
+                <Crafting>5</Crafting>
+            </skillRequirements>
+        </recipeMaker>
+        <costList> <!-- Probably buff this, too cheap? -->
+            <Steel>30</Steel>
+            <ComponentIndustrial>1</ComponentIndustrial>
+        </costList>
+    </ProjectSilverSquad.BrainChipDef>
+
+
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_CraftableChipBase">
+        <defName>SilverSquad_BrainChip_Blank</defName>
+        <label>blank cloning configuration disk</label>
+        <description>A disk containing that can hold instructions readable by a cloning vat.\n\nIt has the capacity of copying the data from other disks, to avoid losing the information.</description>
+        <data />
+    </ProjectSilverSquad.BrainChipDef>
+
+
+    <ProjectSilverSquad.BrainChipDef Name="SilverSquad_BrainChip_SkillOffset_Base" ParentName="SilverSquad_CraftableChipBase" Abstract="True">
+        <data>
+            <embryoGrowingTimeTicksOffset>60000</embryoGrowingTimeTicksOffset>
+            <pawnGrowingTimeTicksOffset>60000</pawnGrowingTimeTicksOffset>
+            <instabilityOffset>0.05</instabilityOffset>
+        </data>
+    </ProjectSilverSquad.BrainChipDef>
+
+
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_BrainChip_SkillOffset_Base">
+        <defName>SilverSquad_BrainChip_SkillOffset_Shooting</defName>
+        <label>cloning configuration disk (Shooting)</label>
+        <description>A disk containing that can hold instructions readable by a cloning vat.\n\It can be slotted into the cloning vat to modify the characteristics of a clone</description>
+        <data>
+            <skillMods>
+                <Shooting>5</Shooting>
+            </skillMods>
+        </data>
+    </ProjectSilverSquad.BrainChipDef>
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_BrainChip_SkillOffset_Base">
+        <defName>SilverSquad_BrainChip_SkillOffset_Melee</defName>
+        <label>cloning configuration disk (Melee)</label>
+        <description>A disk containing that can hold instructions readable by a cloning vat.\n\It can be slotted into the cloning vat to modify the characteristics of a clone</description>
+        <data>
+            <skillMods>
+                <Melee>5</Melee>
+            </skillMods>
+        </data>
+    </ProjectSilverSquad.BrainChipDef>
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_BrainChip_SkillOffset_Base">
+        <defName>SilverSquad_BrainChip_SkillOffset_Construction</defName>
+        <label>cloning configuration disk (Construction)</label>
+        <description>A disk containing that can hold instructions readable by a cloning vat.\n\It can be slotted into the cloning vat to modify the characteristics of a clone</description>
+        <data>
+            <skillMods>
+                <Construction>5</Construction>
+            </skillMods>
+        </data>
+    </ProjectSilverSquad.BrainChipDef>
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_BrainChip_SkillOffset_Base">
+        <defName>SilverSquad_BrainChip_SkillOffset_Mining</defName>
+        <label>cloning configuration disk (Mining)</label>
+        <description>A disk containing that can hold instructions readable by a cloning vat.\n\It can be slotted into the cloning vat to modify the characteristics of a clone</description>
+        <data>
+            <skillMods>
+                <Mining>5</Mining>
+            </skillMods>
+        </data>
+    </ProjectSilverSquad.BrainChipDef>
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_BrainChip_SkillOffset_Base">
+        <defName>SilverSquad_BrainChip_SkillOffset_Cooking</defName>
+        <label>cloning configuration disk (Cooking)</label>
+        <description>A disk containing that can hold instructions readable by a cloning vat.\n\It can be slotted into the cloning vat to modify the characteristics of a clone</description>
+        <data>
+            <skillMods>
+                <Cooking>5</Cooking>
+            </skillMods>
+        </data>
+    </ProjectSilverSquad.BrainChipDef>
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_BrainChip_SkillOffset_Base">
+        <defName>SilverSquad_BrainChip_SkillOffset_Plants</defName>
+        <label>cloning configuration disk (Plants)</label>
+        <description>A disk containing that can hold instructions readable by a cloning vat.\n\It can be slotted into the cloning vat to modify the characteristics of a clone</description>
+        <data>
+            <skillMods>
+                <Plants>5</Plants>
+            </skillMods>
+        </data>
+    </ProjectSilverSquad.BrainChipDef>
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_BrainChip_SkillOffset_Base">
+        <defName>SilverSquad_BrainChip_SkillOffset_Animals</defName>
+        <label>cloning configuration disk (Animals)</label>
+        <description>A disk containing that can hold instructions readable by a cloning vat.\n\It can be slotted into the cloning vat to modify the characteristics of a clone</description>
+        <data>
+            <skillMods>
+                <Animals>5</Animals>
+            </skillMods>
+        </data>
+    </ProjectSilverSquad.BrainChipDef>
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_BrainChip_SkillOffset_Base">
+        <defName>SilverSquad_BrainChip_SkillOffset_Crafting</defName>
+        <label>cloning configuration disk (Crafting)</label>
+        <description>A disk containing that can hold instructions readable by a cloning vat.\n\It can be slotted into the cloning vat to modify the characteristics of a clone</description>
+        <data>
+            <skillMods>
+                <Crafting>5</Crafting>
+            </skillMods>
+        </data>
+    </ProjectSilverSquad.BrainChipDef>
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_BrainChip_SkillOffset_Base">
+        <defName>SilverSquad_BrainChip_SkillOffset_Artistic</defName>
+        <label>cloning configuration disk (Artistic)</label>
+        <description>A disk containing that can hold instructions readable by a cloning vat.\n\It can be slotted into the cloning vat to modify the characteristics of a clone</description>
+        <data>
+            <skillMods>
+                <Artistic>5</Artistic>
+            </skillMods>
+        </data>
+    </ProjectSilverSquad.BrainChipDef>
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_BrainChip_SkillOffset_Base">
+        <defName>SilverSquad_BrainChip_SkillOffset_Medical</defName>
+        <label>cloning configuration disk (Medical)</label>
+        <description>A disk containing that can hold instructions readable by a cloning vat.\n\It can be slotted into the cloning vat to modify the characteristics of a clone</description>
+        <data>
+            <skillMods>
+                <Medicine>5</Medicine>
+            </skillMods>
+        </data>
+    </ProjectSilverSquad.BrainChipDef>
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_BrainChip_SkillOffset_Base">
+        <defName>SilverSquad_BrainChip_SkillOffset_Social</defName>
+        <label>cloning configuration disk (Social)</label>
+        <description>A disk containing that can hold instructions readable by a cloning vat.\n\It can be slotted into the cloning vat to modify the characteristics of a clone</description>
+        <data>
+            <skillMods>
+                <Social>5</Social>
+            </skillMods>
+        </data>
+    </ProjectSilverSquad.BrainChipDef>
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_BrainChip_SkillOffset_Base">
+        <defName>SilverSquad_BrainChip_SkillOffset_Intellectual</defName>
+        <label>cloning configuration disk (Intellectual)</label>
+        <description>A disk containing that can hold instructions readable by a cloning vat.\n\It can be slotted into the cloning vat to modify the characteristics of a clone</description>
+        <data>
+            <skillMods>
+                <Intellectual>5</Intellectual>
+            </skillMods>
+        </data>
+    </ProjectSilverSquad.BrainChipDef>
+
+
+    <ProjectSilverSquad.BrainChipDef Name="SilverSquad_GrowthModifierChipBase" ParentName="SilverSquad_CraftableChipBase" Abstract="True">
+        <recipeMaker>
+            <skillRequirements>
+                <Crafting>10</Crafting>
+            </skillRequirements>
+        </recipeMaker>
+        <costList Inherit="False">
+            <Silver>10</Silver>
+            <Gold>1</Gold>
+            <ComponentIndustrial>1</ComponentIndustrial>
+        </costList>
+        <colorOverride>(0.89, 0.506, 0.506, 1)</colorOverride>
+    </ProjectSilverSquad.BrainChipDef>
+
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_GrowthModifierChipBase">
+        <defName>SilverSquad_BrainChip_GrowthModifier_Hasty</defName>
+        <label>cloning configuration disk (Hasty)</label>
+        <description>A disk containing that can hold instructions readable by a cloning vat.\n\It can be slotted into the cloning vat to make the process overall faster, albeit more unstable.</description>
+        <data>
+            <embryoGrowingTimeFactor>0.5</embryoGrowingTimeFactor>
+            <pawnGrowingTimeFactor>0.5</pawnGrowingTimeFactor>
+            <instabilityFactor>1.5</instabilityFactor>
+        </data>
+    </ProjectSilverSquad.BrainChipDef>
+
+    <ProjectSilverSquad.BrainChipDef ParentName="SilverSquad_GrowthModifierChipBase">
+        <defName>SilverSquad_BrainChip_GrowthModifier_Cautious</defName>
+        <label>cloning configuration disk (Cautious)</label>
+        <description>A disk containing that can hold instructions readable by a cloning vat.\n\It can be slotted into the cloning vat to make the process overall slower, albeit more stable.</description>
+        <data>
+            <embryoGrowingTimeFactor>1.5</embryoGrowingTimeFactor>
+            <pawnGrowingTimeFactor>1.5</pawnGrowingTimeFactor>
+            <instabilityFactor>0.5</instabilityFactor>
+        </data>
+    </ProjectSilverSquad.BrainChipDef>
+</Defs>

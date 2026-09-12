@@ -31,7 +31,7 @@ namespace ProjectSilverSquad
 
 		public static BrainChipData RandomizeBrainChipData()
 		{
-			BrainChipDef def = SilverSquad_ThingDefOfs.SilverSquad_BrainChip_BlankBase;
+			BrainChipDef def = SilverSquad_ThingDefOfs.SilverSquad_BrainChip_LootFound;
 			BrainChipData data = new();
 
 			if (Rand.Chance(def.chanceForHybridGeneratedChip))
@@ -58,12 +58,16 @@ namespace ProjectSilverSquad
 
 		private static List<BrainChipSkillModification> GenerateRandomSkills()
 		{
-			int amount = SilverSquad_ThingDefOfs.SilverSquad_BrainChip_BlankBase.randomSkillCount.RandomInRange;
+			int amount = SilverSquad_ThingDefOfs.SilverSquad_BrainChip_LootFound.randomSkillCount.RandomInRange;
+
+			if (amount > DefDatabase<SkillDef>.DefCount)
+				amount = DefDatabase<SkillDef>.DefCount;
+
 			List<BrainChipSkillModification> mods = [];
 
 			for (int i = 0; i < amount; i++)
 			{
-				SkillDef randSkill = DefDatabase<SkillDef>.GetRandom();
+				SkillDef randSkill = DefDatabase<SkillDef>.AllDefs.RandomElement();
 				if (mods.Any(mod => mod.skillDef == randSkill))
 				{
 					i--; // repeat this lap
@@ -80,12 +84,16 @@ namespace ProjectSilverSquad
 
 		private static List<BrainChipTraitModification> GenerateRandomTraits()
 		{
-			int amount = SilverSquad_ThingDefOfs.SilverSquad_BrainChip_BlankBase.randomTraitCount.RandomInRange;
+			int amount = SilverSquad_ThingDefOfs.SilverSquad_BrainChip_LootFound.randomTraitCount.RandomInRange;
+
+			if (amount > DefDatabase<TraitDef>.DefCount)
+				amount = DefDatabase<TraitDef>.DefCount;
+
 			List<BrainChipTraitModification> mods = [];
 
 			for (int i = 0; i < amount; i++)
 			{
-				TraitDef randTrait = DefDatabase<TraitDef>.GetRandom();
+				TraitDef randTrait = DefDatabase<TraitDef>.AllDefs.RandomElement();
 				if (mods.Any(mod => mod.traitDef == randTrait))
 				{
 					i--; // repeat this lap
@@ -119,38 +127,33 @@ namespace ProjectSilverSquad
 			// instabilityOffset and instabilityFactor
 			// embryoGrowingTimeTicksOffset and pawnGrowingTimeTicksOffset
 			// embryoGrowingTimeFactor and pawnGrowingTimeFactor
-			int numOfParams = Rand.RangeInclusive(1, 6);
-			List<int> pickedParams = [];
+			int numOfParams = Rand.RangeInclusive(1, 5);
+			List<int> availableParams = [1, 2, 3, 4, 5, 6];
 
-			for (int i = 0; i < numOfParams; i++)
+			for (int i = 0; i < numOfParams - 1; i++)
 			{
-				int randParam = Rand.Range(1, 6);
-				if (pickedParams.Contains(randParam)) // Avoid assigning the same parameter
-				{
-					i--;
-					continue;
-				}
-				pickedParams.Add(randParam);
+				int randParam = availableParams.RandomElement();
+				availableParams.Remove(randParam);
 
 				switch (randParam)
 				{
 					case 1:
-						data.instabilityOffset = SilverSquad_ThingDefOfs.SilverSquad_BrainChip_BlankBase.randomInstabilityOffset.RandomInRange;
+						data.instabilityOffset = SilverSquad_ThingDefOfs.SilverSquad_BrainChip_LootFound.randomInstabilityOffset.RandomInRange;
 						break;
 					case 2:
-						data.instabilityFactor = SilverSquad_ThingDefOfs.SilverSquad_BrainChip_BlankBase.randomInstabilityFactor.RandomInRange;
+						data.instabilityFactor = SilverSquad_ThingDefOfs.SilverSquad_BrainChip_LootFound.randomInstabilityFactor.RandomInRange;
 						break;
 					case 3:
-						data.embryoGrowingTimeTicksOffset = SilverSquad_ThingDefOfs.SilverSquad_BrainChip_BlankBase.randomEmbryoGrowingTimeTicksOffset.RandomInRange;
+						data.embryoGrowingTimeTicksOffset = SilverSquad_ThingDefOfs.SilverSquad_BrainChip_LootFound.randomEmbryoGrowingTimeTicksOffset.RandomInRange;
 						break;
 					case 4:
-						data.pawnGrowingTimeTicksOffset = SilverSquad_ThingDefOfs.SilverSquad_BrainChip_BlankBase.randomPawnGrowingTimeTicksOffset.RandomInRange;
+						data.pawnGrowingTimeTicksOffset = SilverSquad_ThingDefOfs.SilverSquad_BrainChip_LootFound.randomPawnGrowingTimeTicksOffset.RandomInRange;
 						break;
 					case 5:
-						data.embryoGrowingTimeFactor = SilverSquad_ThingDefOfs.SilverSquad_BrainChip_BlankBase.randomEmbryoGrowingTimeFactor.RandomInRange;
+						data.embryoGrowingTimeFactor = SilverSquad_ThingDefOfs.SilverSquad_BrainChip_LootFound.randomEmbryoGrowingTimeFactor.RandomInRange;
 						break;
 					case 6:
-						data.pawnGrowingTimeFactor = SilverSquad_ThingDefOfs.SilverSquad_BrainChip_BlankBase.randomPawnGrowingTimeFactor.RandomInRange;
+						data.pawnGrowingTimeFactor = SilverSquad_ThingDefOfs.SilverSquad_BrainChip_LootFound.randomPawnGrowingTimeFactor.RandomInRange;
 						break;
 					default:
 						break;

@@ -95,7 +95,7 @@ namespace ProjectSilverSquad
 					MissingResourceInstability();
 				}
 
-				if (Settings.Instability >= 1)
+				if (Settings.Instability >= 1f)
 				{
 					DoBadOutcome();
 					Reset();
@@ -146,7 +146,7 @@ namespace ProjectSilverSquad
 
 		private void MissingResourceInstability()
 		{
-			Settings.Instability += ModExtension.instabilityPerPeriod / (ModExtension.instabilityPeriod / GenTicks.TickRareInterval);
+			Settings.Instability += ModExtension.instabilityPerPeriod;
 		}
 
 

@@ -2,9 +2,12 @@
 {
 	public class BrainChipDef : ThingDef
 	{
-		public Color generatedSkillChipColor;
-		public Color generatedTraitChipColor;
-		public Color generatedHybridChipColor;
+		public BrainChipData data;
+
+		public Color skillChipColor;
+		public Color traitChipColor;
+		public Color hybridChipColor;
+		public Color? colorOverride;
 
 		public float chanceForHybridGeneratedChip;
 		/// <summary>
@@ -21,5 +24,8 @@
 		public IntRange randomPawnGrowingTimeTicksOffset;
 		public FloatRange randomEmbryoGrowingTimeFactor;
 		public FloatRange randomPawnGrowingTimeFactor;
+
+		public float instabilityPerTrait;
+		public float instabilityPerSkillPoint;
 	}
 }

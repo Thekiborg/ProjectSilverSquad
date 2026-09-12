@@ -117,7 +117,7 @@ namespace ProjectSilverSquad
 				{
 					selectedChips[chip] = !value;
 				}
-				RegisterBrainChip(chip);
+				RegisterBrainChip();
 			}
 			if (selectedChips.TryGetValue(chip, out var selected) && selected)
 			{
@@ -191,36 +191,8 @@ namespace ProjectSilverSquad
 		}
 
 
-		internal void RegisterBrainChip(ThingClass_BrainChip chip)
+		internal void RegisterBrainChip()
 		{
-			if (!ProjectSilverSquad.CloneSkillMods.AppliedSkillBrainChipsPerPawn.TryGetValue(settingsWindow.PreviewClone, out List<ThingClass_BrainChip> appliedBrainChips))
-			{
-				appliedBrainChips = [];
-				ProjectSilverSquad.CloneSkillMods.AppliedSkillBrainChipsPerPawn.Add(settingsWindow.PreviewClone, appliedBrainChips);
-			}
-
-			if (selectedChips[chip])
-			{
-				appliedBrainChips.Add(chip);
-
-				List<Tuple<BrainChipSkillModification, Passion>> prevPassions = [];
-				foreach (var skillMod in chip.data.skillMods)
-				{
-					var record = settingsWindow.PreviewClone.skills.GetSkill(skillMod.skillDef);
-					Passion passion = record.passion;
-					/*if (skillMod.passionMod == PassionMod.PassionModType.AddOneLevel)
-					{
-						prevPassions.Add(new(skillMod, passion));
-						passion = passion.AddTo(Passion.Minor);
-					}*/
-					record.passion = passion;
-				}
-			}
-			else
-			{
-				appliedBrainChips.Remove(chip);
-			}
-
 			settingsWindow.PreviewClone.skills.Notify_SkillDisablesChanged();
 			settingsWindow.PreviewClone.skills.DirtyAptitudes();
 		}
