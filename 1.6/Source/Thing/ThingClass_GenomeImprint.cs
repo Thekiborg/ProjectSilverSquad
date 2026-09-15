@@ -1,6 +1,6 @@
 ﻿namespace ProjectSilverSquad
 {
-	public class ThingClass_GenomeImprint : ThingWithComps
+	public class ThingClass_GenomeImprint : ThingWithComps, IChipDataCopiable
 	{
 		public override string Label => genome is null ? base.Label : $"{genome?.Clone?.Name?.ToStringShort ?? ""}'s {base.Label}";
 		public GenomeImprintInformation genome;
@@ -65,6 +65,22 @@
 			base.ExposeData();
 			Scribe_Deep.Look(ref genome, "SilverSquad_Genome");
 			Scribe_References.Look(ref pawnToScan, "SilverSquad_Genome_PawnToScan");
+		}
+
+
+		public void CopyDataFrom(Thing sourceChip)
+		{
+			ThingClass_GenomeImprint otherGenome = sourceChip as ThingClass_GenomeImprint;
+			if (otherGenome is not null && !otherGenome.IsEmpty())
+			{
+				RecordGenome(otherGenome.genome.Clone);
+			}
+		}
+
+
+		public bool IsEmpty()
+		{
+			return genome is null;
 		}
 	}
 }

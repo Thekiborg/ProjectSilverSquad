@@ -2,7 +2,7 @@
 
 namespace ProjectSilverSquad
 {
-	public class ThingClass_BrainChip : ThingWithComps, IChipDataCopiable
+	public class ThingClass_BrainChip : ThingWithComps
 	{
 		private readonly StringBuilder sb = new();
 		public BrainChipData data;
