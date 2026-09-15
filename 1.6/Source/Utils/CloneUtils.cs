@@ -21,6 +21,9 @@ namespace ProjectSilverSquad
 		public static BrainChipCategory CategoryFor(ThingClass_BrainChip chip)
 		{
 			BrainChipCategory cat = BrainChipCategory.None;
+			if (chip.data is null)
+				return cat;
+
 			if (!chip.data.skillMods.NullOrEmpty())
 				cat |= BrainChipCategory.SkillOnly;
 			if (!chip.data.traitMods.NullOrEmpty())
