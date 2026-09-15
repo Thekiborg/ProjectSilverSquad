@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/TraderKindDef[defName="Caravan_Outlander_CombatSupplier"]/stockGenerators</xpath>
+        <value>
+            <li Class="StockGenerator_SingleDef">
+                <thingDef>SilverSquad_BrainChip_LootFound</thingDef>
+                <countRange>1~2</countRange>
+            </li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/TraderKindDef[defName="Caravan_Outlander_PirateMerchant"]/stockGenerators</xpath>
+        <value>
+            <li Class="StockGenerator_SingleDef">
+                <thingDef>SilverSquad_BrainChip_LootFound</thingDef>
+                <countRange>1~2</countRange>
+            </li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/TraderKindDef[defName="Caravan_Outlander_Exotic"]/stockGenerators</xpath>
+        <value>
+            <li Class="StockGenerator_SingleDef">
+                <thingDef>SilverSquad_BrainChip_LootFound</thingDef>
+                <countRange>3~5</countRange>
+            </li>
+        </value>
+    </Operation>
+
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/TraderKindDef[defName="Orbital_CombatSupplier"]/stockGenerators</xpath>
+        <value>
+            <li Class="StockGenerator_SingleDef">
+                <thingDef>SilverSquad_BrainChip_LootFound</thingDef>
+                <countRange>2~3</countRange>
+            </li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/TraderKindDef[defName="Orbital_Exotic"]/stockGenerators</xpath>
+        <value>
+            <li Class="StockGenerator_SingleDef">
+                <thingDef>SilverSquad_BrainChip_LootFound</thingDef>
+                <countRange>4~6</countRange>
+            </li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/TraderKindDef[defName="Orbital_PirateMerchant"]/stockGenerators</xpath>
+        <value>
+            <li Class="StockGenerator_SingleDef">
+                <thingDef>SilverSquad_BrainChip_LootFound</thingDef>
+                <countRange>2~3</countRange>
+            </li>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingSetMakerDef[defName="MapGen_AncientComplexRoomLoot_Better"]/root/options</xpath>
+        <value>
+            <li>
+                <weight>0.5</weight>
+                <thingSetMaker Class="ThingSetMaker_StackCount">
+                    <fixedParams>
+                        <filter>
+                            <thingDefs>
+                                <li>SilverSquad_BrainChip_LootFound</li>
+                            </thingDefs>
+                        </filter>
+                        <countRange>2~3</countRange>
+                    </fixedParams>
+                </thingSetMaker>
+            </li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingSetMakerDef[defName="Reward_AncientSafe"]/root/options</xpath>
+        <value>
+            <li>
+                <weight>0.5</weight>
+                <thingSetMaker Class="ThingSetMaker_StackCount">
+                    <fixedParams>
+                        <filter>
+                            <thingDefs>
+                                <li>SilverSquad_BrainChip_LootFound</li>
+                            </thingDefs>
+                        </filter>
+                        <countRange>1</countRange>
+                    </fixedParams>
+                </thingSetMaker>
+            </li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingSetMakerDef[defName="MapGen_HighValueCrate"]/root/options</xpath>
+        <value>
+            <li>
+                <weight>2.0</weight>
+                <thingSetMaker Class="ThingSetMaker_StackCount">
+                    <fixedParams>
+                        <filter>
+                            <thingDefs>
+                                <li>SilverSquad_BrainChip_LootFound</li>
+                            </thingDefs>
+                        </filter>
+                        <countRange>1</countRange>
+                    </fixedParams>
+                </thingSetMaker>
+            </li>
+        </value>
+    </Operation>
+
+</Patch>

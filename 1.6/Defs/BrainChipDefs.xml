@@ -53,6 +53,11 @@
 
         <instabilityPerTrait>0.1</instabilityPerTrait>
         <instabilityPerSkillPoint>0.01</instabilityPerSkillPoint>
+
+        <thingSetMakerTags>
+            <li>RewardStandardMidFreq</li>
+        </thingSetMakerTags>
+        <tradeability>Buyable</tradeability>
     </ProjectSilverSquad.BrainChipDef>
 
 
